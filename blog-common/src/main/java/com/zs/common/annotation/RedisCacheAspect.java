@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class RedisCacheAspect {
-    private static final String BIZ_CACHE_PREFIX = "biz_cache_";
+    private static final String CACHE_PREFIX = "cache_";
 
     @Autowired
     private RedisService redisService;
@@ -36,12 +36,12 @@ public class RedisCacheAspect {
         RedisCache cache = currentMethod.getAnnotation(RedisCache.class);
         boolean flush = cache.flush();
         if (flush) {
-            String classPrefix = AspectUtil.getKeyOfClassPrefix(point, BIZ_CACHE_PREFIX);
+            String classPrefix = AspectUtil.getKeyOfClassPrefix(point, CACHE_PREFIX);
             log.info("清空缓存 - {}*", classPrefix);
             redisService.delBatch(classPrefix);
             return point.proceed();
         }
-        String key = AspectUtil.getKey(point, cache.key(), BIZ_CACHE_PREFIX);
+        String key = AspectUtil.getKey(point, cache.key(), CACHE_PREFIX);
         boolean hasKey = redisService.hasKey(key);
         if (hasKey) {
             try {
