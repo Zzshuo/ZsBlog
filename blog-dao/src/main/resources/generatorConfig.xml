@@ -46,7 +46,7 @@
                              targetProject="src/main/java" type="XMLMAPPER">
         </javaClientGenerator>
 
-        <table tableName="vote_option">
+        <table tableName="user">
         </table>
     </context>
 </generatorConfiguration>
