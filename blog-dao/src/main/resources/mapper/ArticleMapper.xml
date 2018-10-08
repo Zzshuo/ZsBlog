@@ -6,7 +6,7 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="original" jdbcType="TINYINT" property="original" />
     <result column="type_id" jdbcType="TINYINT" property="typeId" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="code" jdbcType="TINYINT" property="code"/>
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
     <result column="state" jdbcType="TINYINT" property="state" />
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, original, type_id, status, description, keywords, state, create_time, 
+    id, title, original, type_id, code, description, keywords, state, create_time,
     update_time
   </sql>
   <sql id="Blob_Column_List">
@@ -131,11 +131,11 @@
   </delete>
   <insert id="insert" parameterType="com.zs.dao.model.Article">
     insert into article (id, title, original, 
-      type_id, status, description, 
+      type_id, code, description,
       keywords, state, create_time, 
       update_time, content)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{original,jdbcType=TINYINT}, 
-      #{typeId,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=TINYINT}, #{code,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR},
       #{keywords,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
@@ -154,8 +154,8 @@
       <if test="typeId != null">
         type_id,
       </if>
-      <if test="status != null">
-        status,
+      <if test="code != null">
+        code,
       </if>
       <if test="description != null">
         description,
@@ -189,8 +189,8 @@
       <if test="typeId != null">
         #{typeId,jdbcType=TINYINT},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
+      <if test="code != null">
+        #{code,jdbcType=TINYINT},
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
@@ -233,8 +233,8 @@
       <if test="record.typeId != null">
         type_id = #{record.typeId,jdbcType=TINYINT},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=TINYINT},
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=TINYINT},
       </if>
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
@@ -265,7 +265,7 @@
       title = #{record.title,jdbcType=VARCHAR},
       original = #{record.original,jdbcType=TINYINT},
       type_id = #{record.typeId,jdbcType=TINYINT},
-      status = #{record.status,jdbcType=TINYINT},
+    code = #{record.code,jdbcType=TINYINT},
       description = #{record.description,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=TINYINT},
@@ -282,7 +282,7 @@
       title = #{record.title,jdbcType=VARCHAR},
       original = #{record.original,jdbcType=TINYINT},
       type_id = #{record.typeId,jdbcType=TINYINT},
-      status = #{record.status,jdbcType=TINYINT},
+    code = #{record.code,jdbcType=TINYINT},
       description = #{record.description,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=TINYINT},
@@ -304,8 +304,8 @@
       <if test="typeId != null">
         type_id = #{typeId,jdbcType=TINYINT},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+      <if test="code != null">
+        code = #{code,jdbcType=TINYINT},
       </if>
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
@@ -333,7 +333,7 @@
     set title = #{title,jdbcType=VARCHAR},
       original = #{original,jdbcType=TINYINT},
       type_id = #{typeId,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT},
+      code = #{code,jdbcType=TINYINT},
       description = #{description,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
       state = #{state,jdbcType=TINYINT},
@@ -347,7 +347,7 @@
     set title = #{title,jdbcType=VARCHAR},
       original = #{original,jdbcType=TINYINT},
       type_id = #{typeId,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT},
+      code = #{code,jdbcType=TINYINT},
       description = #{description,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
       state = #{state,jdbcType=TINYINT},

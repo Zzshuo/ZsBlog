@@ -24,7 +24,7 @@ CREATE TABLE `article` (
   `content` longtext COMMENT '文章内容',
   `original` tinyint(4)  NOT NULL DEFAULT '1' COMMENT '是否原创',
   `type_id` tinyint(4)  NOT NULL DEFAULT '1' COMMENT '类型',
-  `status` tinyint(4)  NOT NULL  DEFAULT '1' COMMENT '状态',
+  `code` tinyint(4)  NOT NULL  DEFAULT '1' COMMENT '状态',
   `description` varchar(300) DEFAULT NULL COMMENT '文章简介，最多200字',
   `keywords` varchar(200) DEFAULT NULL COMMENT '文章关键字，优化搜索',
   `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:正常,2:删除',
