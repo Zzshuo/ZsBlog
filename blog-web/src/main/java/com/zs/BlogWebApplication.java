@@ -1,10 +1,14 @@
-package com.zs.web;
+package com.zs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @author zshuo
+ * @date 2018/10/11
+ */
 @SpringBootApplication
 @ServletComponentScan
 @EnableTransactionManagement

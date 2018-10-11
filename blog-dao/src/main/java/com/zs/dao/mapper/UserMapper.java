@@ -2,9 +2,12 @@ package com.zs.dao.mapper;
 
 import com.zs.dao.model.User;
 import com.zs.dao.model.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface UserMapper {
     long countByExample(UserExample example);
 
