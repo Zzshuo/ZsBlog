@@ -44,12 +44,12 @@
         <dependencies>
             <dependency>
                 <groupId>com.zs</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>blog-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zs</groupId>
-                <artifactId>dao</artifactId>
+                <artifactId>blog-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

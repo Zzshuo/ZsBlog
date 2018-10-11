@@ -1,6 +1,5 @@
 package com.zs.common.util;
 
-import com.github.pagehelper.PageInfo;
 import com.zs.common.object.ResponseVO;
 import com.zs.common.object.State;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,10 +18,6 @@ public class ResponseUtil {
 
     public static ResponseVO success(Object data) {
         return new ResponseVO<>(State.SUCCESS, data);
-    }
-
-    public static ResponseVO success(Object data, PageInfo pageInfo) {
-        return new ResponseVO<>(State.SUCCESS, data, pageInfo);
     }
 
     public static ResponseVO error() {

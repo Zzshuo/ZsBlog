@@ -2,9 +2,12 @@ package com.zs.dao.mapper;
 
 import com.zs.dao.model.Article;
 import com.zs.dao.model.ArticleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ArticleMapper {
     long countByExample(ArticleExample example);
 

@@ -7,4 +7,6 @@ package com.zs.common.consts;
  * @date 2018/10/8
  **/
 public class CommonConst {
+
+    public static final String SHIRO_SALT = "zshuo_shiro_salt";
 }

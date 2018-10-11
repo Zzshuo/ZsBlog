@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -78,8 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, nickname, mobile, email, qq, birthday, gender, picture, reg_ip, 
-    last_login_ip, last_login_time, state, create_time, update_time
+    id, username, password, role_id, nickname, mobile, email, qq, birthday, gender, picture, 
+    reg_ip, last_login_ip, last_login_time, state, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.zs.dao.model.UserExample" resultMap="BaseResultMap">
     select
@@ -113,17 +114,17 @@
   </delete>
   <insert id="insert" parameterType="com.zs.dao.model.User">
     insert into user (id, username, password, 
-      nickname, mobile, email, 
-      qq, birthday, gender, picture, 
-      reg_ip, last_login_ip, last_login_time, 
-      state, create_time, update_time
-      )
+      role_id, nickname, mobile, 
+      email, qq, birthday, gender, 
+      picture, reg_ip, last_login_ip, 
+      last_login_time, state, create_time, 
+      update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{qq,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=CHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{regIp,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
-      #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{roleId,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=CHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{regIp,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zs.dao.model.User">
     insert into user
@@ -136,6 +137,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="roleId != null">
+        role_id,
       </if>
       <if test="nickname != null">
         nickname,
@@ -186,6 +190,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
@@ -246,6 +253,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
@@ -295,6 +305,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=INTEGER},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
@@ -320,6 +331,9 @@
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
       </if>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
@@ -367,6 +381,7 @@
     update user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
       nickname = #{nickname,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

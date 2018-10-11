@@ -46,7 +46,7 @@
                              targetProject="src/main/java" type="XMLMAPPER">
         </javaClientGenerator>
 
-        <table tableName="user">
+        <table tableName="role">
         </table>
     </context>
 </generatorConfiguration>

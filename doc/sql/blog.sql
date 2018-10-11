@@ -2,12 +2,13 @@ CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL COMMENT '用户名',
   `password` varchar(100) NOT NULL COMMENT '登录密码',
+  `role_id` int(11) unsigned NOT NULL COMMENT 'roleId',
   `nickname` varchar(30) NOT NULL DEFAULT '' COMMENT '昵称',
   `mobile` varchar(20) NOT NULL DEFAULT '' COMMENT '手机号',
   `email` varchar(100) NOT NULL DEFAULT '' COMMENT '邮箱地址',
   `qq` varchar(20) NOT NULL DEFAULT '' COMMENT 'QQ',
   `birthday` date DEFAULT NULL COMMENT '生日',
-  `gender` enum('male','female')  NOT NULL  DEFAULT 'male' COMMENT '性别',
+  `gender` enum('male','female') NOT NULL DEFAULT 'male' COMMENT '性别',
   `picture` varchar(255) NOT NULL DEFAULT '' COMMENT '头像地址',
   `reg_ip` varchar(30) NOT NULL DEFAULT '' COMMENT '注册IP',
   `last_login_ip` varchar(30) NOT NULL DEFAULT '' COMMENT '最近登录IP',
@@ -15,7 +16,8 @@ CREATE TABLE `user` (
   `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:正常,2:删除',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `article` (
@@ -33,4 +35,14 @@ CREATE TABLE `article` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `role` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `role` varchar(100) NOT NULL DEFAULT 'guest' COMMENT '角色',
+  `rolename` varchar(30) NOT NULL DEFAULT '' COMMENT '角色名称',
+  `permission` varchar(100) NOT NULL DEFAULT '' COMMENT '权限',
+  `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:正常,2:删除',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
