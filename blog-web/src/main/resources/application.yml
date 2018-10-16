@@ -30,6 +30,13 @@ spring:
     view:
       prefix: /pages/
       suffix: .html
+  thymeleaf:
+    encoding: utf-8
+    mode: HTML5
+    servlet:
+      content-type: text/html
+    #开发时关闭缓存,不然没法看到实时页面
+    cache: false
 server:
   port: 8080
 

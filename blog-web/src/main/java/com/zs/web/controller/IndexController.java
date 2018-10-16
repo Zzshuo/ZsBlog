@@ -1,5 +1,6 @@
 package com.zs.web.controller;
 
+import com.zs.common.annotation.BusinessLog;
 import com.zs.common.util.ResponseUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/index")
 public class IndexController {
 
+
+    @BusinessLog("index1 enter")
     @RequestMapping("/1")
     public ModelAndView index(Model model) {
+        model.addAttribute("name", "zshuo");
         return ResponseUtil.view("index");
-    }
-
-    @RequestMapping("/2")
-    public String index2() {
-        return "index";
     }
 }

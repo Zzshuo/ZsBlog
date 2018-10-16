@@ -1,7 +1,8 @@
-package com.zs.web.controller;
+package com.zs.web.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.zs.common.annotation.BusinessLog;
 import com.zs.common.util.ResponseUtil;
 import com.zs.dao.model.User;
 import com.zs.web.service.UserService;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2018/10/11
  **/
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/admin/login")
 public class LoginController {
 
     @Autowired
@@ -30,6 +31,7 @@ public class LoginController {
         return ResponseUtil.view("/login");
     }
 
+    @BusinessLog("goto - users")
     @ResponseBody
     @RequestMapping("/users")
     public String users(UserVo userVo, Model model) {
