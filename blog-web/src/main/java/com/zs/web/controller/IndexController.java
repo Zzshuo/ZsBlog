@@ -12,12 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2018/10/9
  **/
 @Controller
-@RequestMapping("/index")
+@RequestMapping
 public class IndexController {
 
 
-    @BusinessLog("index1 enter")
-    @RequestMapping("/1")
+    @BusinessLog("index enter")
+    @RequestMapping("/index")
     public ModelAndView index(Model model) {
         model.addAttribute("name", "zshuo");
         return ResponseUtil.view("index");

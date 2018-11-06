@@ -56,8 +56,8 @@ public class ShiroConfig {
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
         filterFactoryBean.setSecurityManager(securityManager);
         // 配置登录的url和登录成功的url
-        filterFactoryBean.setLoginUrl("/login");
-        filterFactoryBean.setSuccessUrl("/admin");
+        filterFactoryBean.setLoginUrl("/admin/login");
+        filterFactoryBean.setSuccessUrl("/admin/home");
         // 配置未授权跳转页面
         filterFactoryBean.setUnauthorizedUrl("/errorPage/403");
         // 配置访问权限

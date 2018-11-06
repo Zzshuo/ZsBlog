@@ -9,5 +9,7 @@ import lombok.Data;
  **/
 @Data
 public class UserVo extends RequestVo {
+    private String username;
 
+    private String password;
 }

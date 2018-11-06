@@ -24,6 +24,10 @@ public class ResponseUtil {
         return new ResponseVO<>(State.ERROR);
     }
 
+    public static ResponseVO error(Object data) {
+        return new ResponseVO<>(State.ERROR, data);
+    }
+
     public static ResponseVO error(State state) {
         return new ResponseVO<>(state);
     }
