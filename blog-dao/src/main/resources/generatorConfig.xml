@@ -44,17 +44,14 @@
 
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
-            <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
         <!--mapper文件生成路径 -->
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources">
-            <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--dao层生成路径 -->
         <javaClientGenerator targetPackage="com.zs.dao.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
-            <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <table tableName="role"
