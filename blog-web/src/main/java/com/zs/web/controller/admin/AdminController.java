@@ -3,11 +3,9 @@ package com.zs.web.controller.admin;
 import com.zs.common.annotation.BusinessLog;
 import com.zs.common.object.ResponseVO;
 import com.zs.common.util.ResponseUtil;
-import com.zs.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,9 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-    @Autowired
-    private UserService userService;
 
     @BusinessLog("进入登陆页面")
     @RequestMapping("/login")

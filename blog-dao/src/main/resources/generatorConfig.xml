@@ -21,9 +21,17 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <!-- TKmybatis配置: 配置了通用Mapper的插件tk.mybatis.mapper.generator.MapperPlugin，
+                    该插件有一个必选的<property>属性mappers，这里的mappers和通用Mapper中的mappers配置含义一样， 就是我们使用的通用Mapper接口，多个通用Mapper接口可以用逗号隔开。 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+
         <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
         <commentGenerator>
+            <!-- 是否取消注释 -->
             <property name="suppressAllComments" value="true"/>
+            <!-- 是否取消注释时间戳 -->
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
@@ -36,17 +44,24 @@
 
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
+            <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
         <!--mapper文件生成路径 -->
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--dao层生成路径 -->
         <javaClientGenerator targetPackage="com.zs.dao.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <table tableName="role">
+        </table>
+        <table tableName="article">
+        </table>
+        <table tableName="user">
         </table>
     </context>
 </generatorConfiguration>
