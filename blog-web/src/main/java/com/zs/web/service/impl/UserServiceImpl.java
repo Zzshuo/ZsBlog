@@ -3,6 +3,8 @@ package com.zs.web.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zs.dao.mapper.UserMapper;
+import com.zs.dao.model.User;
+import com.zs.dao.model.UserExample;
 import com.zs.web.service.UserService;
 import com.zs.web.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;

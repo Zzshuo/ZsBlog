@@ -1,6 +1,8 @@
 package com.zs.web.config;
 
 import com.zs.common.consts.CommonConst;
+import com.zs.dao.model.Role;
+import com.zs.dao.model.User;
 import com.zs.web.service.RoleService;
 import com.zs.web.service.UserService;
 import org.apache.shiro.SecurityUtils;
