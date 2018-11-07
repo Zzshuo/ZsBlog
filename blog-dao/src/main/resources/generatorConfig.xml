@@ -6,7 +6,7 @@
     <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
     <!--<classPathEntry location="D:\generator_mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
 
-    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context id="mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
 
         <!-- 生成的Java文件的编码 -->
         <property name="javaFileEncoding" value="UTF-8"/>
