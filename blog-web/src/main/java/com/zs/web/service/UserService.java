@@ -1,7 +1,6 @@
 package com.zs.web.service;
 
 import com.github.pagehelper.PageInfo;
-import com.zs.dao.model.User;
 import com.zs.web.vo.UserVo;
 
 /**
