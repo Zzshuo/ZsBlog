@@ -1,4 +1,4 @@
-package com.zs.web.vo;
+package com.zs.web.vo.request;
 
 import com.zs.common.object.RequestVo;
 import lombok.Data;
@@ -6,12 +6,12 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author zshuo
- * @date 2018/10/11
+ * @date 2018/11/8
  **/
-@Data
 @EqualsAndHashCode(callSuper = true)
-public class UserVo extends RequestVo {
-    private String username;
+@Data
+public class ArticleReqVo extends RequestVo {
 
-    private String password;
+    private Integer id;
+
 }

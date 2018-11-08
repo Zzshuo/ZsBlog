@@ -1,4 +1,4 @@
-package com.zs.web.controller;
+package com.zs.web.controller.web;
 
 import com.zs.common.annotation.BusinessLog;
 import com.zs.common.util.ResponseUtil;

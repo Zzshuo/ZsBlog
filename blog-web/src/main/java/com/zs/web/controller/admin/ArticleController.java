@@ -1,11 +1,17 @@
 package com.zs.web.controller.admin;
 
-import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zs.common.annotation.BusinessLog;
 import com.zs.common.object.ResponseVO;
 import com.zs.common.util.ResponseUtil;
+import com.zs.web.service.ArticleService;
+import com.zs.web.vo.request.ArticleReqVo;
+import com.zs.web.vo.response.ArticleVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author zshuo
@@ -15,10 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/article")
 public class ArticleController {
 
+    @Autowired
+    private ArticleService articleService;
+
     @BusinessLog("文章列表")
     @RequestMapping("/list")
-    public ResponseVO list() {
-        return ResponseUtil.success(PageHelper.getLocalPage());
+    @ResponseBody
+    public ResponseVO list(@RequestBody ArticleReqVo reqVo) {
+        PageInfo<ArticleVo> pageInfo = articleService.list(reqVo);
+        return ResponseUtil.success(pageInfo);
     }
 
     @BusinessLog("删除文章")

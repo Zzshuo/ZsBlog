@@ -2,7 +2,7 @@ package com.zs.web.service;
 
 import com.github.pagehelper.PageInfo;
 import com.zs.dao.model.User;
-import com.zs.web.vo.UserVo;
+import com.zs.web.vo.request.UserReqVo;
 
 /**
  * @author zshuo
@@ -14,5 +14,5 @@ public interface UserService {
 
     User getByUserName(String username);
 
-    PageInfo<User> getUsers(UserVo userVo);
+    PageInfo<User> getUsers(UserReqVo userReqVo);
 }

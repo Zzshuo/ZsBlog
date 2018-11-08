@@ -6,7 +6,7 @@ import com.zs.dao.mapper.UserMapper;
 import com.zs.dao.model.User;
 import com.zs.dao.model.UserExample;
 import com.zs.web.service.UserService;
-import com.zs.web.vo.UserVo;
+import com.zs.web.vo.request.UserReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> getUsers(UserVo userVo) {
+    public PageInfo<User> getUsers(UserReqVo userReqVo) {
         UserExample example = new UserExample();
-        PageHelper.startPage(userVo.getPageNumber(), userVo.getPageSize());
+        PageHelper.startPage(userReqVo.getPageNum(), userReqVo.getPageSize());
         List<User> users = userMapper.selectByExample(example);
         return new PageInfo<>(users);
     }
