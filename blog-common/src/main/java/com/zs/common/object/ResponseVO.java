@@ -12,12 +12,17 @@ public class ResponseVO<T> {
     private String message;
     private T data;
 
-    public ResponseVO(State state) {
+    public ResponseVO(ErrorEnum state) {
         this.code = state.getCode();
         this.message = state.getMessage();
     }
 
-    public ResponseVO(State state, T data) {
+    public ResponseVO(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public ResponseVO(ErrorEnum state, T data) {
         this.code = state.getCode();
         this.message = state.getMessage();
         this.data = data;

@@ -6,7 +6,7 @@ import java.util.Objects;
  * @author zshuo
  * @date 2018/10/8
  **/
-public enum State {
+public enum ErrorEnum {
     /**
      * 成功
      */
@@ -17,7 +17,7 @@ public enum State {
     private Integer code;
     private String message;
 
-    State(Integer code, String message) {
+    ErrorEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -30,8 +30,8 @@ public enum State {
         return message;
     }
 
-    public static State getResponseStatus(String message) {
-        for (State s : State.values()) {
+    public static ErrorEnum getResponseStatus(String message) {
+        for (ErrorEnum s : ErrorEnum.values()) {
             if (Objects.equals(s.getMessage(), message)) {
                 return s;
             }
