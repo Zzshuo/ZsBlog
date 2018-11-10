@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zs.dao.mapper.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.zs.dao.model.Article">
+<mapper namespace="com.zs.blog.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.zs.blog.model.Article">
     <!--
       WARNING - @mbg.generated
     -->
@@ -16,7 +16,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zs.dao.model.Article">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zs.blog.model.Article">
     <!--
       WARNING - @mbg.generated
     -->
@@ -67,7 +67,7 @@
     -->
     content
   </sql>
-  <select id="countByExample" parameterType="com.zs.dao.model.ArticleExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.zs.blog.model.ArticleExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

@@ -39,7 +39,7 @@
                         connectionURL="jdbc:mysql://localhost:3306/myBlog?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root" password="123456"/>
         <!--实体生成路径 -->
-        <javaModelGenerator targetPackage="com.zs.dao.model"
+        <javaModelGenerator targetPackage="com.zs.blog.model"
                             targetProject="src/main/java">
 
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
@@ -50,7 +50,7 @@
                          targetProject="src/main/resources">
         </sqlMapGenerator>
         <!--dao层生成路径 -->
-        <javaClientGenerator targetPackage="com.zs.dao.mapper"
+        <javaClientGenerator targetPackage="com.zs.blog.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
         </javaClientGenerator>
 

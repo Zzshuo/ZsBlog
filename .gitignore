@@ -27,3 +27,4 @@
 *mvnw.cmd
 *mvnw
 /.mvn/
+/logback.path_IS_UNDEFINED/
