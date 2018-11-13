@@ -42,7 +42,6 @@ public class AdminController {
     public ResponseVO submit(@RequestBody UserReqVo userReqVo) {
         String username = userReqVo.getUsername();
         String password = userReqVo.getPassword();
-        log.info("登录失败，用户名[{}]", username);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             // 在调用了login方法后,SecurityManager会收到AuthenticationToken,并将其发送给已配置的Realm执行必须的认证检查

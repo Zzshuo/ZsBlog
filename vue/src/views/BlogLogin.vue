@@ -11,6 +11,7 @@
       <br/>
       <textarea cols="30" rows="10" v-model="responseVo"></textarea>
     </div>
+    <hr/>
     <blog-footer></blog-footer>
   </div>
 </template>
@@ -31,19 +32,24 @@
     },
     methods: {
       login() {
-        this.$axios
-          .post('/login', {
+        this.$axios.post(
+          '/api/admin/submit',
+          {
             username: this.loginVo.username,
             password: this.loginVo.password
-          })
-          .then(successResponse => {
-            this.responseVo = JSON.stringify(successResponse.data)
-            if (successResponse.data.code === 200) {
-              this.$router.replace({path: '/index'})
-            }
-          })
-          .catch(failResponse => {
-          })
+          },
+        ).then(response => {
+          this.responseVo = JSON.stringify(response.data)
+          if (response.data.code === 200) {
+            this.$router.replace({path: '/index'})
+          }
+        }).catch(function (err) {
+          if (err.response) {
+            console.log(err.response)
+            //控制台打印错误返回的内容
+          }
+        })
+
       }
     }
   }
