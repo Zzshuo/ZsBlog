@@ -4,10 +4,13 @@ import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.object.ResponseVO;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.vo.request.UserReqVo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,22 +26,24 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 
     @BusinessLog("进入登陆页面")
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public ModelAndView index() {
         return ResponseUtil.view("/admin/login");
     }
 
     @BusinessLog("退出登录")
-    @RequestMapping("/logout")
+    @PostMapping("/logout")
     public ModelAndView logout() {
         //退出
         SecurityUtils.getSubject().logout();
         return ResponseUtil.view("/admin/logout");
     }
 
+    @ApiOperation(value = "提交登陆请求", notes = "根据User对象创建用户")
+    @ApiImplicitParam(name = "userReqVo", value = "用户实体UserReqVo", required = true, dataType = "UserReqVo")
     @BusinessLog("提交登陆请求")
     @ResponseBody
-    @RequestMapping("/submit")
+    @PostMapping("/submit")
     public ResponseVO submit(@RequestBody UserReqVo userReqVo) {
         String username = userReqVo.getUsername();
         String password = userReqVo.getPassword();

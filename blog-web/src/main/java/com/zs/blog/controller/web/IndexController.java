@@ -4,6 +4,7 @@ import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.util.ResponseUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,7 +18,7 @@ public class IndexController {
 
 
     @BusinessLog("index enter")
-    @RequestMapping("/index")
+    @PostMapping("/index")
     public ModelAndView index(Model model) {
         model.addAttribute("name", "zshuo");
         return ResponseUtil.view("index");

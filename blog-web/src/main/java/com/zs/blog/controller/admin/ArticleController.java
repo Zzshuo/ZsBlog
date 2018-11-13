@@ -9,6 +9,7 @@ import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +26,7 @@ public class ArticleController {
     private ArticleService articleService;
 
     @BusinessLog("文章列表")
-    @RequestMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public ResponseVO list(@RequestBody ArticleReqVo reqVo) {
         PageInfo<ArticleVo> pageInfo = articleService.list(reqVo);
@@ -33,25 +34,25 @@ public class ArticleController {
     }
 
     @BusinessLog("删除文章")
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     public ResponseVO delete(Integer id) {
         return ResponseUtil.success();
     }
 
     @BusinessLog("获取文章")
-    @RequestMapping("/get")
+    @PostMapping("/get")
     public ResponseVO get(Integer id) {
         return ResponseUtil.success();
     }
 
     @BusinessLog("发布/修改文章")
-    @RequestMapping("/addOrUpdate")
+    @PostMapping("/addOrUpdate")
     public ResponseVO addOrUpdate() {
         return ResponseUtil.success();
     }
 
     @BusinessLog("彻底删除")
-    @RequestMapping("/remove")
+    @PostMapping("/remove")
     public ResponseVO remove(Integer id) {
         return ResponseUtil.success();
     }
