@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 /**
  * AOP 相关工具
  *
- * @Auther zshuo
+ * @Author zshuo
  * @Date 2018/9/30
  **/
 public class AspectUtil {

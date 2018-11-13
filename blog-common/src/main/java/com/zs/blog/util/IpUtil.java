@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 获取IP的工具类
  *
- * @Auther zshuo
+ * @Author zshuo
  * @Date 2018/9/30
  **/
 public class IpUtil {

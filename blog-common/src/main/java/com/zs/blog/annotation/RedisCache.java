@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Redis缓存自定义注解
  *
- * @Auther zshuo
+ * @Author zshuo
  * @Date 2018/9/30
  **/
 @Target({ElementType.METHOD})

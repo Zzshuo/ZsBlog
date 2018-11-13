@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 /**
- * @Auther zshuo
+ * @Author zshuo
  * @Date 2018/9/30
  **/
 public class RequestUtil {
