@@ -1,6 +1,7 @@
 <template>
   <div>
     <button @click="handleClick">list</button>
+    <el-button @click="handleClick">默认按钮</el-button>
     <div class="">{{this.content}}</div>
   </div>
 </template>
