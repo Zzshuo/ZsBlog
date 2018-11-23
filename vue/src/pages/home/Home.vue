@@ -6,18 +6,15 @@
       <el-footer>132</el-footer>
     </el-container>
 
-    <el-button @click="watchHtml">watch</el-button>
-    <el-button @click="unWatchHtml">unwatch</el-button>
-    <md-editor ref="markdown"></md-editor>
+    <el-button @click="handleClick">test</el-button>
+    <div>{{content}}</div>
   </div>
 </template>
 
 <script>
-import MdEditor from '../MdEditor'
 export default {
   name: 'Home',
   components: {
-    MdEditor
   },
   data () {
     return {
@@ -29,19 +26,12 @@ export default {
   },
   methods: {
     handleClick () {
-      this.axios.post('/api/admin/article/list', this.reqVo)
-        .then(this.handleClickSucc)
-    },
-    handleClickSucc (res) {
-      const data = res.data
-      this.content = data.data.list
-      console.log(data)
-    },
-    watchHtml: function () {
-      this.$refs['markdown'].watch()
-    },
-    unWatchHtml: function () {
-      this.$refs['markdown'].unwatch()
+      this.axios.getArticleList(this.reqVo).then((res) => {
+        this.content = res
+        console.log('123' + res)
+      }).catch((err) => {
+        console.log('234' + err)
+      })
     }
   }
 }
