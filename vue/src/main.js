@@ -3,18 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import fastClick from 'fastclick'
-import './assets/styles/reset.css'
-import './assets/styles/border.css'
 import axios from 'axios'
 import ElementUI from 'element-ui'
+import fastClick from 'fastclick'
+import store from './store'
+
 import 'element-ui/lib/theme-chalk/index.css'
+// import './assets/styles/reset.css'
+// import './assets/styles/border.css'
 
 Vue.config.productionTip = false
+Vue.use(ElementUI)
+
 // fastClick
 fastClick.attach(document.body)
-// ElementUI
-Vue.use(ElementUI)
 
 // 将API方法绑定到全局
 Vue.prototype.axios = axios
@@ -24,6 +26,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
