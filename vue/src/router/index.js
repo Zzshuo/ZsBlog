@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/pages/home/Home'
 import Page401 from '@/pages/error/401'
 import Page404 from '@/pages/error/404'
+import Demo from '@/pages/demo/Demo'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/404',
       name: '404',
       component: Page404
+    },
+    {
+      path: '/demo',
+      name: 'Demo',
+      component: Demo
     }
   ]
 })

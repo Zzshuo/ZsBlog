@@ -7,13 +7,16 @@ import ElementUI from 'element-ui'
 import fastClick from 'fastclick'
 import store from './store'
 import axios from './utils/api'
+import mavonEditor from 'mavon-editor'
 
 import 'element-ui/lib/theme-chalk/index.css'
-// import './assets/styles/reset.css'
-// import './assets/styles/border.css'
+import './assets/styles/reset.css'
+import './assets/styles/border.css'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(mavonEditor)
 
 // fastClick
 fastClick.attach(document.body)
