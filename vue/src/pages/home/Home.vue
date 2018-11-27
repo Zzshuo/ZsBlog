@@ -8,14 +8,8 @@
 </template>
 
 <script>
-import BlogHeader from '../common/BlogHeader'
-import BlogFooter from '../common/BlogFooter'
 export default {
   name: 'Home',
-  components: {
-    BlogHeader,
-    BlogFooter
-  },
   data () {
     return {
       content: 'xxx',

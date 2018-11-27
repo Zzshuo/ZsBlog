@@ -1,14 +1,16 @@
 <template>
   <div>
-    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top">
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <a class="navbar-item">
-            <img src="https://lqzhgood.github.io/bulma-docs-cn/images/bulma-logo.png" width="112" height="28">
+          <a class="navbar-item iconfont is-large" style="font-size: 1.5rem">
+            &#xe6c5;
           </a>
-
-          <div class="navbar-burger" data-target="navMenu" @click="openPopup">
+          <div class="navbar-item is-hidden-desktop is-pulled-right">
+            <header-search></header-search>
+          </div>
+          <div class="navbar-burger" data-target="navMenu">
             <span></span>
             <span></span>
             <span></span>
@@ -19,28 +21,12 @@
           <!-- navbar start, navbar end -->
           <div class="navbar-start">
             <!-- navbar items -->
-            <a class="navbar-item">
-              Home
-            </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Docs
-              </a>
-              <div class="navbar-dropdown is-boxed">
-                <a class="navbar-item">
-                  Overview
-                </a>
-                <a class="navbar-item">
-                  Elements
-                </a>
-                <a class="navbar-item">
-                  Components
-                </a>
-                <hr class="navbar-divider">
-                <div class="navbar-item">
-                  Version 0.6.2
-                </div>
-              </div>
+            <router-link class="navbar-item" to="/">首页</router-link>
+            <router-link class="navbar-item" to="/about">关于</router-link>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item is-hidden-mobile">
+              <header-search></header-search>
             </div>
           </div>
         </div>
@@ -50,10 +36,14 @@
 </template>
 
 <script>
+import HeaderSearch from './HeaderSearch'
 export default {
   name: 'BlogHeader',
   mounted () {
     document.addEventListener('DOMContentLoaded', this.burger())
+  },
+  components: {
+    HeaderSearch
   },
   methods: {
     burger () {
@@ -73,9 +63,6 @@ export default {
           })
         })
       }
-    },
-    openPopup () {
-
     }
   }
 }
