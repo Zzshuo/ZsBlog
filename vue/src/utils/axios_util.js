@@ -21,24 +21,27 @@ axios.interceptors.response.use((response) => {
     checkCode(responseVo)
     return responseVo
   }
-  return response
 }, (error) => {
+  console.log(error)
   // 错误返回
   return Promise.reject(error)
 })
 
 /**
  * 状态码校验
- * @param response
+ * @param responseVo
  * @return {*}
  */
-function checkCode (response) {
-  console.log(response.code)
-  switch (response.code) {
+function checkCode (responseVo) {
+  console.log(1 + responseVo.code)
+  switch (responseVo.code) {
     case 200:
-      alert(response.message)
+      break
+    default:
+      alert(responseVo.code + responseVo.message)
   }
 }
+
 /**
  * 返回axios方法
  * @param url（如果传绝对地址则baseURL不会追加到url之前）

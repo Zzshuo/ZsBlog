@@ -3,19 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
 import fastClick from 'fastclick'
 import store from './store'
 import axios from './utils/api'
 import mavonEditor from 'mavon-editor'
 
-import 'element-ui/lib/theme-chalk/index.css'
-import './assets/styles/reset.css'
-import './assets/styles/border.css'
+// import './assets/styles/reset.css'
+// import './assets/styles/border.css'
 import 'mavon-editor/dist/css/index.css'
+import 'bulma/css/bulma.css'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
 Vue.use(mavonEditor)
 
 // fastClick

@@ -1,20 +1,20 @@
 <template>
   <div>
-    <el-container>
-      <el-header>123</el-header>
-      <el-main>345</el-main>
-      <el-footer>132</el-footer>
-    </el-container>
-
-    <el-button @click="handleClick">test</el-button>
-    <div>{{content}}</div>
+    <blog-header></blog-header>
+    <a class="button" @click="handleClick">button</a>
+    <div style="height: 100rem; background-color: #666">{{content}}</div>
+    <blog-footer></blog-footer>
   </div>
 </template>
 
 <script>
+import BlogHeader from '../common/BlogHeader'
+import BlogFooter from '../common/BlogFooter'
 export default {
   name: 'Home',
   components: {
+    BlogHeader,
+    BlogFooter
   },
   data () {
     return {
@@ -38,5 +38,4 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-
 </style>
