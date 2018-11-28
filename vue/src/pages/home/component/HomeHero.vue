@@ -1,18 +1,14 @@
 <template>
-  <div class="container">
-    <section class="hero bd-rainbow">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Hero title
-          </h1>
-          <h2 class="subtitle">
-            Hero subtitle
-          </h2>
-        </div>
-      </div>
-    </section>
-  </div>
+  <section class="hero bd-rainbow">
+    <div class="hero-body container">
+      <h1 class="title">
+        Hero title
+      </h1>
+      <h2 class="subtitle">
+        Hero subtitle
+      </h2>
+    </div>
+  </section>
 </template>
 
 <script>
