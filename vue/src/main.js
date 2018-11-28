@@ -10,9 +10,9 @@ import mavonEditor from 'mavon-editor'
 
 // import './assets/styles/reset.css'
 // import './assets/styles/border.css'
-import './assets/styles/iconfont.css'
 import 'mavon-editor/dist/css/index.css'
 import 'bulma/css/bulma.css'
+import 'font-awesome/css/font-awesome.css'
 
 import BlogHeader from './pages/common/BlogHeader'
 import BlogFooter from './pages/common/BlogFooter'

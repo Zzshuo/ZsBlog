@@ -4,8 +4,8 @@
       <input class="input" type="text" placeholder="search">
     </div>
     <div class="control">
-      <a class="iconfont button">
-        &#xe78e;
+      <a class="button">
+        <i class="fa fa-search fa-fw"></i>
       </a>
     </div>
   </div>

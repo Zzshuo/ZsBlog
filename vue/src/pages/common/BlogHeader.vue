@@ -4,7 +4,9 @@
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <router-link class="navbar-item iconfont" to="/" style="font-size: 1.5rem">  &#xe6c5;</router-link>
+          <router-link class="" to="/" >
+             图标
+          </router-link>
           <div class="navbar-item is-hidden-mobile is-hidden-desktop">
             <header-menu></header-menu>
           </div>
