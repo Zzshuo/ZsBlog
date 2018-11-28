@@ -4,10 +4,11 @@
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <a class="navbar-item iconfont is-large" style="font-size: 1.5rem">
-            &#xe6c5;
-          </a>
-          <div class="navbar-item is-hidden-desktop is-pulled-right">
+          <router-link class="navbar-item iconfont" to="/" style="font-size: 1.5rem">  &#xe6c5;</router-link>
+          <div class="navbar-item is-hidden-mobile is-hidden-desktop">
+            <header-menu></header-menu>
+          </div>
+          <div class="navbar-item is-hidden-desktop">
             <header-search></header-search>
           </div>
           <div class="navbar-burger" data-target="navMenu">
@@ -19,13 +20,9 @@
 
         <div class="navbar-menu" id="navMenu">
           <!-- navbar start, navbar end -->
-          <div class="navbar-start">
-            <!-- navbar items -->
-            <router-link class="navbar-item" to="/">首页</router-link>
-            <router-link class="navbar-item" to="/about">关于</router-link>
-          </div>
           <div class="navbar-end">
             <div class="navbar-item is-hidden-mobile">
+              <header-menu></header-menu>
               <header-search></header-search>
             </div>
           </div>
@@ -37,13 +34,15 @@
 
 <script>
 import HeaderSearch from './HeaderSearch'
+import HeaderMenu from './HeaderMenu'
 export default {
   name: 'BlogHeader',
   mounted () {
     document.addEventListener('DOMContentLoaded', this.burger())
   },
   components: {
-    HeaderSearch
+    HeaderSearch,
+    HeaderMenu
   },
   methods: {
     burger () {
