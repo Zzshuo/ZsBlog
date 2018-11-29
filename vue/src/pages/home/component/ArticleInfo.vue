@@ -1,10 +1,10 @@
 <template>
   <div class="article-info">
-    <icon icon-class="calendar"/>
+    <icon icon-class="icon-calendar"/>
     <span class="article-info-span">{{cal}}</span>
-    <icon icon-class="eye"/>
+    <icon icon-class="icon-attention"/>
     <span class="article-info-span">{{eye}}</span>
-    <icon icon-class="check"/>
+    <icon icon-class="icon-comment"/>
     <span class="article-info-span">{{comment}}</span>
   </div>
 </template>
@@ -13,7 +13,6 @@
 export default {
   name: 'ArticleInfo',
   props: {
-    // message:String
     calendar: {
       type: String,
       required: false,
@@ -43,4 +42,5 @@ export default {
     color #999
   .article-info-span
     font-size .875rem
+    padding-right .25rem
 </style>

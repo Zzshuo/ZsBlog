@@ -5,7 +5,7 @@
     </div>
     <div class="control">
       <a class="button">
-        <i class="fa fa-search fa-fw"></i>
+        <icon icon-class="icon-sousuo"/>
       </a>
     </div>
   </div>

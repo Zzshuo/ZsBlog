@@ -15,7 +15,7 @@
     },
     computed: {
       iconName() {
-        return `#icon-${this.iconClass}`
+        return `#${this.iconClass}`
       }
     }
   }
@@ -25,9 +25,9 @@
   .svg-icon {
     width: 1em;
     height: 1em;
-    vertical-align: -0.15em;
+    vertical-align: -0.2em;
     fill: currentColor;
     overflow: hidden;
-    margin-right: .25rem;
+    margin-right: 0rem;
   }
 </style>

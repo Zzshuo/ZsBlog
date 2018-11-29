@@ -39,5 +39,5 @@ export default {
   .title, .subtitle
     ellipsis()
   .subtitle
-    -webkit-line-clamp: 3
+    -webkit-line-clamp: 3 //在一个块元素显示的文本的行数
 </style>
