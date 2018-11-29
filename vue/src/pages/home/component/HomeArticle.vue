@@ -17,7 +17,7 @@
         <div class="zs-info">
           <div class="article-info">
             <icon icon-class="icon-calendar"/>
-            <span class="article-info-span">{{article.createTime}}</span>
+            <span class="article-info-span">{{article.createTime | capitalize}}</span>
             <icon icon-class="icon-attention"/>
             <span class="article-info-span">1</span>
             <icon icon-class="icon-comment"/>
@@ -30,10 +30,17 @@
 </template>
 
 <script>
+import date from '../../../utils/date'
 export default {
   name: 'HomeArticle',
   props: {
     list: Array
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      return date.formatDate(new Date(value))
+    }
   }
 }
 </script>

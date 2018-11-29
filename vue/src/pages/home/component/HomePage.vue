@@ -28,21 +28,9 @@
 export default {
   name: 'HomePage',
   props: {
-    pageNum: {
-      type: Number,
-      required: false,
-      default: 1
-    },
-    total: {
-      type: Number,
-      required: false,
-      default: 1
-    },
-    pageSize: {
-      type: Number,
-      required: false,
-      default: 10
-    }
+    pageNum: Number,
+    total: Number,
+    pageSize: Number
   },
   data () {
     return {

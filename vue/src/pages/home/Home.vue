@@ -44,9 +44,9 @@ export default {
   data () {
     return {
       articleList: [],
-      pageNum: Number,
-      total: Number,
-      pageSize: Number,
+      pageNum: 1,
+      total: 1,
+      pageSize: 10,
       reqVo: {
       }
     }
