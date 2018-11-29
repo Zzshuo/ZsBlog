@@ -10,7 +10,10 @@
               <home-article :list = "articleList"></home-article>
             </div>
             <div class="tile is-child zs-content">
-              <home-page :page = "page"></home-page>
+              <home-page :pageNum = "pageNum"
+                         :pageSize = "pageSize"
+                         :total = "total"
+              ></home-page>
             </div>
           </div>
         </div>
@@ -41,7 +44,9 @@ export default {
   data () {
     return {
       articleList: [],
-      page: [],
+      pageNum: Number,
+      total: Number,
+      pageSize: Number,
       reqVo: {
       }
     }
@@ -52,13 +57,9 @@ export default {
         if (res && res.code === 200) {
           const data = res.data
           this.articleList = data.list
-          this.page.isFirstPage = data.isFirstPage
-          this.page.isLastPage = data.isLastPage
-          this.page.hasPreviousPage = data.hasPreviousPage
-          this.page.hasNextPage = data.hasNextPage
-          this.page.navigatepageNums = data.navigatepageNums
-          this.page.navigateFirstPage = data.navigateFirstPage
-          this.page.navigateLastPage = data.navigateLastPage
+          this.pageNum = data.pageNum
+          this.total = data.total
+          this.pageSize = data.pageSize
         } else {
           console.log(res.code + res.message)
         }

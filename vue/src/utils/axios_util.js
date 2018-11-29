@@ -33,7 +33,6 @@ axios.interceptors.response.use((response) => {
  * @return {*}
  */
 function checkCode (responseVo) {
-  console.log(1 + responseVo.code)
   switch (responseVo.code) {
     case 200:
       break

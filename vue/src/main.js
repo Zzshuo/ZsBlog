@@ -22,8 +22,12 @@ import Icon from './icons/icon'
 // 自定义css
 import './assets/styles/zs-style.css'
 
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
+Vue.use(ElementUI)
 
 // fastClick
 fastClick.attach(document.body)
