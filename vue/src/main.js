@@ -12,10 +12,15 @@ import mavonEditor from 'mavon-editor'
 // import './assets/styles/border.css'
 import 'mavon-editor/dist/css/index.css'
 import 'bulma/css/bulma.css'
-import 'font-awesome/css/font-awesome.css'
+
+import './icons/iconfont'
 
 import BlogHeader from './pages/common/BlogHeader'
 import BlogFooter from './pages/common/BlogFooter'
+import Icon from './icons/icon'
+
+// 自定义css
+import './assets/styles/zs-style.css'
 
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
@@ -29,6 +34,7 @@ Vue.prototype.axios = axios
 // 全局组件
 Vue.component('BlogHeader', BlogHeader)
 Vue.component('BlogFooter', BlogFooter)
+Vue.component('Icon', Icon)
 
 /* eslint-disable no-new */
 new Vue({

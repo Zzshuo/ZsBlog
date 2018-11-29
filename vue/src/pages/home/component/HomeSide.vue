@@ -2,12 +2,10 @@
   <div class="tile is-ancestor">
     <div class="tile is-parent is-vertical">
       <div class="tile is-child box ">
-        <p class="title">Vertical...</p>
-        <p class="subtitle">Top tile</p>
+        <div><i class="fa fa-home"></i><strong>关于我</strong></div>
       </div>
       <div class="tile is-child box ">
-        <p class="title">...tiles</p>
-        <p class="subtitle">Bottom tile</p>
+        <i class="fa fa-tags"></i><strong>文章标签</strong>
       </div>
     </div>
   </div>
