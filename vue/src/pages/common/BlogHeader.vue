@@ -1,16 +1,13 @@
 <template>
   <div>
-    <nav class="navbar is-fixed-top">
+    <nav class="navbar is-fixed-top is-info">
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
           <router-link class="" to="/" >
              图标
           </router-link>
-          <div class="navbar-item is-hidden-mobile is-hidden-desktop">
-            <header-menu></header-menu>
-          </div>
-          <div class="navbar-item is-hidden-desktop">
+          <div class="navbar-item is-hidden-desktop" >
             <header-search></header-search>
           </div>
           <div class="navbar-burger" data-target="navMenu">
@@ -23,8 +20,13 @@
         <div class="navbar-menu" id="navMenu">
           <!-- navbar start, navbar end -->
           <div class="navbar-end">
-            <div class="navbar-item is-hidden-mobile">
-              <header-menu></header-menu>
+            <router-link class="navbar-item" to="/">首页</router-link>
+            <router-link class="navbar-item" to="/">后端</router-link>
+            <router-link class="navbar-item" to="/">前端</router-link>
+            <router-link class="navbar-item" to="/">在线工具</router-link>
+            <router-link class="navbar-item" to="/">其他</router-link>
+            <router-link class="navbar-item" to="/about">关于</router-link>
+            <div class="navbar-item is-hidden-touch">
               <header-search></header-search>
             </div>
           </div>
@@ -36,15 +38,13 @@
 
 <script>
 import HeaderSearch from './HeaderSearch'
-import HeaderMenu from './HeaderMenu'
 export default {
   name: 'BlogHeader',
   mounted () {
     document.addEventListener('DOMContentLoaded', this.burger())
   },
   components: {
-    HeaderSearch,
-    HeaderMenu
+    HeaderSearch
   },
   methods: {
     burger () {

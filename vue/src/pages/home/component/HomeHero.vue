@@ -1,5 +1,5 @@
 <template>
-  <section class="hero bd-rainbow">
+  <section class="hero is-info">
     <div class="hero-body container">
       <h1 class="title">
         Hero title
