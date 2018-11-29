@@ -28,6 +28,5 @@
     vertical-align: -0.2em;
     fill: currentColor;
     overflow: hidden;
-    margin-right: 0rem;
   }
 </style>
