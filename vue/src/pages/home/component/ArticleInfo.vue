@@ -19,14 +19,14 @@ export default {
       default: '0'
     },
     eye: {
-      type: String,
+      type: Number,
       required: false,
-      default: '0'
+      default: 0
     },
     comment: {
-      type: String,
+      type: Number,
       required: false,
-      default: '0'
+      default: 0
     }
   },
   data () {

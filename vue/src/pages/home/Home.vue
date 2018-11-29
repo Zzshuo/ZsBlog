@@ -7,11 +7,10 @@
         <div class="tile is-vertical is-8">
           <div class="tile is-parent is-vertical">
             <div class="tile is-child zs-content">
-              <home-article></home-article>
-              <home-article></home-article>
+              <home-article :list = "articleList"></home-article>
             </div>
             <div class="tile is-child zs-content">
-              <home-page></home-page>
+              <home-page :page = "page"></home-page>
             </div>
           </div>
         </div>
@@ -41,21 +40,33 @@ export default {
   },
   data () {
     return {
-      content: 'xxx',
+      articleList: [],
+      page: [],
       reqVo: {
-        id: 1
       }
     }
   },
   methods: {
-    handleClick () {
+    getArticleList () {
       this.axios.getArticleList(this.reqVo).then((res) => {
-        this.content = res
-        console.log('123' + res)
-      }).catch((err) => {
-        console.log('234' + err)
+        if (res && res.code === 200) {
+          const data = res.data
+          this.articleList = data.list
+          this.page.isFirstPage = data.isFirstPage
+          this.page.isLastPage = data.isLastPage
+          this.page.hasPreviousPage = data.hasPreviousPage
+          this.page.hasNextPage = data.hasNextPage
+          this.page.navigatepageNums = data.navigatepageNums
+          this.page.navigateFirstPage = data.navigateFirstPage
+          this.page.navigateLastPage = data.navigateLastPage
+        } else {
+          console.log(res.code + res.message)
+        }
       })
     }
+  },
+  mounted () {
+    this.getArticleList()
   }
 }
 </script>

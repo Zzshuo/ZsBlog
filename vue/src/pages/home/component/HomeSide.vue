@@ -21,16 +21,16 @@
         <div class="message-body">
         </div>
       </div>
-      <div class="message is-info ">
-        <div class="message-header">
-          <div>
-            <icon class="icon-large" icon-class="icon-comment"/>
-            近期评论
-          </div>
-        </div>
-        <div class="message-body">
-        </div>
-      </div>
+      <!--<div class="message is-info ">-->
+        <!--<div class="message-header">-->
+          <!--<div>-->
+            <!--<icon class="icon-large" icon-class="icon-comment"/>-->
+            <!--近期评论-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="message-body">-->
+        <!--</div>-->
+      <!--</div>-->
       <div class="message is-info">
         <div class="message-header">
           <div>

@@ -1,30 +1,39 @@
 <template>
-  <div class="columns is-mobile zs-relative">
-    <div class="column is-one-quarter zs-column-left">
-      <figure class="image is-square">
-        <img src="https://lqzhgood.github.io/bulma-docs-cn/images/placeholders/128x128.png">
-      </figure>
-    </div>
-    <div class="column">
-      <div>
-        <p class="title is-4">Verti啊都市风口浪尖街坊邻居卡萨冷风机阿里双方均暗示阿发啊了附近</p>
+  <div>
+    <div v-for="article of list" :key="article.id" class="columns is-mobile zs-relative">
+      <div class="column is-one-quarter zs-column-left">
+        <figure class="image is-square">
+          <img v-if="article.img" :src="article.img">
+          <img v-else src="https://lqzhgood.github.io/bulma-docs-cn/images/placeholders/128x128.png">
+        </figure>
       </div>
-      <div>
-        <p class="subtitle is-6 is-hidden-mobile">Top tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop tileTop</p>
-      </div>
-      <div class="zs-info">
-        <article-info :calendar="20180808" :eye="12" :comment="20"></article-info>
+      <div class="column">
+        <div>
+          <p class="title is-4">{{article.title}}</p>
+        </div>
+        <div>
+          <p class="subtitle is-6 is-hidden-mobile">{{article.description}}</p>
+        </div>
+        <div class="zs-info">
+          <div class="article-info">
+            <icon icon-class="icon-calendar"/>
+            <span class="article-info-span">{{article.createTime}}</span>
+            <icon icon-class="icon-attention"/>
+            <span class="article-info-span">1</span>
+            <icon icon-class="icon-comment"/>
+            <span class="article-info-span">1</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ArticleInfo from './ArticleInfo'
 export default {
   name: 'HomeArticle',
-  components: {
-    ArticleInfo
+  props: {
+    list: Array
   }
 }
 </script>
@@ -40,4 +49,9 @@ export default {
     ellipsis()
   .subtitle
     -webkit-line-clamp: 3 //在一个块元素显示的文本的行数
+  .article-info
+    color #999
+  .article-info-span
+    font-size .875rem
+    padding-right .25rem
 </style>
