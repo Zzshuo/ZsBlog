@@ -4,7 +4,7 @@
       <div class="column is-one-quarter zs-column-left">
         <figure class="image is-square">
           <img v-if="article.img" :src="article.img">
-          <img v-else src="https://lqzhgood.github.io/bulma-docs-cn/images/placeholders/128x128.png">
+          <img v-else src="../../../assets/img/default.gif">
         </figure>
       </div>
       <div class="column">
