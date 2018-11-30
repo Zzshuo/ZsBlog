@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <router-link class="" to="/" >
+          <router-link class="navbar-item" to="/" >
              图标
           </router-link>
           <div class="navbar-item is-hidden-desktop" >
@@ -19,13 +19,15 @@
 
         <div class="navbar-menu" id="navMenu">
           <!-- navbar start, navbar end -->
-          <div class="navbar-end">
+          <div class="navbar-start">
             <router-link class="navbar-item" to="/">首页</router-link>
             <router-link class="navbar-item" to="/">后端</router-link>
             <router-link class="navbar-item" to="/">前端</router-link>
             <router-link class="navbar-item" to="/">在线工具</router-link>
             <router-link class="navbar-item" to="/">其他</router-link>
             <router-link class="navbar-item" to="/about">关于</router-link>
+          </div>
+          <div class="navbar-end">
             <div class="navbar-item is-hidden-touch">
               <header-search></header-search>
             </div>
