@@ -1,14 +1,15 @@
-import axios from '../utils/axios_util'
+import axios from './axios_util'
 
 const mock = true
 
 const requests = {
   // 获取文章列表
   getArticleList (data = {}) {
+    const path = 'api/admin/article/list'
     if (mock) {
-      return axios('api/admin/article/list.json', {data: data, method: 'get'})
+      return axios(path + '.json', {data: data, method: 'get'})
     } else {
-      return axios('api/admin/article/list', {data: data})
+      return axios(path, {data: data})
     }
   }
 }

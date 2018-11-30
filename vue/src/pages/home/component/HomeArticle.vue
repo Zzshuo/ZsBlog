@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import date from '../../../utils/date'
+import date from '../../../assets/utils/date'
 export default {
   name: 'HomeArticle',
   props: {

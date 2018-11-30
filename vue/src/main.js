@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import store from './store'
-import axios from './utils/api'
+import axios from './assets/utils/api'
 import mavonEditor from 'mavon-editor'
 
 // import './assets/styles/reset.css'
@@ -13,11 +13,11 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import 'bulma/css/bulma.css'
 
-import './icons/iconfont'
+import './assets/icons/iconfont'
 
 import BlogHeader from './pages/common/BlogHeader'
 import BlogFooter from './pages/common/BlogFooter'
-import Icon from './icons/icon'
+import Icon from './assets/icons/icon'
 
 // 自定义css
 import './assets/styles/zs-style.css'
