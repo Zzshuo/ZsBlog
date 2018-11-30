@@ -7,6 +7,7 @@ axios.interceptors.request.use((config) => {
   // 预处理请求的信息
   return config
 }, (error) => {
+  console.log('3' + error)
   // 预处理请求有异常error时抛出错误
   return Promise.reject(error)
 })
@@ -16,13 +17,14 @@ axios.interceptors.request.use((config) => {
 */
 axios.interceptors.response.use((response) => {
   // 预处理相应的数据
+  console.log('1' + response)
   const responseVo = response.data
   if (responseVo) {
     checkCode(responseVo)
     return responseVo
   }
 }, (error) => {
-  console.log(error)
+  console.log('2' + error)
   // 错误返回
   return Promise.reject(error)
 })
