@@ -5,7 +5,7 @@ import Article from '../pages/article/Article'
 import About from '../pages/about/About'
 import Page401 from '../pages/error/401'
 import Page404 from '../pages/error/404'
-import Demo from '../pages/demo/Demo'
+import Demo from '../pages/md/Demo'
 
 Vue.use(Router)
 

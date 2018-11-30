@@ -2,7 +2,7 @@
   <div>
     <blog-header></blog-header>
     <div class="container">
-      {{article}}
+      <markdown-view :value="article.content"></markdown-view>
     </div>
     <blog-footer></blog-footer>
   </div>
@@ -10,10 +10,12 @@
 
 <script>
 import HomeSide from '../home/component/HomeSide'
+import MarkdownView from '../md/MarkdownView'
 export default {
   name: 'Article',
   components: {
-    HomeSide
+    HomeSide,
+    MarkdownView
   },
   data () {
     return {

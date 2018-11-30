@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import MarkDownEdit from './MarkDownEdit'
-import MarkDownView from './MarkDownView'
+import MarkDownEdit from './MarkdownEdit'
+import MarkDownView from './MarkdownView'
 export default {
   name: 'Demo',
   components: {
