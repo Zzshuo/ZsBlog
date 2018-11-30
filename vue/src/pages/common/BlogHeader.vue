@@ -5,7 +5,7 @@
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
           <router-link class="navbar-item" to="/" >
-             图标
+            <icon icon-class="icon-hot"/>
           </router-link>
           <div class="navbar-item is-hidden-desktop" >
             <header-search></header-search>
