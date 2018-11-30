@@ -47,7 +47,7 @@ export default {
     window.onresize = function windowResize () {
       // 通过捕获系统的onresize事件触发我们需要执行的事件
       this.small = window.outerWidth <= 768
-      console.log(this.small)
+      // console.log(this.small)
     }
   }
 }

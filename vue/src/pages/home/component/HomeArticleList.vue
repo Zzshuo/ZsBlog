@@ -2,18 +2,22 @@
   <div>
     <div v-for="article of list" :key="article.id" class="columns is-mobile zs-relative">
       <div class="column is-one-quarter zs-column-left">
-        <figure class="image is-square">
-          <img v-if="article.img" :src="article.img">
-          <img v-else src="../../../assets/img/default.gif">
-        </figure>
+        <router-link :to="/article/ + article.id">
+          <figure class="image is-square">
+            <img v-if="article.img" :src="article.img">
+            <img v-else src="../../../assets/img/default.gif">
+          </figure>
+        </router-link>
       </div>
       <div class="column">
-        <div>
-          <p class="title is-4">{{article.title}}</p>
-        </div>
-        <div>
-          <p class="subtitle is-6 is-hidden-mobile">{{article.description}}</p>
-        </div>
+        <router-link :to="/article/ + article.id">
+          <div>
+            <p class="title is-4">{{article.title}}</p>
+          </div>
+          <div>
+            <p class="subtitle is-6 is-hidden-mobile">{{article.description}}</p>
+          </div>
+        </router-link>
         <div class="zs-info">
           <div class="article-info">
             <icon icon-class="icon-calendar"/>
@@ -24,6 +28,7 @@
             <span class="article-info-span">1</span>
           </div>
         </div>
+
       </div>
     </div>
   </div>

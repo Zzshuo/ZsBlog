@@ -7,7 +7,7 @@
         <div class="tile is-vertical is-8">
           <div class="tile is-parent is-vertical">
             <div class="tile is-child zs-content">
-              <home-article :list = "articleList"></home-article>
+              <home-article-list :list = "articleList"></home-article-list>
             </div>
             <div class="tile is-child zs-content">
               <home-page :pageNum = "pageNum"
@@ -30,14 +30,14 @@
 
 <script>
 import HomeHero from './component/HomeHero'
-import HomeArticle from './component/HomeArticle'
+import HomeArticleList from './component/HomeArticleList'
 import HomePage from './component/HomePage'
 import HomeSide from './component/HomeSide'
 export default {
   name: 'Home',
   components: {
     HomeHero,
-    HomeArticle,
+    HomeArticleList,
     HomePage,
     HomeSide
   },
