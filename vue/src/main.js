@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import store from './store'
-import axios from './assets/utils/api'
+import api from './assets/utils/api'
 import mavonEditor from 'mavon-editor'
 
 // import './assets/styles/reset.css'
@@ -33,7 +33,7 @@ Vue.use(ElementUI)
 fastClick.attach(document.body)
 
 //  将API方法绑定到全局
-Vue.prototype.axios = axios
+Vue.prototype.api = api
 
 // 全局组件
 Vue.component('BlogHeader', BlogHeader)

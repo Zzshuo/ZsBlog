@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     getArticleList () {
-      this.axios.getArticleList(this.reqVo).then((res) => {
+      this.api.getArticleList(this.reqVo).then((res) => {
         if (res && res.code === 200) {
           const data = res.data
           this.articleList = data.list
