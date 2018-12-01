@@ -42,7 +42,7 @@ export default {
     HomePage,
     HomeSide
   },
-  data() {
+  data () {
     return {
       articleList: [],
       pageNum: 1,
@@ -52,7 +52,7 @@ export default {
     }
   },
   methods: {
-    getArticleList() {
+    getArticleList () {
       this.api.getArticleList(this.reqVo).then((res) => {
         if (res && res.code === 200) {
           const data = res.data
@@ -66,7 +66,7 @@ export default {
       })
     }
   },
-  mounted() {
+  mounted () {
     this.getArticleList()
   }
 }
