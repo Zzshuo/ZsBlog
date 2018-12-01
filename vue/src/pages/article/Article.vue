@@ -1,8 +1,12 @@
 <template>
   <div>
     <blog-header></blog-header>
-    <div class="container">
-      <markdown-view :value="article.content"></markdown-view>
+    <div class="container zs-main">
+      <div class="columns">
+        <div class="column is-offset-2 is-8">
+          <markdown-view :value="article.content"></markdown-view>
+        </div>
+      </div>
     </div>
     <blog-footer></blog-footer>
   </div>

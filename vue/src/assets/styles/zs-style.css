@@ -1,3 +1,6 @@
 .zs-relative {
   position: relative;
 }
+.zs-main {
+  padding: 1rem;
+}

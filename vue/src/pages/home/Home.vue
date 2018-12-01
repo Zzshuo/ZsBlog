@@ -2,23 +2,23 @@
   <div>
     <blog-header></blog-header>
     <home-hero></home-hero>
-    <div class="container">
+    <div class="container zs-main">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile is-parent is-vertical">
-            <div class="tile is-child zs-content">
-              <home-article-list :list = "articleList"></home-article-list>
+            <div class="tile is-child">
+              <home-article-list :list="articleList"></home-article-list>
             </div>
-            <div class="tile is-child zs-content">
-              <home-page :pageNum = "pageNum"
-                         :pageSize = "pageSize"
-                         :total = "total"
+            <div class="tile is-child">
+              <home-page :pageNum="pageNum"
+                         :pageSize="pageSize"
+                         :total="total"
               ></home-page>
             </div>
           </div>
         </div>
         <div class="tile is-parent">
-          <div class="tile is-child zs-content">
+          <div class="tile is-child">
             <home-side></home-side>
           </div>
         </div>
@@ -33,6 +33,7 @@ import HomeHero from './component/HomeHero'
 import HomeArticleList from './component/HomeArticleList'
 import HomePage from './component/HomePage'
 import HomeSide from './component/HomeSide'
+
 export default {
   name: 'Home',
   components: {
@@ -41,18 +42,17 @@ export default {
     HomePage,
     HomeSide
   },
-  data () {
+  data() {
     return {
       articleList: [],
       pageNum: 1,
       total: 1,
       pageSize: 10,
-      reqVo: {
-      }
+      reqVo: {}
     }
   },
   methods: {
-    getArticleList () {
+    getArticleList() {
       this.api.getArticleList(this.reqVo).then((res) => {
         if (res && res.code === 200) {
           const data = res.data
@@ -66,13 +66,11 @@ export default {
       })
     }
   },
-  mounted () {
+  mounted() {
     this.getArticleList()
   }
 }
 </script>
 
 <style scoped lang="stylus">
-  .zs-content
-    padding 1rem
 </style>

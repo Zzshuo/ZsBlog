@@ -19,11 +19,11 @@ import BlogHeader from './pages/common/BlogHeader'
 import BlogFooter from './pages/common/BlogFooter'
 import Icon from './assets/icons/icon'
 
-// 自定义css
-import './assets/styles/zs-style.css'
-
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+
+// 自定义css
+import './assets/styles/zs-style.css'
 
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
