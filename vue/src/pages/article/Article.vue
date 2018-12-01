@@ -5,6 +5,8 @@
       <div class="columns">
         <div class="column is-offset-2 is-8">
           <markdown-view :value="article.content"></markdown-view>
+          <div class="navbar-divider"></div>
+          <markdown-viewdemo :value="article.content"></markdown-viewdemo>
         </div>
       </div>
     </div>
@@ -15,11 +17,13 @@
 <script>
 import HomeSide from '../home/component/HomeSide'
 import MarkdownView from '../md/MarkdownView'
+import MarkdownViewdemo from '../md/MarkdownViewdemo'
 export default {
   name: 'Article',
   components: {
     HomeSide,
-    MarkdownView
+    MarkdownView,
+    MarkdownViewdemo
   },
   data () {
     return {

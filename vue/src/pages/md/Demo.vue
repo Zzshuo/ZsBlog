@@ -8,7 +8,7 @@
 
 <script>
 import MarkDownEdit from './MarkdownEdit'
-import MarkDownView from './MarkdownView'
+import MarkDownView from './MarkdownViewdemo'
 export default {
   name: 'Demo',
   components: {
