@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
-    <div id="markdownbody" v-html="compiledMarkdown" class="markdown-body column"></div>
-    <div class="column is-hidden-mobile is-2" v-show="showNav">
+    <div v-html="compiledMarkdown" class="markdown-body column"></div>
+    <div class="column is-hidden-mobile is-one-quarter" v-show="showNav">
       <div class="markdown-nav">目录</div>
     </div>
   </div>
@@ -63,5 +63,17 @@ export default {
   .markdown-nav
     position fixed
     border 1px solid
-
+    max-width 224px
+  @media screen and (min-width: 769px)
+    .markdown-nav
+      width 21.5%
+  @media screen and (min-width: 1088px)
+    .markdown-nav
+      width 19.9%
+  @media screen and (min-width: 1280px)
+    .markdown-nav
+      width 17.7%
+  @media screen and (min-width: 1472px)
+    .markdown-nav
+      width 15.3%
 </style>
