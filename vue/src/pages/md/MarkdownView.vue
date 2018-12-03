@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div v-html="compiledMarkdown" class="markdown-body md"></div>
+  <div class="columns">
+    <div id="markdownbody" v-html="compiledMarkdown" class="markdown-body column"></div>
+    <div class="column is-hidden-mobile is-2" v-show="showNav">
+      <div class="markdown-nav">目录</div>
+    </div>
   </div>
 </template>
 
@@ -19,6 +22,11 @@ export default {
       default: ''
     }
   },
+  data () {
+    return {
+      showNav: true
+    }
+  },
   mounted () {
     this.markdown()
   },
@@ -31,13 +39,13 @@ export default {
     markdown () {
       marked.setOptions({
         renderer: new marked.Renderer(),
-        gfm: true,
-        tables: true,
-        breaks: false,
-        pedantic: false,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
+        gfm: true, // 允许 Git Hub标准的markdown.
+        tables: true, // 允许支持表格语法。该选项要求 gfm 为true。
+        breaks: false, // 允许回车换行。该选项要求 gfm 为true。
+        pedantic: false, // 尽可能地兼容 markdown.pl的晦涩部分。不纠正原始模型任何的不良行为和错误。
+        sanitize: false, // 对输出进行过滤（清理），将忽略任何已经输入的html代码（标签）
+        smartLists: true, // 使用比原生markdown更时髦的列表。 旧的列表将可能被作为pedantic的处理内容过滤掉.
+        smartypants: true, // 使用更为时髦的标点，比如在引用语法中加入破折号。
         highlight: function (code, lang) {
           if (lang && highlightJs.getLanguage(lang)) {
             return highlightJs.highlight(lang, code, true).value
@@ -52,4 +60,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .markdown-nav
+    position fixed
+    border 1px solid
+
 </style>
