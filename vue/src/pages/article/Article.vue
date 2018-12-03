@@ -1,10 +1,8 @@
 <template>
   <div>
     <blog-header></blog-header>
-    <div class="container zs-main" style="max-width: 1000px">
+    <div class="container zs-main" style="max-width: 1000px; min-height: 35rem">
       <markdown-view :value="article.content"></markdown-view>
-      <div class="navbar-divider"></div>
-      <markdown-viewdemo :value="article.content"></markdown-viewdemo>
     </div>
     <blog-footer></blog-footer>
   </div>

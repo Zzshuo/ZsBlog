@@ -3,3 +3,4 @@
 /dist/
 /*.js
 /src/assets/icons/iconfont.js
+/src/assets/utils/catalog.js
