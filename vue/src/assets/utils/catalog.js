@@ -73,7 +73,7 @@ export default function catalog(){
     $("#AnchorContent").toggle();
   });
   $(".anchor-link").click(function(){
-    $("html,body").animate({scrollTop: $($(this).attr("link")).offset().top}, 500);
+    $("html,body").animate({scrollTop: $($(this).attr("link")).offset().top - 68 }, 500);
   });
 
   var headerNavs = $(".BlogAnchor li .nav_item");
