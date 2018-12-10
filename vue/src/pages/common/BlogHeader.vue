@@ -4,10 +4,10 @@
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <router-link class="navbar-item" to="/" >
+          <router-link class="navbar-item" to="/">
             <icon icon-class="icon-hot"/>
           </router-link>
-          <div class="navbar-item is-hidden-desktop" >
+          <div class="navbar-item is-hidden-desktop">
             <header-search></header-search>
           </div>
           <div class="navbar-burger" data-target="navMenu">
@@ -31,6 +31,20 @@
             <div class="navbar-item is-hidden-touch">
               <header-search></header-search>
             </div>
+            <div class="navbar-item img-item is-hidden-mobile">
+              <div class="dropdown is-right is-hoverable">
+                <div class="">
+                    <img class="img-circle" src="../../assets/img/default.gif">
+                </div>
+                <div class="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <router-link class="dropdown-item" to="/edit">写文章</router-link>
+                    <hr class="dropdown-divider">
+                    <router-link class="dropdown-item" to="/">退出</router-link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -40,6 +54,7 @@
 
 <script>
 import HeaderSearch from './HeaderSearch'
+
 export default {
   name: 'BlogHeader',
   mounted () {
@@ -72,4 +87,11 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .img-item
+    padding 0.25rem 0.75rem
+  .img-circle
+    border-radius: 1500px
+    width 38px
+    height 38px
+    max-height 38px !important
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div>edit</div>
-    <mavon-editor v-model="value" :toolbars="toolbars"/>
+    <mavon-editor v-model="value" :toolbars="toolbars" :placeholder="placeholder" :scrollStyle="scrollStyle"/>
   </div>
 </template>
 
@@ -10,7 +9,8 @@ export default {
   name: 'MarkDownEdit',
   data () {
     return {
-      value: '123123',
+      value: '',
+      placeholder: '请输入...',
       toolbars: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -51,4 +51,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .v-note-wrapper
+    height 33rem !important
+    max-height 33rem !important
+    position inherit
 </style>

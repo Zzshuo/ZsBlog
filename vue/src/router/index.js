@@ -6,6 +6,8 @@ import About from '../pages/about/About'
 import Page401 from '../pages/error/401'
 import Page404 from '../pages/error/404'
 import Demo from '../pages/md/Demo'
+// ------------------back------------------
+import ArticleEdit from '../pages/article/ArticleEdit'
 
 Vue.use(Router)
 
@@ -40,6 +42,12 @@ export default new Router({
       path: '/demo',
       name: 'Demo',
       component: Demo
+    },
+    //  -------------------back---------------
+    {
+      path: '/edit',
+      name: 'ArticleEdit',
+      component: ArticleEdit
     }
   ]
 })

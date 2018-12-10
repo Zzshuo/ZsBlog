@@ -11,13 +11,11 @@
 <script>
 import HomeSide from '../home/component/HomeSide'
 import MarkdownView from '../md/MarkdownView'
-import MarkdownViewdemo from '../md/MarkdownViewdemo'
 export default {
   name: 'Article',
   components: {
     HomeSide,
-    MarkdownView,
-    MarkdownViewdemo
+    MarkdownView
   },
   data () {
     return {
