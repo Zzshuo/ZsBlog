@@ -15,6 +15,7 @@
         <module>blog-common</module>
         <module>blog-dao</module>
         <module>blog-web</module>
+        <module>blog-admin</module>
     </modules>
 
     <parent>
