@@ -1,7 +1,5 @@
 <template>
   <div>
-    <blog-header></blog-header>
-    <home-hero></home-hero>
     <div class="container zs-main">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
@@ -24,7 +22,6 @@
         </div>
       </div>
     </div>
-    <blog-footer></blog-footer>
   </div>
 </template>
 

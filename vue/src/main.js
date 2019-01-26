@@ -15,19 +15,13 @@ import 'bulma/css/bulma.css'
 
 import './assets/icons/iconfont'
 
-import BlogHeader from './pages/common/BlogHeader'
-import BlogFooter from './pages/common/BlogFooter'
 import Icon from './assets/icons/icon'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-
 // 自定义css
-import './assets/styles/zs-style.css'
+import './assets/styles/base.styl'
 
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
-Vue.use(ElementUI)
 
 // fastClick
 fastClick.attach(document.body)
@@ -36,8 +30,6 @@ fastClick.attach(document.body)
 Vue.prototype.api = api
 
 // 全局组件
-Vue.component('BlogHeader', BlogHeader)
-Vue.component('BlogFooter', BlogFooter)
 Vue.component('Icon', Icon)
 
 /* eslint-disable no-new */

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {Message} from 'element-ui'
 
 /*
 * 增加请求拦截器
@@ -23,7 +22,7 @@ axios.interceptors.response.use((response) => {
     return responseVo
   }
 }, (error) => {
-  Message.error(error)
+  // Message.error(error)
   // 错误返回
   return Promise.reject(error)
 })
@@ -38,7 +37,7 @@ function checkCode (responseVo) {
     case 200:
       break
     default:
-      Message.error(responseVo.code + ':' + responseVo.message)
+      // Message.error(responseVo.code + ':' + responseVo.message)
   }
 }
 

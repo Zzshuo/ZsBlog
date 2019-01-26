@@ -24,7 +24,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 npm install stylus-loader --save     
 npm install stylus --save  
 # 移动端浏览器 会有300  
-npm install fastclick --save  
+npm install fastclick --save
 # 轮播图   
 npm install vue-awesome-swiper --save
 # ajax
@@ -32,3 +32,5 @@ npm install axios --save
 npm install vuex --save
 #npm install scriptjs --save
 #cnpm install scriptjs --save
+
+npm install iview --save

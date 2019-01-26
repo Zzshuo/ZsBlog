@@ -6,3 +6,9 @@ npm install fastclick --save
 # ajax
 npm install axios --save
 npm install vuex --save
+
+引入bootstrap
+npm install bootstrap --save 
+npm install bootstrap-vue --save
+
+npm install iview --save

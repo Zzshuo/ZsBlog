@@ -1,12 +1,20 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
+    <blog-header></blog-header>
     <router-view/>
+    <blog-footer></blog-footer>
   </div>
 </template>
 
 <script>
+import BlogHeader from './pages/common/BlogHeader'
+import BlogFooter from './pages/common/BlogFooter'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    BlogHeader,
+    BlogFooter
+  }
 }
 </script>
 <style>

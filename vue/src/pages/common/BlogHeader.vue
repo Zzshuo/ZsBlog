@@ -1,14 +1,25 @@
 <template>
   <div>
-    <nav class="navbar is-fixed-top is-info">
+    <nav class="navbar is-fixed-top">
       <div class="container">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
           <router-link class="navbar-item" to="/">
             <icon icon-class="icon-hot"/>
           </router-link>
-          <div class="navbar-item is-hidden-desktop">
-            <header-search></header-search>
+          <div class="navbar-item img-item">
+            <div class="dropdown is-left is-hoverable">
+              <div class="">
+                <img class="img-circle" src="../../assets/img/default.gif">
+              </div>
+              <div class="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <router-link class="dropdown-item" to="/edit">写文章</router-link>
+                  <hr class="dropdown-divider">
+                  <router-link class="dropdown-item" to="/">退出</router-link>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="navbar-burger" data-target="navMenu">
             <span></span>
@@ -28,25 +39,12 @@
             <router-link class="navbar-item" to="/about">关于</router-link>
           </div>
           <div class="navbar-end">
-            <div class="navbar-item is-hidden-touch">
+            <div class="navbar-item">
               <header-search></header-search>
-            </div>
-            <div class="navbar-item img-item is-hidden-mobile">
-              <div class="dropdown is-right is-hoverable">
-                <div class="">
-                    <img class="img-circle" src="../../assets/img/default.gif">
-                </div>
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-content">
-                    <router-link class="dropdown-item" to="/edit">写文章</router-link>
-                    <hr class="dropdown-divider">
-                    <router-link class="dropdown-item" to="/">退出</router-link>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
+
       </div>
     </nav>
   </div>
