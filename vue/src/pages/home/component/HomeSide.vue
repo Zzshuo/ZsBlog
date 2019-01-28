@@ -1,7 +1,7 @@
 <template>
-  <div class=" ">
-    <div class="  is-vertical">
-      <div class="message">
+  <div>
+    <div class="is-vertical">
+      <div class="message zs-box">
         <div class="message-header">
           <div>
             <icon class="icon-large" icon-class="icon-home-white"/>
@@ -11,7 +11,7 @@
         <div class="message-body">
         </div>
       </div>
-      <div class="message ">
+      <div class="message zs-box">
         <div class="message-header">
           <div>
             <icon class="icon-large" icon-class="icon-tag"/>
@@ -21,7 +21,7 @@
         <div class="message-body">
         </div>
       </div>
-      <!--<div class="message is-info ">-->
+      <!--<div class="message zs-box">-->
         <!--<div class="message-header">-->
           <!--<div>-->
             <!--<icon class="icon-large" icon-class="icon-comment"/>-->
@@ -31,7 +31,7 @@
         <!--<div class="message-body">-->
         <!--</div>-->
       <!--</div>-->
-      <div class="message">
+      <div class="message zs-box">
         <div class="message-header">
           <div>
             <icon class="icon-large" icon-class="icon-info"/>

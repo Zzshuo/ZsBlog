@@ -1,8 +1,6 @@
 <template>
   <div class="footer">
-      <div class="hidden">
-        <scroll-top></scroll-top>
-      </div>
+      <BackTop></BackTop>
       <div class="container">
         <div class="content has-text-centered">
           <a href="https://bulma.io">
@@ -24,11 +22,9 @@
 </template>
 
 <script>
-import ScrollTop from './ScrollTop'
 export default {
   name: 'BlogFooter',
   components: {
-    ScrollTop
   }
 }
 </script>

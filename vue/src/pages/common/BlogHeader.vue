@@ -1,17 +1,15 @@
 <template>
   <div>
-    <nav class="navbar is-fixed-top">
-      <div class="container">
+    <nav class="navbar is-fixed-top zs-box">
+      <div class="container zs-main-header">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <router-link class="navbar-item" to="/">
-            <icon icon-class="icon-hot"/>
-          </router-link>
+
           <div class="navbar-item img-item">
             <div class="dropdown is-left is-hoverable">
-              <div class="">
-                <img class="img-circle" src="../../assets/img/default.gif">
-              </div>
+              <router-link class="navbar-item" to="/">
+                ZsBlog
+              </router-link>
               <div class="dropdown-menu" role="menu">
                 <div class="dropdown-content">
                   <router-link class="dropdown-item" to="/edit">写文章</router-link>
@@ -40,7 +38,7 @@
           </div>
           <div class="navbar-end">
             <div class="navbar-item">
-              <header-search></header-search>
+              <Input search placeholder="Enter something..." />
             </div>
           </div>
         </div>
@@ -51,15 +49,12 @@
 </template>
 
 <script>
-import HeaderSearch from './HeaderSearch'
-
 export default {
   name: 'BlogHeader',
   mounted () {
     document.addEventListener('DOMContentLoaded', this.burger())
   },
   components: {
-    HeaderSearch
   },
   methods: {
     burger () {

@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="container zs-main">
-      <div class="tile is-ancestor">
-        <div class="tile is-vertical is-8">
-          <div class="tile is-parent is-vertical">
-            <div class="tile is-child">
-              <home-article-list :list="articleList"></home-article-list>
-            </div>
-            <div class="tile is-child">
-              <home-page :pageNum="pageNum"
-                         :pageSize="pageSize"
-                         :total="total"
-              ></home-page>
-            </div>
+  <div class="container zs-main">
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile is-parent is-vertical">
+          <div class="tile is-child">
+            <home-article-list :list="articleList"></home-article-list>
+          </div>
+          <div class="tile is-child">
+            <home-page :pageNum="pageNum"
+                       :pageSize="pageSize"
+                       :total="total"
+            ></home-page>
           </div>
         </div>
-        <div class="tile is-parent">
-          <div class="tile is-child">
-            <home-side></home-side>
-          </div>
+      </div>
+      <div class="tile is-parent">
+        <div class="tile is-child">
+          <home-side></home-side>
         </div>
       </div>
     </div>
@@ -26,7 +24,6 @@
 </template>
 
 <script>
-import HomeHero from './component/HomeHero'
 import HomeArticleList from './component/HomeArticleList'
 import HomePage from './component/HomePage'
 import HomeSide from './component/HomeSide'
@@ -34,7 +31,6 @@ import HomeSide from './component/HomeSide'
 export default {
   name: 'Home',
   components: {
-    HomeHero,
     HomeArticleList,
     HomePage,
     HomeSide

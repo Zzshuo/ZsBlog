@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app">
+  <div id="app" class="zs-app">
     <blog-header></blog-header>
     <router-view/>
     <blog-footer></blog-footer>

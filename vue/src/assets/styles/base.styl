@@ -1,6 +1,30 @@
-.app
+.zs-app
   background-color: #f4f5f5
+.zs-box,.zs-item
+  background-color #ffffff
+  border-radius 2px
+  box-shadow 0 1px 2px 0 rgba(0,0,0,.05)
+.zs-item
+  border-bottom 1px solid rgba(178,186,194,.15)
 .zs-relative
   position: relative
-.zs-main
-  padding: 1rem
+.zs-main-header
+  padding: 0 1rem
+.container
+  max-width 1000px
+body
+  font-size 1rem
+.zs-article
+  padding 1rem
+
+
+@media screen and (max-width: 768px) {
+  .zs-main  {
+    padding: 1.5rem 0rem
+  }
+}
+@media screen and (min-width: 769px) {
+  .zs-main  {
+    padding: 1.5rem 1rem
+  }
+}

@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <blog-header></blog-header>
-    <div class="container zs-main" style="max-width: 1000px; min-height: 35rem">
+  <div class="container zs-main">
+    <div class="zs-box zs-article">
       <markdown-view :value="article.content"></markdown-view>
     </div>
-    <blog-footer></blog-footer>
   </div>
 </template>
 

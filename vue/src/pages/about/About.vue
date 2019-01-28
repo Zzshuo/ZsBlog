@@ -1,8 +1,6 @@
 <template>
   <div>
-    <blog-header></blog-header>
       about
-    <blog-footer></blog-footer>
   </div>
 </template>
 
