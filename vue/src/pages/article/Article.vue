@@ -11,9 +11,28 @@
           <div v-html="compiledMarkdown" class="markdown-body" ref="markdownBody"></div>
         </div>
       </div>
-      <div class="tile is-parent is-hidden-mobile" v-if="true" style="position:relative">
+      <div class="tile is-parent is-hidden-mobile" v-if="category.length > 0" style="position:relative">
         <Anchor show-ink :affix="true" style="position: fixed;width: calc(100% - 80%);max-width: 250px">
-          <AnchorLink v-for="item in category" :key="item.id" :href="item.href" :title="item.title" />
+          <div  v-for="item in category" :key="item.id" >
+            <div v-if="item.tagName==='h1'">
+              <AnchorLink :href="item.href" :title="item.title" style="padding-left: 1rem;font-size: 1.25rem"/>
+            </div>
+            <div v-else-if="item.tagName==='h2'">
+              <AnchorLink :href="item.href" :title="item.title" style="padding-left: 1.5rem;font-size: 1.125rem"/>
+            </div>
+            <div v-else-if="item.tagName==='h3'">
+              <AnchorLink :href="item.href" :title="item.title" style="padding-left: 2rem;font-size: 1rem"/>
+            </div>
+            <div v-else-if="item.tagName==='h4'">
+              <AnchorLink :href="item.href" :title="item.title" style="padding-left: 2.5rem;font-size: 0.875rem"/>
+            </div>
+            <div v-else-if="item.tagName==='h5'">
+              <AnchorLink :href="item.href" :title="item.title" style="padding-left: 3rem;font-size: 0.75rem"/>
+            </div>
+            <div v-else-if="item.tagName==='h6'">
+              <AnchorLink :href="item.href" :title="item.title" style="padding-left: 3.5rem;font-size: 0.75rem"/>
+            </div>
+          </div>
         </Anchor>
       </div>
     </div>
