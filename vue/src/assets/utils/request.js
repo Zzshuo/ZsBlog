@@ -22,7 +22,9 @@ axios.interceptors.response.use((response) => {
     return responseVo
   }
 }, (error) => {
-  // Message.error(error)
+  this.$Notice.error({
+    title: error
+  })
   // 错误返回
   return Promise.reject(error)
 })
@@ -37,7 +39,10 @@ function checkCode (responseVo) {
     case 200:
       break
     default:
-      // Message.error(responseVo.code + ':' + responseVo.message)
+      this.$Notice.error({
+        title: responseVo.code,
+        desc: responseVo.message
+      })
   }
 }
 

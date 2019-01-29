@@ -101,5 +101,4 @@ export default function catalog(){
     $(this).attr({"title":"展开"});
     $("#AnchorContent").hide();
   }
-  alert("end")
 }

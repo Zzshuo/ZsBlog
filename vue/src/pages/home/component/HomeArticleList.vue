@@ -1,38 +1,36 @@
 <template>
   <div>
-    <div v-for="article of list" :key="article.id" class="columns is-mobile zs-relative zs-item">
-      <div class="column is-one-quarter zs-column-left">
-        <router-link :to="/article/ + article.id">
-          <figure class="image is-square">
-            <img v-if="article.img" :src="article.img">
-            <img v-else src="../../../assets/img/default.gif">
-          </figure>
-        </router-link>
-      </div>
-      <div class="column">
-        <div class="meta-row">
-          <div>java</div>
-        </div>
-        <div class="title-row">
-          <router-link :to="/article/ + article.id">
-            <div class="title-content is-4">{{article.title}}</div>
-          </router-link>
-        </div>
-        <div class="info-row">
-            <div class="info-box">
-              <Icon type="ios-calendar" />
-              <span class="article-info-span">{{article.createTime | capitalize}}</span>
+    <div v-for="article of list" :key="article.id">
+      <router-link :to="/article/ + article.id">
+        <div class="zs-content" :class="{itemHover:itemHoverIndex===article.id}" @mouseenter="mouseEnter(article.id)" @mouseleave="mouseLeave">
+          <div class="content-left">
+              <img v-if="article.img" :src="article.img">
+              <img v-else src="../../../assets/img/moon.jpg">
+          </div>
+          <div class="content-right">
+            <div class="meta-row">
+              <div>java</div>
             </div>
-            <div class="info-box">
-              <Icon type="md-eye" />
-              <span class="article-info-span">1</span>
+            <div class="title-row">
+                <div class="title-content is-4">{{article.title}}</div>
             </div>
-            <div class="info-box">
-              <Icon type="ios-text" />
-              <span class="article-info-span">1</span>
+            <div class="info-row">
+                <div class="info-row-item">
+                  <Icon type="ios-calendar" />
+                  <span class="info-row-item-span">{{article.createTime | capitalize}}</span>
+                </div>
+                <div class="info-row-item">
+                  <Icon type="md-eye" />
+                  <span class="info-row-item-span">1</span>
+                </div>
+                <div class="info-row-item">
+                  <Icon type="ios-text" />
+                  <span class="info-row-item-span">1</span>
+                </div>
             </div>
+          </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -43,6 +41,19 @@ export default {
   name: 'HomeArticle',
   props: {
     list: Array
+  },
+  data () {
+    return {
+      itemHoverIndex: null
+    }
+  },
+  methods: {
+    mouseEnter (index) {
+      this.itemHoverIndex = index
+    },
+    mouseLeave () {
+      this.itemHoverIndex = null
+    }
   },
   filters: {
     capitalize: function (value) {
@@ -55,10 +66,21 @@ export default {
 
 <style scoped lang="stylus">
   @import "../../../assets/styles/mixins.styl"
-  .zs-column-left
-    max-width 110px
-  .article-info-span
-    font-size .875rem
+  .zs-content
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    border-radius 2px
+    box-shadow 0 1px 2px 0 rgba(0,0,0,.05)
+    border-bottom 1px solid rgba(178,186,194,.15)
+  .content-left
+    width: 86px
+    height: 86px
+    max-width 86px
+    max-height  86px
+  .content-right
+    margin 0 1rem
+
   .meta-row
     color: #b3bac1
   .title-row
@@ -73,7 +95,11 @@ export default {
     color: #b3bac1
     display: inline-flex;
     white-space: nowrap;
-  .info-box
+  .info-row-item
     padding: 0 .75rem 0 0;
     border-radius: 1px;
+  .info-row-item-span
+    font-size .875rem
+  .itemHover
+    background-color #fafafa;
 </style>

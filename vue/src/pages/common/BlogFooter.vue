@@ -30,4 +30,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .footer
+    padding: 3rem 1.5rem 1.5rem;
 </style>

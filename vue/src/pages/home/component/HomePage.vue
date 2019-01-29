@@ -1,25 +1,27 @@
 <template>
   <div class="page-center">
     <div class="is-hidden-mobile">
-      <el-pagination
-        @current-change="handleCurrentChange"
-        :current-page="pageNum"
-        :page-sizes="[10, 20, 30]"
-        :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
-        :total="total">
-      </el-pagination>
+      <!--<el-pagination-->
+        <!--@current-change="handleCurrentChange"-->
+        <!--:current-page="pageNum"-->
+        <!--:page-sizes="[10, 20, 30]"-->
+        <!--:page-size="pageSize"-->
+        <!--layout="total, prev, pager, next, jumper"-->
+        <!--:total="total">-->
+      <!--</el-pagination>-->
+      <Page :total="total" />
     </div>
     <div class="is-hidden-tablet">
-      <el-pagination
-        small
-        @current-change="handleCurrentChange"
-        :current-page="pageNum"
-        :page-sizes="[10, 20, 30]"
-        :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
-        :total="total">
-      </el-pagination>
+      <!--<el-pagination-->
+        <!--small-->
+        <!--@current-change="handleCurrentChange"-->
+        <!--:current-page="pageNum"-->
+        <!--:page-sizes="[10, 20, 30]"-->
+        <!--:page-size="pageSize"-->
+        <!--layout="total, prev, pager, next, jumper"-->
+        <!--:total="total">-->
+      <!--</el-pagination>-->
+      <Page :total="total" size="small" />
     </div>
   </div>
 </template>

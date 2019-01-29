@@ -1,56 +1,51 @@
 <template>
   <div>
-    <div class="is-vertical">
-      <div class="message zs-box">
-        <div class="message-header">
-          <div>
-            <icon class="icon-large" icon-class="icon-home-white"/>
-            关于我
-          </div>
-        </div>
-        <div class="message-body">
-        </div>
+    <Card :bordered="false" class="zs-box">
+      <div style="text-align:center">
+        <img src="../../../assets/img/logo.png">
+        <h3>A high quality UI Toolkit based on Vue.js</h3>
       </div>
-      <div class="message zs-box">
-        <div class="message-header">
-          <div>
-            <icon class="icon-large" icon-class="icon-tag"/>
-            文章标签
-          </div>
-        </div>
-        <div class="message-body">
-        </div>
+    </Card>
+    <Card :bordered="false" class="zs-box">
+      <div>
+        <p>
+          <Icon type="md-home" />
+          <Divider type="vertical" />
+          关于我
+        </p>
+        <Divider />
+        <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
       </div>
-      <!--<div class="message zs-box">-->
-        <!--<div class="message-header">-->
-          <!--<div>-->
-            <!--<icon class="icon-large" icon-class="icon-comment"/>-->
-            <!--近期评论-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="message-body">-->
-        <!--</div>-->
-      <!--</div>-->
-      <div class="message zs-box">
-        <div class="message-header">
-          <div>
-            <icon class="icon-large" icon-class="icon-info"/>
-            网站信息
-          </div>
-        </div>
-        <div class="message-body">
-          <article>
-            <icon icon-class="icon-formfill"/>文章总数：2 篇<br>
-            <icon icon-class="icon-tagfill"/>标签总数：7 个<br>
-            <icon icon-class="icon-comment"/>分类总数：3 个<br>
-            <icon icon-class="icon-commentfill"/>留言数量：1 条<br>
-            <icon icon-class="icon-friendfill"/>在线人数：1人<br>
-            <icon icon-class="icon-timefill"/>运行天数：113天<br>
-            <icon icon-class="icon-writefill"/>最后更新：2018年01月19日22点<br>
-          </article>
-        </div>
+    </Card>
+    <Card class="zs-box">
+      <div>
+        <p>
+          <Icon type="md-pricetags" />
+          <Divider type="vertical" />
+          文章标签
+        </p>
+        <Divider />
+        <p></p>
       </div>
-    </div>
+    </Card>
+    <Card class="zs-box">
+      <div>
+        <p>
+          <Icon type="md-alert" />
+          <Divider type="vertical" />
+          网站信息
+        </p>
+        <Divider />
+        <p>
+          <Icon type="md-document" />文章总数：2 篇<br>
+          <Icon type="md-pricetag" />标签总数：7 个<br>
+          <Icon type="ios-folder-open" />分类总数：3 个<br>
+          <Icon type="ios-text" />留言数量：1 条<br>
+          <Icon type="md-person" />在线人数：1人<br>
+          <Icon type="ios-time" />运行天数：113天<br>
+        </p>
+      </div>
+    </Card>
   </div>
 </template>
 
@@ -66,4 +61,8 @@ export default {
     margin-right .25rem
   .icon-large
     font-size 1.25rem
+  .zs-box
+    margin-bottom 1.5rem
+  .ivu-divider-horizontal
+    margin .5rem 0
 </style>

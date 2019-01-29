@@ -1,10 +1,25 @@
 <template>
-  <div class="columns">
-    <div v-html="compiledMarkdown" class="markdown-body column" id="markdown-body"></div>
-    <div class="column is-hidden-mobile is-one-quarter" v-show="showNav">
-      <div class="markdown-catalog" id="markdown-catalog">
-      </div>
+  <div class="tile is-ancestor">
+    <div class="tile is-parent is-8">
+      <div v-html="compiledMarkdown" class="markdown-body" id="markdown-body"></div>
     </div>
+
+    <div class="tile is-parent">
+      <Anchor show-ink affix="true">
+        <AnchorLink href="#basic_usage" title="Basic Usage" />
+        <AnchorLink href="#static_position" title="Static Position" />
+        <AnchorLink href="#API" title="API">
+          <AnchorLink href="#Anchor_props" title="Anchor props" />
+          <AnchorLink href="#Anchor_events" title="Anchor events" />
+          <AnchorLink href="#AnchorLink_props" title="AnchorLink props" />
+        </AnchorLink>
+      </Anchor>
+    </div>
+
+    <!--<div class="column is-hidden-mobile is-one-quarter" v-show="showNav">-->
+      <!--<div class="markdown-catalog" id="markdown-catalog">-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
