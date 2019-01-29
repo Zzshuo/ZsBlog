@@ -2,7 +2,7 @@
   <div class="container zs-main">
     <div class="tile is-ancestor">
       <div class="tile is-parent is-9">
-        <div class="zs-box zs-content" style="height: 1500px">
+        <div class="zs-box zs-content">
           <Breadcrumb separator=">">
             <BreadcrumbItem to="/">Home</BreadcrumbItem>
             <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
@@ -109,4 +109,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .zs-content
+    min-height 500px
 </style>
