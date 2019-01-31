@@ -1,7 +1,7 @@
 <template>
   <div class="container zs-main">
     <div class="tile is-ancestor">
-      <div class="tile is-vertical is-8">
+      <div class="tile is-8">
         <div class="tile is-parent is-vertical">
           <div class="tile is-child">
             <home-article-list :list="articleList"></home-article-list>

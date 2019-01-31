@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar is-fixed-top zs-box">
+    <nav class="navbar is-transparent is-fixed-top zs-box">
       <div class="container zs-main-header">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->

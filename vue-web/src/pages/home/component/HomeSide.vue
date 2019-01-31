@@ -56,13 +56,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .svg-icon
-    font-size 1.125rem
-    margin-right .25rem
-  .icon-large
-    font-size 1.25rem
   .zs-box
     margin-bottom 1.5rem
-  .ivu-divider-horizontal
-    margin .5rem 0
 </style>

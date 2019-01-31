@@ -1,16 +1,25 @@
 <template>
   <div class="container zs-main">
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-9">
-        <div class="zs-box zs-content">
-          <Breadcrumb separator=">">
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
-            <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-          </Breadcrumb>
-          <div v-html="compiledMarkdown" class="markdown-body" ref="markdownBody"></div>
+      <div class="tile is-9">
+        <div class="tile is-parent is-vertical">
+          <div class="tile is-child">
+            <div class="zs-box zs-content">
+              <Breadcrumb separator=">">
+                <BreadcrumbItem to="/">Home</BreadcrumbItem>
+                <BreadcrumbItem to="/components/breadcrumb">java</BreadcrumbItem>
+              </Breadcrumb>
+              <h1>{{article.title}}</h1>
+              <Divider/>
+              <div v-html="compiledMarkdown" class="markdown-body" ref="markdownBody"></div>
+            </div>
+          </div>
+          <div class="tile is-child zs-box zs-content">
+            {{article.createTime | capitalize}}
+          </div>
         </div>
       </div>
+      <!--目录-->
       <div class="tile is-parent is-hidden-mobile" v-if="category.length > 0" style="position:relative">
         <Anchor show-ink :affix="true" style="position: fixed;width: calc(100% - 80%);max-width: 250px">
           <div  v-for="item in category" :key="item.id" >
@@ -44,6 +53,7 @@ import marked from 'marked'
 import highlightJs from 'highlight.js'
 import 'highlight.js/styles/atelier-dune-dark.css'
 import 'mavon-editor/dist/markdown/github-markdown.min.css'
+import { getRelativeTime } from '../../assets/utils/tools'
 export default {
   name: 'Article',
   components: {
@@ -52,7 +62,9 @@ export default {
     return {
       compiledMarkdown: '',
       article: {
-        content: ''
+        title:'',
+        content: '',
+        createTime:''
       },
       id: this.$route.params.id,
       category: []
@@ -104,11 +116,15 @@ export default {
         }
       })
     }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      return getRelativeTime(Date.parse(value))
+    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
-  .zs-content
-    min-height 500px
 </style>
