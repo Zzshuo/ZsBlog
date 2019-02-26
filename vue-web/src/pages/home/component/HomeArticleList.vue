@@ -14,20 +14,10 @@
             <div class="title-row">
                 <div class="title-content is-4">{{article.title}}</div>
             </div>
-            <div class="info-row">
-                <div class="info-row-item">
-                  <Icon type="ios-calendar" />
-                  <span class="info-row-item-span">{{article.createTime | capitalize}}</span>
-                </div>
-                <div class="info-row-item">
-                  <Icon type="md-eye" />
-                  <span class="info-row-item-span">1</span>
-                </div>
-                <div class="info-row-item">
-                  <Icon type="ios-text" />
-                  <span class="info-row-item-span">1</span>
-                </div>
-            </div>
+            <ArticleDetail :createTime="article.createTime"
+                          :views="article.views"
+                          :comments="article.comments">
+            </ArticleDetail>
           </div>
         </div>
       </router-link>
@@ -36,9 +26,12 @@
 </template>
 
 <script>
-import date from '../../../assets/utils/date'
+import ArticleDetail from '../../../components/ArticleDetail'
 export default {
   name: 'HomeArticle',
+  components: {
+    ArticleDetail
+  },
   props: {
     list: Array
   },
@@ -53,12 +46,6 @@ export default {
     },
     mouseLeave () {
       this.itemHoverIndex = null
-    }
-  },
-  filters: {
-    capitalize: function (value) {
-      if (!value) return ''
-      return date.formatDate(new Date(value))
     }
   }
 }
@@ -91,15 +78,6 @@ export default {
     font-weight: 500;
     line-height: 1.2;
     color: #2e3135;
-  .info-row
-    color: #b3bac1
-    display: inline-flex;
-    white-space: nowrap;
-  .info-row-item
-    padding: 0 .75rem 0 0;
-    border-radius: 1px;
-  .info-row-item-span
-    font-size .875rem
   .itemHover
     background-color #fafafa;
 </style>

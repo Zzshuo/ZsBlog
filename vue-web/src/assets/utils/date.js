@@ -3,7 +3,7 @@ const date = {
     if (!time) {
       return ''
     }
-    format = format || 'yyyy-MM-dd'
+    format = format || 'yyyy-MM-dd HH:mm:ss'
     const year = time.getFullYear() // 年份
     const month = time.getMonth() + 1 // 月份
     const day = time.getDate() // 日

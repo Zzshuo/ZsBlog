@@ -9,7 +9,16 @@
                 <BreadcrumbItem to="/">Home</BreadcrumbItem>
                 <BreadcrumbItem to="/components/breadcrumb">java</BreadcrumbItem>
               </Breadcrumb>
-              <h1>{{article.title}}</h1>
+              <div style="display: inline-flex;">
+                <Original class="original" :original="article.original"></Original>
+                <h1>{{article.title}}</h1>
+              </div>
+              <div>
+                <ArticleDetail :createTime="article.createTime"
+                               :views="article.views"
+                               :comments="article.comments">
+                </ArticleDetail>
+              </div>
               <Divider/>
               <div v-html="compiledMarkdown" class="markdown-body" ref="markdownBody"></div>
             </div>
@@ -53,18 +62,26 @@ import marked from 'marked'
 import highlightJs from 'highlight.js'
 import 'highlight.js/styles/atelier-dune-dark.css'
 import 'mavon-editor/dist/markdown/github-markdown.min.css'
-import { getRelativeTime } from '../../assets/utils/tools'
+// import { getRelativeTime } from '../../assets/utils/tools'
+import date from '../../assets/utils/date'
+import Original from '../../components/Original'
+import ArticleDetail from '../../components/ArticleDetail'
 export default {
   name: 'Article',
   components: {
+    Original,
+    ArticleDetail
   },
   data () {
     return {
       compiledMarkdown: '',
       article: {
-        title:'',
+        title: '',
         content: '',
-        createTime:''
+        createTime: '',
+        original: 1,
+        views: 0,
+        comments: 0
       },
       id: this.$route.params.id,
       category: []
@@ -79,7 +96,7 @@ export default {
       this.api.getArticleById(this.id).then((res) => {
         if (res && res.code === 200) {
           this.article = res.data
-          this.compiledMarkdown = marked(this.article.content, {sanitize: true})
+          this.compiledMarkdown = marked(this.article.content, { sanitize: true })
           this.$nextTick(() => {
             // 提取文章标签，生成目录
             Array.from(this.$refs.markdownBody.querySelectorAll('h1,h2,h3,h4,h5,h6')).forEach((item, index) => {
@@ -120,11 +137,15 @@ export default {
   filters: {
     capitalize: function (value) {
       if (!value) return ''
-      return getRelativeTime(Date.parse(value))
+      // return getRelativeTime(Date.parse(value))
+      return date.formatDate(new Date(value))
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
+  .original
+    padding-top .5rem
+    padding-right .5rem
 </style>
