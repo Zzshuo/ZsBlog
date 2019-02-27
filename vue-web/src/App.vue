@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="zs-app has-navbar-fixed-top">
+  <div id="app" class="zs-app" style="padding-top: 60px">
     <blog-header></blog-header>
     <router-view />
     <blog-footer></blog-footer>
@@ -18,6 +18,4 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
-.has-top
-  top: 3.25rem
 </style>

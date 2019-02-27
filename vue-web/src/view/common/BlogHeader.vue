@@ -1,77 +1,37 @@
 <template>
-  <div>
-    <nav class="navbar is-transparent is-fixed-top zs-box">
-      <div class="container zs-main-header">
-        <div class="navbar-brand">
-          <!-- navbar items, navbar burger... -->
-
-          <div class="navbar-item img-item">
-            <div class="is-left is-hoverable">
-              <router-link class="navbar-item" to="/">
-                ZsBlog
-              </router-link>
-            </div>
-          </div>
-          <div class="navbar-burger" data-target="navMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+  <div class="zs-box zs-fix-top" >
+    <div class="container zs-main-header">
+      <div style="display: flex; align-items: Center">
+        <div>
+          <router-link class="is-hidden-mobile img-item"  to="/">
+            ZsBlog
+          </router-link>
         </div>
-
-        <div class="navbar-menu" id="navMenu">
-          <!-- navbar start, navbar end -->
-          <div class="navbar-start">
-            <router-link class="navbar-item" to="/">首页</router-link>
-            <router-link class="navbar-item" to="/back">后端</router-link>
-            <router-link class="navbar-item" to="/front">前端</router-link>
-            <router-link class="navbar-item" to="/util">在线工具</router-link>
-            <router-link class="navbar-item" to="/about">关于</router-link>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <Input search placeholder="Enter something..." />
-            </div>
-          </div>
-        </div>
-
+        <Menu mode="horizontal" :theme="'light'" active-name="1">
+          <MenuItem name="1" to="/">首页</MenuItem>
+          <MenuItem name="2" to="/back">后端</MenuItem>
+          <MenuItem name="3" to="/front">前端</MenuItem>
+          <MenuItem name="4" to="/util">在线工具</MenuItem>
+          <MenuItem name="5" to="/about">关于</MenuItem>
+        </Menu>
       </div>
-    </nav>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'BlogHeader',
-  mounted () {
-    document.addEventListener('DOMContentLoaded', this.burger())
-  },
-  components: {
-  },
-  methods: {
-    burger () {
-      var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
-      // Check if there are any navbar burgers
-      if ($navbarBurgers.length > 0) {
-        // Add a click event on each of them
-        $navbarBurgers.forEach(function ($el) {
-          $el.addEventListener('click', function () {
-            // Get the target from the "data-target" attribute
-            var target = $el.dataset.target
-            var $target = document.getElementById(target)
-
-            // Toggle the class on both the "navbar-burger" and the "navbar-menu"
-            $el.classList.toggle('is-active')
-            $target.classList.toggle('is-active')
-          })
-        })
-      }
-    }
-  }
+  name: 'BlogHeader'
 }
 </script>
 
 <style scoped lang="stylus">
+  .zs-fix-top
+    top 0
+    position: fixed;
+    z-index: 30
+    width 100%
+    display flex
   .img-item
     padding 0.25rem 0.75rem
   .img-circle
