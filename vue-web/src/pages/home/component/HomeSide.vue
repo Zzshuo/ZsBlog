@@ -57,15 +57,15 @@
 </template>
 
 <script>
-  export default {
+export default {
   name: 'HomeSide',
   data () {
     return {
       tagList: [],
       webInfo: {},
       reqVo: {},
-      colorList: ['red', 'volcano', 'orange', 'gold','yellow','lime','green','cyan','blue','geekblue','purple']
-  }
+      colorList: ['red', 'volcano', 'orange', 'gold', 'yellow', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple']
+    }
   },
   methods: {
     getTagList () {
