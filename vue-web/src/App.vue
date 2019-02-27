@@ -7,15 +7,15 @@
 </template>
 
 <script>
-  import BlogHeader from './pages/common/BlogHeader'
-  import BlogFooter from './pages/common/BlogFooter'
-  export default {
-    name: 'App',
-    components: {
-      BlogHeader,
-      BlogFooter
-    }
+import BlogHeader from './view/common/BlogHeader'
+import BlogFooter from './view/common/BlogFooter'
+export default {
+  name: 'App',
+  components: {
+    BlogHeader,
+    BlogFooter
   }
+}
 </script>
 <style scoped lang="stylus">
 .has-top

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import date from '../assets/utils/date'
+import date from '../../assets/utils/date'
 export default {
   name: 'ArticleDetail',
   props: {

@@ -5,10 +5,10 @@
         <div class="tile is-parent is-vertical">
           <div class="tile is-child">
             <div class="zs-box zs-content">
-              <Breadcrumb separator=">">
-                <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/components/breadcrumb">java</BreadcrumbItem>
-              </Breadcrumb>
+              <!--<Breadcrumb separator=">">-->
+                <!--<BreadcrumbItem to="/">Home</BreadcrumbItem>-->
+                <!--<BreadcrumbItem to="/components/breadcrumb">java</BreadcrumbItem>-->
+              <!--</Breadcrumb>-->
               <div style="display: inline-flex;">
                 <Original class="original" :original="article.original"></Original>
                 <h1>{{article.title}}</h1>
@@ -64,8 +64,8 @@ import 'highlight.js/styles/atelier-dune-dark.css'
 import 'mavon-editor/dist/markdown/github-markdown.min.css'
 // import { getRelativeTime } from '../../assets/utils/tools'
 import date from '../../assets/utils/date'
-import Original from '../../components/Original'
-import ArticleDetail from '../../components/ArticleDetail'
+import Original from '../common/Original'
+import ArticleDetail from '../common/ArticleDetail'
 export default {
   name: 'Article',
   components: {
@@ -83,7 +83,7 @@ export default {
         views: 0,
         comments: 0
       },
-      id: this.$route.params.id,
+      articleId: this.$route.params.articleId,
       category: []
     }
   },
@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     getArticle () {
-      this.api.getArticleById(this.id).then((res) => {
+      this.api.getArticleById(this.articleId).then((res) => {
         if (res && res.code === 200) {
           this.article = res.data
           this.compiledMarkdown = marked(this.article.content, { sanitize: true })

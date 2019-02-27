@@ -3,9 +3,6 @@
       <BackTop></BackTop>
       <div class="container">
         <div class="content has-text-centered">
-          <a href="https://bulma.io">
-            <img src="https://lqzhgood.github.io/bulma-docs-cn/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
-          </a>
           <div>
             <small>
               托管于

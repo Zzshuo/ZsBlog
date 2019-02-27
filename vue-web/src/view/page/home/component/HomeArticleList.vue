@@ -5,7 +5,7 @@
         <div class="zs-content" :class="{itemHover:itemHoverIndex===article.id}" @mouseenter="mouseEnter(article.id)" @mouseleave="mouseLeave">
           <div class="content-left">
               <img v-if="article.img" :src="article.img">
-              <img v-else src="../../../assets/img/moon.jpg">
+              <img v-else src="../../../../assets/img/moon.jpg">
           </div>
           <div class="content-right">
             <div class="meta-row">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ArticleDetail from '../../../components/ArticleDetail'
+import ArticleDetail from '../../../common/ArticleDetail'
 export default {
   name: 'HomeArticle',
   components: {
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  @import "../../../assets/styles/mixins.styl"
+  @import "../../../../assets/styles/mixins.styl"
   .zs-content
     display: flex;
     align-items: center;

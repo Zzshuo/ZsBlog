@@ -7,10 +7,14 @@
             <home-article-list :list="articleList"></home-article-list>
           </div>
           <div class="tile is-child">
-            <home-page :pageNum="pageNum"
-                       :pageSize="pageSize"
-                       :total="total"
-            ></home-page>
+            <div class="page-center">
+              <div class="is-hidden-mobile">
+                <Page :total="total" :current="pageNum" @on-change="handleCurrentChange"/>
+              </div>
+              <div class="is-hidden-tablet">
+                <Page :total="total" :current="pageNum" size="small" @on-change="handleCurrentChange"/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -25,15 +29,19 @@
 
 <script>
 import HomeArticleList from './component/HomeArticleList'
-import HomePage from './component/HomePage'
 import HomeSide from './component/HomeSide'
 
 export default {
   name: 'Home',
   components: {
     HomeArticleList,
-    HomePage,
     HomeSide
+  },
+  props: {
+    showType: {
+      type: String,
+      default: 'normal'
+    }
   },
   data () {
     return {
@@ -46,6 +54,8 @@ export default {
   },
   methods: {
     getArticleList () {
+      this.reqVo.showType = this.showType
+      this.reqVo.pageNum = this.pageNum
       this.api.getArticleList(this.reqVo).then((res) => {
         if (res && res.code === 200) {
           const data = res.data
@@ -57,6 +67,11 @@ export default {
           console.log(res.code + res.message)
         }
       })
+    },
+    handleCurrentChange (val) {
+      this.pageNum = val
+      this.getArticleList()
+      console.log(`当前页: ${val}`)
     }
   },
   mounted () {
@@ -66,4 +81,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .page-center
+    text-align center
 </style>
