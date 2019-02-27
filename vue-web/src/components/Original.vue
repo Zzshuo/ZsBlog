@@ -1,7 +1,7 @@
 <template>
   <span>
-    <Avatar v-if="original===1" style="color: #f56a00; background-color: #fde3cf" class="original">原</Avatar>
-    <Avatar v-else style="color: #86ca5e; background: #fde3cf" class="original">转</Avatar>
+    <Avatar v-if="original===1" style="color: #f56a00; background-color: #fde3cf" class="original">原创</Avatar>
+    <Avatar v-else style="color: rgb(38, 162, 3); background: rgb(0, 231, 239)" class="original">转载</Avatar>
   </span>
 </template>
 

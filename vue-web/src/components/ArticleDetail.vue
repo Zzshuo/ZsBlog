@@ -2,7 +2,8 @@
   <div class="info-row">
     <div class="info-row-item">
       <Icon type="ios-calendar" />
-      <span class="info-row-item-span">{{createTime | capitalize}}</span>
+      <span v-if="isShowTime" class="info-row-item-span">{{createTime | capitalizeTime}}</span>
+      <span v-else="isShowTime" class="info-row-item-span">{{createTime | capitalizeDate}}</span>
     </div>
     <div class="info-row-item">
       <Icon type="md-eye" />
@@ -21,11 +22,19 @@ export default {
   name: 'ArticleDetail',
   props: {
     createTime: String,
+    isShowTime: {
+      type: Boolean,
+      default: true
+    },
     views: Number,
     comments: Number
   },
   filters: {
-    capitalize: function (value) {
+    capitalizeDate: function (value) {
+      if (!value) return ''
+      return date.formatDate(new Date(value),'yyyy-MM-dd')
+    },
+    capitalizeTime: function (value) {
       if (!value) return ''
       return date.formatDate(new Date(value))
     }

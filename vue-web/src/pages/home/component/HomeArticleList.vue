@@ -15,8 +15,9 @@
                 <div class="title-content is-4">{{article.title}}</div>
             </div>
             <ArticleDetail :createTime="article.createTime"
-                          :views="article.views"
-                          :comments="article.comments">
+                           :isShowTime="false"
+                           :views="article.views"
+                           :comments="article.comments">
             </ArticleDetail>
           </div>
         </div>
@@ -65,6 +66,9 @@ export default {
     height: 86px
     max-width 86px
     max-height  86px
+    display: flex;
+    justify-content: center;
+    align-items: Center;
   .content-right
     margin 0 1rem
 
