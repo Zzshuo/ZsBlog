@@ -3,9 +3,6 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
-    <!--<classPathEntry location="D:\generator_mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
-
     <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
 
         <!-- 生成的Java文件的编码 -->
@@ -36,7 +33,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/myBlog?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://localhost:3306/zsBlog?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root" password="123456"/>
         <!--实体生成路径 -->
         <javaModelGenerator targetPackage="com.zs.blog.model"
@@ -54,17 +51,23 @@
                              targetProject="src/main/java" type="XMLMAPPER">
         </javaClientGenerator>
 
-        <table tableName="role"
-               enableCountByExample="true" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
         <table tableName="article"
                enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
+            <columnOverride column="state" javaType="java.lang.Integer"/>
         </table>
-        <table tableName="user"
+        <table tableName="article_tag"
+               enableCountByExample="true" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="tag"
+               enableCountByExample="true" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="type"
                enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

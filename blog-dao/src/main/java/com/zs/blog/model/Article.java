@@ -1,8 +1,7 @@
 package com.zs.blog.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.util.Date;
+import javax.persistence.*;
 
 public class Article {
     @Id
@@ -16,33 +15,23 @@ public class Article {
     /**
      * 是否原创
      */
-    private Byte original;
+    private Boolean original;
 
     /**
      * 类型
      */
     @Column(name = "type_id")
-    private Byte typeId;
+    private Integer typeId;
 
     /**
-     * 状态
+     * 文章封面图片
      */
-    private Byte status;
+    private String image;
 
     /**
-     * 文章简介，最多200字
+     * 1:正常,2:删除,3:草稿
      */
-    private String description;
-
-    /**
-     * 文章关键字，优化搜索
-     */
-    private String keywords;
-
-    /**
-     * 1:正常,2:删除
-     */
-    private Byte state;
+    private Integer state;
 
     /**
      * 创建时间
@@ -98,7 +87,7 @@ public class Article {
      *
      * @return original - 是否原创
      */
-    public Byte getOriginal() {
+    public Boolean getOriginal() {
         return original;
     }
 
@@ -107,7 +96,7 @@ public class Article {
      *
      * @param original 是否原创
      */
-    public void setOriginal(Byte original) {
+    public void setOriginal(Boolean original) {
         this.original = original;
     }
 
@@ -116,7 +105,7 @@ public class Article {
      *
      * @return type_id - 类型
      */
-    public Byte getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
@@ -125,79 +114,43 @@ public class Article {
      *
      * @param typeId 类型
      */
-    public void setTypeId(Byte typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 
     /**
-     * 获取状态
+     * 获取文章封面图片
      *
-     * @return status - 状态
+     * @return image - 文章封面图片
      */
-    public Byte getStatus() {
-        return status;
+    public String getImage() {
+        return image;
     }
 
     /**
-     * 设置状态
+     * 设置文章封面图片
      *
-     * @param status 状态
+     * @param image 文章封面图片
      */
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
     }
 
     /**
-     * 获取文章简介，最多200字
+     * 获取1:正常,2:删除,3:草稿
      *
-     * @return description - 文章简介，最多200字
+     * @return state - 1:正常,2:删除,3:草稿
      */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * 设置文章简介，最多200字
-     *
-     * @param description 文章简介，最多200字
-     */
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
-    /**
-     * 获取文章关键字，优化搜索
-     *
-     * @return keywords - 文章关键字，优化搜索
-     */
-    public String getKeywords() {
-        return keywords;
-    }
-
-    /**
-     * 设置文章关键字，优化搜索
-     *
-     * @param keywords 文章关键字，优化搜索
-     */
-    public void setKeywords(String keywords) {
-        this.keywords = keywords == null ? null : keywords.trim();
-    }
-
-    /**
-     * 获取1:正常,2:删除
-     *
-     * @return state - 1:正常,2:删除
-     */
-    public Byte getState() {
+    public Integer getState() {
         return state;
     }
 
     /**
-     * 设置1:正常,2:删除
+     * 设置1:正常,2:删除,3:草稿
      *
-     * @param state 1:正常,2:删除
+     * @param state 1:正常,2:删除,3:草稿
      */
-    public void setState(Byte state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

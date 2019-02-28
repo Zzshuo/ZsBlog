@@ -11,6 +11,14 @@ import com.zs.blog.vo.response.ArticleVo;
 public interface ArticleService {
 
     /**
+     * 获取文章
+     *
+     * @param id
+     * @return
+     */
+    ArticleVo get(Integer id);
+
+    /**
      * 文章列表
      *
      * @param reqVo

@@ -27,6 +27,11 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
+    public ArticleVo get(Integer id) {
+        return null;
+    }
+
+    @Override
     public PageInfo<ArticleVo> list(ArticleReqVo reqVo) {
         ArticleExample example = new ArticleExample();
         ArticleExample.Criteria criteria = example.createCriteria();

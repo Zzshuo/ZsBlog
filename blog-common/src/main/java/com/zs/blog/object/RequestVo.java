@@ -8,11 +8,16 @@ import lombok.Data;
  **/
 @Data
 public class RequestVo {
+    public final static int DEFAULT_PAGE_NUM = 1;
     public final static int DEFAULT_PAGE_SIZE = 10;
-    private int pageNum = 1;
-    private int pageSize = 0;
+    private Integer pageNum;
+    private Integer pageSize;
+
+    public int getPageNum() {
+        return pageNum == null ? DEFAULT_PAGE_NUM : pageNum;
+    }
 
     public int getPageSize() {
-        return pageSize > 0 ? pageSize : DEFAULT_PAGE_SIZE;
+        return pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
     }
 }

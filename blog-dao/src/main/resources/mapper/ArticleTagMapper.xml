@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zs.blog.mapper.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.zs.blog.model.Article">
+<mapper namespace="com.zs.blog.mapper.ArticleTagMapper">
+  <resultMap id="BaseResultMap" type="com.zs.blog.model.ArticleTag">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="original" jdbcType="BIT" property="original" />
-    <result column="type_id" jdbcType="INTEGER" property="typeId" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="tag_id" jdbcType="INTEGER" property="tagId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zs.blog.model.Article">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -56,19 +47,13 @@
     <!--
       WARNING - @mbg.generated
     -->
-    id, title, original, type_id, image, state, create_time, update_time
+    id, article_id, tag_id, create_time, update_time
   </sql>
-  <sql id="Blob_Column_List">
+  <select id="countByExample" parameterType="com.zs.blog.model.ArticleTagExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->
-    content
-  </sql>
-  <select id="countByExample" parameterType="com.zs.blog.model.ArticleExample" resultType="java.lang.Long">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    select count(*) from article
+    select count(*) from article_tag
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
