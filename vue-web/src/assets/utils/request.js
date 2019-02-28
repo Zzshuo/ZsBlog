@@ -65,7 +65,7 @@ export default function request (url, {
   // 请求主题
   data = {},
   // 请求头
-  headers = {'Content-Type': 'application/json;charset=UTF-8;'},
+  headers = { 'Content-Type': 'application/json;charset=UTF-8;' },
   // 文件类型
   dataType = 'json',
   baseURL = '/'
