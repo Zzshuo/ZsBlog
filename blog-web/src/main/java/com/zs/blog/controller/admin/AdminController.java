@@ -1,7 +1,7 @@
 package com.zs.blog.controller.admin;
 
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.object.ResponseVO;
+import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.vo.request.UserReqVo;
 import io.swagger.annotations.ApiImplicitParam;
@@ -44,7 +44,7 @@ public class AdminController {
     @BusinessLog("提交登陆请求")
     @ResponseBody
     @PostMapping("/submit")
-    public ResponseVO submit(@RequestBody UserReqVo userReqVo) {
+    public ResponseVo submit(@RequestBody UserReqVo userReqVo) {
         String username = userReqVo.getUsername();
         String password = userReqVo.getPassword();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);

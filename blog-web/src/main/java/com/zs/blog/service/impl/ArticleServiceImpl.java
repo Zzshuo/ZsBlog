@@ -2,12 +2,15 @@ package com.zs.blog.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleMapper;
 import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
+import com.zs.blog.object.ErrorEnum;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.PageHelperUtil;
-import com.zs.blog.vo.request.ArticleReqVo;
+import com.zs.blog.vo.request.ArticlePageReqVo;
+import com.zs.blog.vo.response.ArticleDetailVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +30,23 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
-    public ArticleVo get(Integer id) {
-        return null;
+    public ArticleDetailVo get(Integer id) {
+        Article article = articleMapper.selectByPrimaryKey(id);
+        if (article == null) {
+            throw new BusinessException(ErrorEnum.ERROR_NO_ARTICLE);
+        }
+        ArticleDetailVo articleDetailVo = new ArticleDetailVo();
+        BeanUtils.copyProperties(article, articleDetailVo);
+        return articleDetailVo;
     }
 
     @Override
-    public PageInfo<ArticleVo> list(ArticleReqVo reqVo) {
+    public PageInfo<ArticleVo> list(ArticlePageReqVo reqVo) {
         ArticleExample example = new ArticleExample();
         ArticleExample.Criteria criteria = example.createCriteria();
 
-        if (Objects.nonNull(reqVo.getId())) {
-            criteria.andIdEqualTo(reqVo.getId());
+        if (Objects.nonNull(reqVo.getTypeId())) {
+            criteria.andTypeIdEqualTo(reqVo.getTypeId());
         }
 
         PageHelperUtil.startPage(reqVo);

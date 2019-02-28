@@ -11,7 +11,11 @@ public enum ErrorEnum {
      * 成功
      */
     SUCCESS(200, "操作成功！"),
-    ERROR(500, "服务器未知错误！")
+    ERROR(500, "服务器未知错误！"),
+
+    ERROR_NO_ARTICLE(500, "没有该文章！")
+
+    //
     ;
 
     private Integer code;

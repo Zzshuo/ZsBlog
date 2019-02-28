@@ -7,28 +7,28 @@ import lombok.Data;
  * @date 2018/10/8
  **/
 @Data
-public class ResponseVO<T> {
+public class ResponseVo<T> {
     private Integer code;
     private String message;
     private T data;
 
-    public ResponseVO(ErrorEnum state) {
+    public ResponseVo(ErrorEnum state) {
         this.code = state.getCode();
         this.message = state.getMessage();
     }
 
-    public ResponseVO(Integer code, String message) {
+    public ResponseVo(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResponseVO(ErrorEnum state, T data) {
+    public ResponseVo(ErrorEnum state, T data) {
         this.code = state.getCode();
         this.message = state.getMessage();
         this.data = data;
     }
 
-    public ResponseVO(Integer code, String message, T data) {
+    public ResponseVo(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;

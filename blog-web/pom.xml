@@ -79,10 +79,6 @@
             <version>1.1.10</version>
         </dependency>
         <!--springboot 集成Mybatis所需jar配置 end -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
         <!--swagger2-->
         <dependency>
             <groupId>io.springfox</groupId>

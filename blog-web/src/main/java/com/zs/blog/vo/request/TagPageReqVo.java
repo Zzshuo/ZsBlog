@@ -6,12 +6,9 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author zshuo
- * @date 2018/11/8
+ * @date 2019/2/28
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ArticleReqVo extends RequestVo {
-
-    private Integer id;
-
+public class TagPageReqVo extends RequestVo {
 }

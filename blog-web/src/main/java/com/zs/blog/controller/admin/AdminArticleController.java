@@ -2,10 +2,10 @@ package com.zs.blog.controller.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.object.ResponseVO;
+import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
-import com.zs.blog.vo.request.ArticleReqVo;
+import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  **/
 @Controller
 @RequestMapping("/admin/article")
-public class ArticleController {
+public class AdminArticleController {
 
     @Autowired
     private ArticleService articleService;
@@ -28,26 +28,26 @@ public class ArticleController {
     @BusinessLog("文章列表")
     @PostMapping("/list")
     @ResponseBody
-    public ResponseVO list(@RequestBody ArticleReqVo reqVo) {
+    public ResponseVo list(@RequestBody ArticlePageReqVo reqVo) {
         PageInfo<ArticleVo> pageInfo = articleService.list(reqVo);
         return ResponseUtil.success(pageInfo);
     }
 
     @BusinessLog("删除文章")
     @PostMapping("/delete")
-    public ResponseVO delete(Integer id) {
+    public ResponseVo delete(Integer id) {
         return ResponseUtil.success();
     }
 
     @BusinessLog("获取文章")
     @PostMapping("/get")
-    public ResponseVO get(Integer id) {
+    public ResponseVo get(Integer id) {
         return ResponseUtil.success();
     }
 
     @BusinessLog("发布/修改文章")
     @PostMapping("/addOrUpdate")
-    public ResponseVO addOrUpdate() {
+    public ResponseVo addOrUpdate() {
 
 
         return ResponseUtil.success();
@@ -55,7 +55,7 @@ public class ArticleController {
 
     @BusinessLog("彻底删除")
     @PostMapping("/remove")
-    public ResponseVO remove(Integer id) {
+    public ResponseVo remove(Integer id) {
         return ResponseUtil.success();
     }
 }

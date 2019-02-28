@@ -1,7 +1,7 @@
 package com.zs.blog.exception;
 
 import com.zs.blog.object.ErrorEnum;
-import com.zs.blog.object.ResponseVO;
+import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,7 +27,7 @@ public class MyExceptionHandler {
      */
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public ResponseVO errorHandler(Exception ex) {
+    public ResponseVo errorHandler(Exception ex) {
         log.error(ex.getMessage());
         return ResponseUtil.error(ex.getMessage());
     }
@@ -41,7 +41,7 @@ public class MyExceptionHandler {
      */
     @ResponseBody
     @ExceptionHandler(value = BusinessException.class)
-    public ResponseVO errorHandler(BusinessException ex) {
+    public ResponseVo errorHandler(BusinessException ex) {
         ErrorEnum errorEnum = ex.getErrorEnum();
         if (Objects.nonNull(errorEnum)) {
             String message = errorEnum.getMessage();

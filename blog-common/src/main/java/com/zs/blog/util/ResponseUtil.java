@@ -1,7 +1,7 @@
 package com.zs.blog.util;
 
 import com.zs.blog.object.ErrorEnum;
-import com.zs.blog.object.ResponseVO;
+import com.zs.blog.object.ResponseVo;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -12,28 +12,28 @@ import java.util.Map;
  **/
 public class ResponseUtil {
 
-    public static ResponseVO success() {
-        return new ResponseVO<>(ErrorEnum.SUCCESS);
+    public static ResponseVo success() {
+        return new ResponseVo<>(ErrorEnum.SUCCESS);
     }
 
-    public static ResponseVO success(Object data) {
-        return new ResponseVO<>(ErrorEnum.SUCCESS, data);
+    public static ResponseVo success(Object data) {
+        return new ResponseVo<>(ErrorEnum.SUCCESS, data);
     }
 
-    public static ResponseVO error() {
-        return new ResponseVO<>(ErrorEnum.ERROR);
+    public static ResponseVo error() {
+        return new ResponseVo<>(ErrorEnum.ERROR);
     }
 
-    public static ResponseVO error(Object data) {
-        return new ResponseVO<>(ErrorEnum.ERROR, data);
+    public static ResponseVo error(Object data) {
+        return new ResponseVo<>(ErrorEnum.ERROR, data);
     }
 
-    public static ResponseVO error(ErrorEnum state) {
-        return new ResponseVO<>(state);
+    public static ResponseVo error(ErrorEnum state) {
+        return new ResponseVo<>(state);
     }
 
-    public static ResponseVO error(Integer code, String message) {
-        return new ResponseVO<>(code, message);
+    public static ResponseVo error(Integer code, String message) {
+        return new ResponseVo<>(code, message);
     }
 
     public static ModelAndView view(String view) {

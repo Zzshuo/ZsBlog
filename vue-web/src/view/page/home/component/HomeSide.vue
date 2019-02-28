@@ -46,7 +46,6 @@
         <p>
           <Icon type="md-document" />文章总数：{{webInfo.articleCount}} 篇<br>
           <Icon type="md-pricetag" />标签总数：{{webInfo.tagCount}} 个<br>
-          <Icon type="ios-folder-open" />分类总数：{{webInfo.typeCount}} 个<br>
           <Icon type="ios-text" />留言数量：{{webInfo.msgCount}} 条<br>
           <Icon type="md-person" />在线人数：{{webInfo.online}} 人<br>
           <Icon type="ios-time" />运行天数：{{webInfo.runDay}} 天<br>

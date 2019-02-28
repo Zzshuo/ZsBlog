@@ -1,7 +1,8 @@
 package com.zs.blog.service;
 
 import com.github.pagehelper.PageInfo;
-import com.zs.blog.vo.request.ArticleReqVo;
+import com.zs.blog.vo.request.ArticlePageReqVo;
+import com.zs.blog.vo.response.ArticleDetailVo;
 import com.zs.blog.vo.response.ArticleVo;
 
 /**
@@ -16,7 +17,7 @@ public interface ArticleService {
      * @param id
      * @return
      */
-    ArticleVo get(Integer id);
+    ArticleDetailVo get(Integer id);
 
     /**
      * 文章列表
@@ -24,5 +25,5 @@ public interface ArticleService {
      * @param reqVo
      * @return
      */
-    PageInfo<ArticleVo> list(ArticleReqVo reqVo);
+    PageInfo<ArticleVo> list(ArticlePageReqVo reqVo);
 }

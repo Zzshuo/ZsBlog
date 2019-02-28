@@ -1,7 +1,7 @@
 spring:
   profiles:
-    # @profileActive@表示该属性值会在maven构建时被替换掉。
-    active: @profileActive@
+    # '@profileActive@'表示该属性值会在maven构建时被替换掉。
+    active: '@profileActive@'
 
   # Redis数据库索引（默认为0）
   redis:

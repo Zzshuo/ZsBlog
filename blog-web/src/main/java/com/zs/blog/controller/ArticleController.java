@@ -2,22 +2,25 @@ package com.zs.blog.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.object.ResponseVO;
+import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
-import com.zs.blog.vo.request.ArticleReqVo;
+import com.zs.blog.vo.request.ArticlePageReqVo;
+import com.zs.blog.vo.response.ArticleDetailVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * @author zshuo
  * @date 2019/2/28
  **/
-@Controller
+@RestController
 @RequestMapping("/article")
 public class ArticleController {
 
@@ -26,14 +29,15 @@ public class ArticleController {
 
     @BusinessLog("获取文章")
     @PostMapping("/get")
-    public ResponseVO get(Integer id) {
-        ArticleVo articleVo = articleService.get(id);
-        return ResponseUtil.success(articleVo);
+    public ResponseVo get(@RequestBody Map<String, String> map) {
+        Integer id = Integer.valueOf(map.get("id"));
+        ArticleDetailVo articleDetailVo = articleService.get(id);
+        return ResponseUtil.success(articleDetailVo);
     }
 
     @BusinessLog("文章列表")
     @PostMapping("/list")
-    public ResponseVO list(@RequestBody ArticleReqVo reqVo) {
+    public ResponseVo list(@RequestBody ArticlePageReqVo reqVo) {
         PageInfo<ArticleVo> pageInfo = articleService.list(reqVo);
         return ResponseUtil.success(pageInfo);
     }
