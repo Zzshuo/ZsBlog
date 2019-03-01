@@ -12,7 +12,6 @@ import Page404 from './view/error/404'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
