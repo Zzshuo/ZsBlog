@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ServletComponentScan
 @EnableTransactionManagement
-//@ComponentScan(basePackages = {"com.zs.blog.controller.*"})
 public class BlogWebApplication {
 
     public static void main(String[] args) {

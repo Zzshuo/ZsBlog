@@ -38,9 +38,7 @@ public class TagServiceImpl implements TagService {
 
         Page<TagVo> page = new Page<>();
         for (Tag o : tags) {
-            TagVo tagVo = new TagVo();
-            BeanUtils.copyProperties(o, tagVo);
-            page.add(tagVo);
+            page.add(genTagVo(o));
         }
 
         return PageHelperUtil.result(tags, page);

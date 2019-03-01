@@ -14,7 +14,7 @@ import 'iview/dist/styles/iview.css'
 import './assets/styles/base.styl'
 import api from './api/api'
 
-//if (process.env.NODE_ENV !== 'production') require('@/mock')
+if (process.env.NODE_ENV !== 'production') require('@/mock')
 
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
@@ -30,3 +30,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+console.log(process.env.NODE_ENV)

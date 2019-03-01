@@ -24,11 +24,11 @@ const BASE_URL = process.env.NODE_ENV === 'production'
 module.exports = {
   publicPath: BASE_URL,
   // 构建输出目录
-  outputDir: path.resolve(__dirname, '../blog-web/src/main/webapp'),
+  outputDir: path.resolve(__dirname, '../blog-web/src/main/resources/static'),
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
-  assetsDir: 'static',
+  assetsDir: '',
   // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径。
-  indexPath: path.resolve(__dirname, '../blog-web/src/main/webapp/index.html'),
+  indexPath: path.resolve(__dirname, '../blog-web/src/main/resources/static/index.html'),
 
   // 如果你不需要使用eslint，把lintOnSave设为false即可
   lintOnSave: true,
@@ -45,13 +45,14 @@ module.exports = {
     host: '0.0.0.0',
     port: 8090,
     // 路由接口代理配置
+    // proxy: 'http://localhost:8080'
     proxy: {
-      '/api': {
+      '/': {
         target: 'http://localhost:8080',
         changeOrigin: true, //可否跨域
-        pathRewrite: {
-          '^/api': ''
-        }
+        // pathRewrite: {
+        //   '^/api': ''
+        // }
       }
     }
   }

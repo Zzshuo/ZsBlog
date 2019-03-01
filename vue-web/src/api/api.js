@@ -3,26 +3,26 @@ import request from '../assets/utils/request'
 const api = {
   // 获取文章列表
   getArticleList (data = {}) {
-    const path = 'api/article/list'
+    const path = 'article/list'
     return request(path, { data: data })
   },
   // 根据id获取文章
   getArticleById (data = {}) {
-    const path = 'api/article/get'
+    const path = 'article/get'
     return request(path, { data: data })
   },
   // 获取标签列表
   getTagList (data = {}) {
-    const path = 'api/tag/list'
+    const path = 'tag/list'
     return request(path, { data: data })
   },
   getTagById (data = {}) {
-    const path = 'api/tag/get'
+    const path = 'tag/get'
     return request(path, { data: data })
   },
   // 获取网站信息
   getWebInfo (data = {}) {
-    const path = 'api/web/info'
+    const path = 'web/info'
     return request(path, { data: data })
   }
 }
