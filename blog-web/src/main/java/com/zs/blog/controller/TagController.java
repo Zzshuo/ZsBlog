@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/2/28
  **/
 @RestController
-@RequestMapping("/tag")
+@RequestMapping("/api/tag")
 public class TagController {
 
     @Autowired

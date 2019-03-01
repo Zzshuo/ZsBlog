@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
  **/
 @Slf4j
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class AdminController {
 
     @BusinessLog("进入登陆页面")

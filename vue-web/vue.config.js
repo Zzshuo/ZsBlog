@@ -45,14 +45,13 @@ module.exports = {
     host: '0.0.0.0',
     port: 8090,
     // 路由接口代理配置
-    // proxy: 'http://localhost:8080'
     proxy: {
-      '/': {
+      '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true, //可否跨域
-        // pathRewrite: {
-        //   '^/api': ''
-        // }
+        pathRewrite: {
+          '^/api': ''
+        }
       }
     }
   }

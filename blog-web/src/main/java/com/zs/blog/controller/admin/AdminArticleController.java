@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2018/11/7
  **/
 @Controller
-@RequestMapping("/admin/article")
+@RequestMapping("/api/admin/article")
 public class AdminArticleController {
 
     @Autowired
