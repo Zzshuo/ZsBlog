@@ -23,6 +23,7 @@
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
         </plugin>
+        <plugin type="com.zs.blog.plugin.LombokPlugin"/>
 
         <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
         <commentGenerator>
