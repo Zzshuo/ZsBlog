@@ -13,6 +13,7 @@
 
     <modules>
         <module>blog-common</module>
+        <module>blog-service</module>
         <module>blog-dao</module>
         <module>blog-web</module>
         <module>blog-admin</module>
@@ -46,6 +47,11 @@
             <dependency>
                 <groupId>com.zs</groupId>
                 <artifactId>blog-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zs</groupId>
+                <artifactId>blog-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

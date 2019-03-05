@@ -1,10 +1,8 @@
 package com.zs.blog.vo.request;
 
 import com.zs.blog.object.RequestVo;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * @author zshuo
