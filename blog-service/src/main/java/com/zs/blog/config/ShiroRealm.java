@@ -32,8 +32,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     /**
      * 权限认证，为当前登录的Subject授予角色和权限（角色的权限信息集合）
-     *
-     * @param principalCollection
+     *     * @param principalCollection
      * @return
      */
     @Override

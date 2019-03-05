@@ -5,6 +5,7 @@ import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
+import com.zs.blog.util.redis.RedisUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.response.ArticleDetailVo;
 import com.zs.blog.vo.response.ArticleVo;
@@ -23,6 +24,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/article")
 public class ArticleController {
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Autowired
     private ArticleService articleService;
