@@ -1,6 +1,6 @@
 package com.zs.blog.exception;
 
-import com.zs.blog.object.ErrorEnum;
+import com.zs.blog.enums.ErrorEnum;
 import lombok.Data;
 
 /**

@@ -2,7 +2,8 @@ package com.zs.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.zs.blog.vo.request.ArticlePageReqVo;
-import com.zs.blog.vo.response.ArticleDetailVo;
+import com.zs.blog.vo.request.ArticleReqVo;
+import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
 
 /**
@@ -12,12 +13,26 @@ import com.zs.blog.vo.response.ArticleVo;
 public interface ArticleService {
 
     /**
+     * 发布/修改文章
+     *
+     * @param reqVo
+     */
+    void addOrUpdate(ArticleReqVo reqVo);
+
+    /**
+     * 删除文章
+     *
+     * @param id
+     */
+    void delete(Integer id);
+
+    /**
      * 获取文章
      *
      * @param id
      * @return
      */
-    ArticleDetailVo get(Integer id);
+    ArticleVo get(Integer id);
 
     /**
      * 文章列表
@@ -25,5 +40,5 @@ public interface ArticleService {
      * @param reqVo
      * @return
      */
-    PageInfo<ArticleVo> list(ArticlePageReqVo reqVo);
+    PageInfo<ArticleBriefVo> list(ArticlePageReqVo reqVo);
 }

@@ -1,4 +1,4 @@
-package com.zs.blog.controller.admin;
+package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.object.ResponseVo;

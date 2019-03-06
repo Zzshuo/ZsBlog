@@ -1,6 +1,6 @@
 package com.zs.blog.util;
 
-import com.zs.blog.object.ErrorEnum;
+import com.zs.blog.enums.ErrorEnum;
 import com.zs.blog.object.ResponseVo;
 import org.springframework.web.servlet.ModelAndView;
 

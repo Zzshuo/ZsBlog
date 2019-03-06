@@ -2,16 +2,21 @@ package com.zs.blog.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import com.zs.blog.enums.ErrorEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleMapper;
+import com.zs.blog.mapper.ArticleTagMapper;
 import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
-import com.zs.blog.object.ErrorEnum;
 import com.zs.blog.service.ArticleService;
+import com.zs.blog.service.TagService;
 import com.zs.blog.util.PageHelperUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
-import com.zs.blog.vo.response.ArticleDetailVo;
+import com.zs.blog.vo.request.ArticleReqVo;
+import com.zs.blog.vo.request.TagReqVo;
+import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,19 +34,57 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    private ArticleTagMapper articleTagMapper;
+
+    @Autowired
+    private TagService tagService;
+
     @Override
-    public ArticleDetailVo get(Integer id) {
+    public void addOrUpdate(ArticleReqVo reqVo) {
+        List<TagReqVo> tagList = reqVo.getTagList();
+        if (CollectionUtils.isNotEmpty(tagList)) {
+            for (TagReqVo tagReqVo : tagList) {
+                // 标签不存在添加标签
+                if (!tagService.exist(tagReqVo.getId())) {
+                    tagService.addOrUpdate(tagReqVo);
+                }
+            }
+        }
+
+        Article article = new Article();
+        BeanUtils.copyProperties(reqVo, article);
+        if (article.getId() != null) {
+            articleMapper.updateByPrimaryKeySelective(article);
+        } else {
+            articleMapper.insertSelective(article);
+        }
+    }
+
+    @Override
+    public void delete(Integer id) {
+        int i = articleMapper.deleteByPrimaryKey(id);
+        if (i <= 0) {
+            throw new BusinessException(ErrorEnum.ERROR_NO_ARTICLE);
+        }
+    }
+
+    @Override
+    public ArticleVo get(Integer id) {
         Article article = articleMapper.selectByPrimaryKey(id);
         if (article == null) {
             throw new BusinessException(ErrorEnum.ERROR_NO_ARTICLE);
         }
-        ArticleDetailVo articleDetailVo = new ArticleDetailVo();
-        BeanUtils.copyProperties(article, articleDetailVo);
-        return articleDetailVo;
+        ArticleVo articleVo = new ArticleVo();
+        BeanUtils.copyProperties(article, articleVo);
+
+        // TODO 查找对应标签
+
+        return articleVo;
     }
 
     @Override
-    public PageInfo<ArticleVo> list(ArticlePageReqVo reqVo) {
+    public PageInfo<ArticleBriefVo> list(ArticlePageReqVo reqVo) {
         ArticleExample example = new ArticleExample();
         ArticleExample.Criteria criteria = example.createCriteria();
 
@@ -52,11 +95,11 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelperUtil.startPage(reqVo);
         List<Article> articles = articleMapper.selectByExample(example);
 
-        Page<ArticleVo> page = new Page<>();
+        Page<ArticleBriefVo> page = new Page<>();
         for (Article o : articles) {
-            ArticleVo articleVo = new ArticleVo();
-            BeanUtils.copyProperties(o, articleVo);
-            page.add(articleVo);
+            ArticleBriefVo articleBriefVo = new ArticleBriefVo();
+            BeanUtils.copyProperties(o, articleBriefVo);
+            page.add(articleBriefVo);
         }
 
         return PageHelperUtil.result(articles, page);

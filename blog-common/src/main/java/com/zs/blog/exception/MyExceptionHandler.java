@@ -1,6 +1,6 @@
 package com.zs.blog.exception;
 
-import com.zs.blog.object.ErrorEnum;
+import com.zs.blog.enums.ErrorEnum;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;

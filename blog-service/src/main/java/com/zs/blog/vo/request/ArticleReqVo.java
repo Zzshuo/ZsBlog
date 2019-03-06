@@ -1,17 +1,15 @@
-package com.zs.blog.vo.response;
+package com.zs.blog.vo.request;
 
-import com.zs.blog.vo.request.TagReqVo;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author zshuo
- * @date 2018/11/8
+ * @date 2019/3/6
  **/
 @Data
-public class ArticleVo {
+public class ArticleReqVo {
     private Integer id;
 
     /**
@@ -35,14 +33,9 @@ public class ArticleVo {
     private String image;
 
     /**
-     * 创建时间
+     * 1:正常,2:删除,3:草稿
      */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
+    private Integer state;
 
     /**
      * 文章内容

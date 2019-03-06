@@ -7,5 +7,10 @@ import com.zs.blog.vo.response.WebInfoVo;
  * @date 2019/2/28
  **/
 public interface WebService {
+    /**
+     * webInfo
+     *
+     * @return
+     */
     WebInfoVo info();
 }

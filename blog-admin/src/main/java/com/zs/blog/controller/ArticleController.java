@@ -8,6 +8,7 @@ import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.util.redis.RedisUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
+import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,20 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+    @BusinessLog("发布/修改文章")
+    @PostMapping("/addOrUpdate")
+    public ResponseVo addOrUpdate(@RequestBody ArticleReqVo reqVo) {
+        articleService.addOrUpdate(reqVo);
+        return ResponseUtil.success();
+    }
+
+    @BusinessLog("删除文章")
+    @PostMapping("/delete")
+    public ResponseVo delete(@RequestBody BaseReqVo reqVo) {
+        articleService.delete(reqVo.getId());
+        return ResponseUtil.success();
+    }
 
     @BusinessLog("获取文章")
     @PostMapping("/get")

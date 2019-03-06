@@ -6,10 +6,10 @@ import java.util.Date;
 
 /**
  * @author zshuo
- * @date 2018/11/8
+ * @date 2019/2/28
  **/
 @Data
-public class ArticleDetailVo {
+public class ArticleBriefVo {
     private Integer id;
 
     /**
@@ -36,14 +36,4 @@ public class ArticleDetailVo {
      * 创建时间
      */
     private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 文章内容
-     */
-    private String content;
 }

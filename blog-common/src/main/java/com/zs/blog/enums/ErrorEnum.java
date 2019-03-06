@@ -1,4 +1,4 @@
-package com.zs.blog.object;
+package com.zs.blog.enums;
 
 import java.util.Objects;
 
@@ -13,7 +13,8 @@ public enum ErrorEnum {
     SUCCESS(200, "操作成功！"),
     ERROR(500, "服务器未知错误！"),
 
-    ERROR_NO_ARTICLE(500, "没有该文章！")
+    ERROR_NO_ARTICLE(500, "没有该文章！"),
+    ERROR_NO_TAG(501, "没有该标签！")
 
     //
     ;
