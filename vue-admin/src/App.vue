@@ -1,21 +1,27 @@
 <template>
-  <div id="app" class="zs-app" style="padding-top: 60px">
-    <blog-header></blog-header>
-    <router-view />
-    <blog-footer></blog-footer>
+  <div id="app">
+    <router-view/>
   </div>
 </template>
 
 <script>
-import BlogHeader from './view/common/BlogHeader'
-import BlogFooter from './view/common/BlogFooter'
 export default {
-  name: 'App',
-  components: {
-    BlogHeader,
-    BlogFooter
-  }
+  name: 'App'
 }
 </script>
-<style scoped lang="stylus">
+
+<style lang="less">
+.size{
+  width: 100%;
+  height: 100%;
+}
+html,body{
+  .size;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  .size;
+}
 </style>
