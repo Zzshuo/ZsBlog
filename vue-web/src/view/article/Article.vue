@@ -63,7 +63,7 @@ import highlightJs from 'highlight.js'
 import 'highlight.js/styles/atelier-dune-dark.css'
 import 'mavon-editor/dist/markdown/github-markdown.min.css'
 // import { getRelativeTime } from '../../assets/utils/tools'
-import date from '../../assets/utils/date'
+import date from '../../libs/date'
 import Original from '../common/Original'
 import ArticleDetail from '../common/ArticleDetail'
 export default {

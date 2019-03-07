@@ -1,4 +1,4 @@
-import request from '../assets/utils/request'
+import request from '../libs/request'
 
 const api = {
   // 获取文章列表
