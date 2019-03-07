@@ -35,3 +35,14 @@ vue-cli-service serve [options]
       --port    端口号 (default: 8080)
       --https   使用https (default: false)
 ```
+```
+├── public  打包所需静态资源
+└── src
+    ├── api  AJAX请求
+    ├── assets  项目静态资源
+    ├── libs  封装工具函数
+    ├── mock  mock模拟数据
+    ├── router.js  路由配置
+    ├── store.js  Vuex配置
+    └── view  页面文件
+```
