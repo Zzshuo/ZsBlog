@@ -1,6 +1,5 @@
 package com.zs.blog.vo.response;
 
-import com.zs.blog.vo.request.TagReqVo;
 import lombok.Data;
 
 import java.util.Date;
@@ -52,5 +51,5 @@ public class ArticleVo {
     /**
      * 标签列表
      */
-    private List<TagReqVo> tagList;
+    private List<TagVo> tagList;
 }

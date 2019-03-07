@@ -5,9 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.zs.blog.enums.ErrorEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleMapper;
-import com.zs.blog.mapper.ArticleTagMapper;
+import com.zs.blog.mapper.SelfMapper;
 import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
+import com.zs.blog.model.Tag;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.service.TagService;
 import com.zs.blog.util.PageHelperUtil;
@@ -16,6 +17,7 @@ import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
+import com.zs.blog.vo.response.TagVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author zshuo
@@ -35,7 +38,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Autowired
-    private ArticleTagMapper articleTagMapper;
+    private SelfMapper selfMapper;
 
     @Autowired
     private TagService tagService;
@@ -78,8 +81,16 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleVo articleVo = new ArticleVo();
         BeanUtils.copyProperties(article, articleVo);
 
-        // TODO 查找对应标签
-
+        List<Tag> tagList = selfMapper.getTagByArticleId(id);
+        List<TagVo> collect = tagList
+                .stream()
+                .map(tag -> {
+                    TagVo tagVo = new TagVo();
+                    BeanUtils.copyProperties(tag, tagVo);
+                    return tagVo;
+                })
+                .collect(Collectors.toList());
+        articleVo.setTagList(collect);
         return articleVo;
     }
 
