@@ -17,16 +17,14 @@ const BASE_URL = process.env.NODE_ENV === 'production'
   : '/'
 
 module.exports = {
-  // Project deployment base
-  // By default we assume your app will be deployed at the root of a domain,
-  // e.g. https://www.my-app.com/
-  // If your app is deployed at a sub-path, you will need to specify that
-  // sub-path here. For example, if your app is deployed at
-  // https://www.foobar.com/my-app/
-  // then change this to '/my-app/'
-  baseUrl: BASE_URL,
-  // tweak internal webpack configuration.
-  // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
+  publicPath: BASE_URL,
+  // 构建输出目录
+  outputDir: path.resolve(__dirname, '../blog-admin/src/main/resources/static'),
+  //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
+  assetsDir: '',
+  // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径。
+  indexPath: path.resolve(__dirname, '../blog-admin/src/main/resources/static/index.html'),
+
   // 如果你不需要使用eslint，把lintOnSave设为false即可
   lintOnSave: true,
   chainWebpack: config => {
@@ -35,9 +33,21 @@ module.exports = {
       .set('_c', resolve('src/components'))
   },
   // 设为false打包时不生成.map文件
-  productionSourceMap: false
+  productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
-  // devServer: {
-  //   proxy: 'localhost:3000'
-  // }
+  devServer: {
+    open: true,
+    host: '0.0.0.0',
+    port: 8090,
+    // 路由接口代理配置
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true, //可否跨域
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
+  }
 }
