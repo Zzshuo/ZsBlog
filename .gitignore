@@ -28,3 +28,4 @@
 *mvnw
 /.mvn/
 /logback.path_IS_UNDEFINED/
+/.vscode/
