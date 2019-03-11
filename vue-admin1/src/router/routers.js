@@ -33,7 +33,7 @@ export default [
     redirect: '/home',
     component: Main,
     meta: {
-      hideInMenu: true,
+      // hideInMenu: true,
       notCache: true
     },
     children: [
@@ -41,12 +41,41 @@ export default [
         path: '/home',
         name: 'home',
         meta: {
-          hideInMenu: true,
+          // hideInMenu: true,
           title: '首页',
           notCache: true,
           icon: 'md-home'
         },
         component: () => import('@/view/single-page/home')
+      }
+    ]
+  },
+  {
+    path: '/article',
+    name: '文章',
+    component: Main,
+    meta: {
+      title: '文章',
+      icon: 'ios-book'
+    },
+    children: [
+      {
+        path: 'edit',
+        name: 'article-edit',
+        meta: {
+          icon: '_qq',
+          title: '写文章'
+        },
+        component: () => import('@/view/article/edit.vue')
+      },
+      {
+        path: 'article-list',
+        name: '文章列表',
+        meta: {
+          icon: '_qq',
+          title: '文章列表'
+        },
+        component: () => import('@/view/article/list.vue')
       }
     ]
   },
