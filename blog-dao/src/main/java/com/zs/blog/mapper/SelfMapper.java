@@ -19,5 +19,5 @@ public interface SelfMapper {
      * @return
      */
     @Select("SELECT * FROM tag WHERE id IN (SELECT tag_id FROM article_tag WHERE article_id = #{articleId})")
-    List<Tag> getTagByArticleId(@Param("ArticleId") Integer articleId);
+    List<Tag> getTagByArticleId(@Param("articleId") Integer articleId);
 }

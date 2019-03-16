@@ -46,6 +46,7 @@ export default {
     customTreeTable: '自定义树表',
     tab: 'Tab',
     form: '表单',
+    article: '文章管理',
     createArticle: '创建文章',
     editArticle: '编辑文章',
     articleList: '文章列表',

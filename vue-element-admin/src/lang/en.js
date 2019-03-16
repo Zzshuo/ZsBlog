@@ -1,6 +1,7 @@
 export default {
   route: {
     dashboard: 'Dashboard',
+    create: 'article',
     introduction: 'Introduction',
     documentation: 'Documentation',
     guide: 'Guide',
@@ -46,6 +47,7 @@ export default {
     customTreeTable: 'Custom TreeTable',
     tab: 'Tab',
     form: 'Form',
+    article: 'article',
     createArticle: 'Create Article',
     editArticle: 'Edit Article',
     articleList: 'Article List',

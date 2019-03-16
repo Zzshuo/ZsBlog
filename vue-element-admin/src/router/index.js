@@ -1,17 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-Vue.use(Router)
-
 /* Layout */
 import Layout from '@/views/layout/Layout'
-
 /* Router Modules */
 import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import treeTableRouter from './modules/tree-table'
 import nestedRouter from './modules/nested'
+
+Vue.use(Router)
 
 /** note: sub-menu only appear when children.length>=1
  *  detail see  https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -114,6 +112,68 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
+    path: '/article',
+    component: Layout,
+    redirect: '/article/list',
+    name: 'article',
+    meta: {
+      title: 'article',
+      icon: 'documentation'
+    },
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/article/create'),
+        name: 'CreateArticle',
+        meta: { title: 'createArticle', icon: 'edit' }
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        component: () => import('@/views/article/edit'),
+        name: 'EditArticle',
+        meta: { title: 'editArticle', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/article/list'),
+        name: 'ArticleList',
+        meta: { title: 'articleList', icon: 'list' }
+      }
+    ]
+  },
+  // {
+  //   path: '/article',
+  //   component: Layout,
+  //   redirect: '/article/list',
+  //   name: 'article',
+  //   meta: {
+  //     title: 'article',
+  //     icon: 'documentation'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'create',
+  //       component: () => import('@/views/article/create'),
+  //       name: 'createArticle',
+  //       meta: { title: 'createArticle', icon: 'edit' }
+  //     },
+  //     {
+  //       path: 'edit/:id(\\d+)',
+  //       component: () => import('@/views/article/edit'),
+  //       name: 'EditArticle',
+  //       meta: { title: 'editArticle', noCache: true },
+  //       hidden: true
+  //     },
+  //     {
+  //       path: 'list',
+  //       component: () => import('@/views/article/list'),
+  //       name: 'ArticleList',
+  //       meta: { title: 'articleList', icon: 'list' }
+  //     }
+  //   ]
+  // },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/index',
@@ -164,38 +224,6 @@ export const asyncRouterMap = [
   nestedRouter,
   tableRouter,
   treeTableRouter,
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/list',
-    name: 'Example',
-    meta: {
-      title: 'example',
-      icon: 'example'
-    },
-    children: [
-      {
-        path: 'create',
-        component: () => import('@/views/example/create'),
-        name: 'CreateArticle',
-        meta: { title: 'createArticle', icon: 'edit' }
-      },
-      {
-        path: 'edit/:id(\\d+)',
-        component: () => import('@/views/example/edit'),
-        name: 'EditArticle',
-        meta: { title: 'editArticle', noCache: true },
-        hidden: true
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/example/list'),
-        name: 'ArticleList',
-        meta: { title: 'articleList', icon: 'list' }
-      }
-    ]
-  },
 
   {
     path: '/tab',
