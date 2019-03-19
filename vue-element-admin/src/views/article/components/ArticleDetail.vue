@@ -1,6 +1,6 @@
 <template>
   <div class="createPost-container">
-    <el-form ref="postForm" :model="postForm" :rules="rules" label-position="left" class="form-container">
+    <el-form ref="postForm" :model="postForm" :rules="rules" hide-required-asterisk class="form-container">
 
       <sticky :class-name="'sub-navbar '+postForm.state">
         <CommentDropdown v-model="postForm.comment_disabled" />
@@ -16,20 +16,20 @@
         </el-form-item>
         <el-row>
           <el-col :xs="24" :sm="12" :md="8" :lg="6">
-            <el-form-item label="分类:">
+            <el-form-item label="分类:" prop="typeId">
               <form-item-type v-model="postForm.typeId"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="8" :lg="6">
-            <el-form-item label="类型:">
+            <el-form-item label="类型:" prop="original">
               <el-radio-group v-model="postForm.original">
-                <el-radio-button label="原创"/>
-                <el-radio-button label="转载"/>
+                <el-radio-button label="原创" value="1"/>
+                <el-radio-button label="转载" value="0"/>
               </el-radio-group>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="标签:">
+        <el-form-item label="标签:" prop="tagList">
           <form-item-tag v-model="postForm.tagList"/>
         </el-form-item>
         <el-form-item prop="content" style="margin-bottom: 30px;">
@@ -61,12 +61,6 @@ import 'mavon-editor/dist/css/index.css'
 
 const defaultForm = {
   state: 1,
-  title: '', // 文章题目
-  content: '', // 文章内容
-  image: '', // 文章图片
-  original: undefined, // 前台展示时间
-  typeId: undefined,
-  tagList: [],
   comment_disabled: false
 }
 
@@ -85,11 +79,10 @@ export default {
       loading: false,
       userListOptions: [],
       rules: {
-        title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
-        content: [{ required: true, message: '请输入内容', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入标题', trigger: 'change' }],
+        content: [{ required: true, message: '请输入内容', trigger: 'change' }],
         original: [{ required: true, message: '请选择类型', rigger: 'change' }],
-        typeId: [{ required: true, message: '请选择分类', trigger: 'blur' }],
-        tagList: [{ required: true, message: '请选择标签', trigger: 'blur' }]
+        typeId: [{ required: true, message: '请选择分类', trigger: 'change' }]
       },
       tempRoute: {}
     }
