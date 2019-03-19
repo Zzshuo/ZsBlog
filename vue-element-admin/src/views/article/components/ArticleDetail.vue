@@ -53,7 +53,6 @@ import Upload from '@/components/Upload/singleImage3'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
 import { fetchArticle } from '@/api/article'
-import { userSearch } from '@/api/remoteSearch'
 import { CommentDropdown } from './Dropdown'
 import { FormItemImage, FormItemTag, FormItemType } from './FormItem'
 import { mavonEditor } from 'mavon-editor'
@@ -77,7 +76,6 @@ export default {
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
-      userListOptions: [],
       rules: {
         title: [{ required: true, message: '请输入标题', trigger: 'change' }],
         content: [{ required: true, message: '请输入内容', trigger: 'change' }],
@@ -128,24 +126,25 @@ export default {
       this.$store.dispatch('updateVisitedView', route)
     },
     submitForm() {
-      console.log(this.postForm)
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$notify({
-            title: '成功',
+          this.$message({
             message: '发布文章成功',
             type: 'success',
+            showClose: true,
             duration: 2000
           })
           this.postForm.state = 1
           this.loading = false
+          this.$router.push('/article/list')
         } else {
           console.log('error submit!!')
           return false
         }
       })
     },
+    // 保存草稿
     draftForm() {
       if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
         this.$message({
@@ -154,18 +153,18 @@ export default {
         })
         return
       }
-      this.$message({
-        message: '保存成功',
-        type: 'success',
-        showClose: true,
-        duration: 1000
-      })
-      this.postForm.state = 3
-    },
-    getRemoteUserList(query) {
-      userSearch(query).then(response => {
-        if (!response.data.items) return
-        this.userListOptions = response.data.items.map(v => v.name)
+      this.api.saveArticle(this.postForm).then(response => {
+        const res = response.data
+        if (res && res.code === 200) {
+          this.$message({
+            message: '保存草稿成功',
+            type: 'success',
+            showClose: true,
+            duration: 1000
+          })
+          this.postForm.state = 3
+          this.$router.push('/article/list')
+        }
       })
     },
     $imgAdd(pos, $file) {

@@ -3,14 +3,16 @@ import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-// create an axios instance
-const service = axios.create({
-  baseURL: process.env.BASE_API, // api 的 base_url
-  timeout: 5000 // request timeout
-})
+const config = {
+  timeout: 5000,
+  // 在外部文件配置axios的基础路径 ip地址
+  baseURL: process.env.BASE_API,
+  headers: { 'Content-Type': 'application/json;charset=UTF-8;' },
+  dataType: 'json'
+}
 
 // request interceptor
-service.interceptors.request.use(
+axios.interceptors.request.use(
   config => {
     // Do something before request is sent
     if (store.getters.token) {
@@ -26,8 +28,8 @@ service.interceptors.request.use(
   }
 )
 
-// response interceptor
-service.interceptors.response.use(
+// response 拦截器
+axios.interceptors.response.use(
   response => response,
   /**
    * 下面的注释为通过在response里，自定义code来标示请求状态
@@ -73,4 +75,6 @@ service.interceptors.response.use(
   }
 )
 
-export default service
+// create an axios instance
+const request = axios.create(config)
+export default request

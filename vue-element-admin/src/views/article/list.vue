@@ -8,21 +8,40 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="Date">
+      <el-table-column width="180px" align="center" label="创建日期">
         <template slot-scope="scope">
           <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="120px" align="center" label="Author">
+      <el-table-column width="120px" align="center" label="修改日期">
         <template slot-scope="scope">
           <span>{{ scope.row.author }}</span>
         </template>
       </el-table-column>
-
-      <el-table-column width="100px" label="Importance">
+      <el-table-column width="120px" align="center" label="标题">
         <template slot-scope="scope">
-          <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="meta-item__icon"/>
+          <span>{{ scope.row.author }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="120px" align="center" label="是否原创">
+        <template slot-scope="scope">
+          <span>{{ scope.row.author }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="120px" align="center" label="类型">
+        <template slot-scope="scope">
+          <span>{{ scope.row.author }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="120px" align="center" label="状态">
+        <template slot-scope="scope">
+          <span>{{ scope.row.author }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="120px" align="center" label="标签">
+        <template slot-scope="scope">
+          <span>{{ scope.row.author }}</span>
         </template>
       </el-table-column>
 
@@ -34,7 +53,6 @@
 
       <el-table-column min-width="300px" label="Title">
         <template slot-scope="scope">
-
           <router-link :to="'/example/edit/'+scope.row.id" class="link-type">
             <span>{{ scope.row.title }}</span>
           </router-link>
@@ -79,7 +97,7 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 20
+        limit: 10
       }
     }
   },

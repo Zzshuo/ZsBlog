@@ -17,8 +17,9 @@ import i18n from './lang' // Internationalization
 import './icons' // icon
 import './errorLog' // error log
 import './permission' // permission control
-import './mock' // simulation data
 
+if (process.env.NODE_ENV !== 'production') require('@/mock')
+import api from './api/api'
 import * as filters from './filters' // global filters
 
 Vue.use(Element, {
@@ -32,7 +33,8 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
-
+//  将API方法绑定到全局
+Vue.prototype.api = api
 new Vue({
   el: '#app',
   router,

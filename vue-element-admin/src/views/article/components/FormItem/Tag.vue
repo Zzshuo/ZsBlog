@@ -19,13 +19,12 @@
     />
     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     <el-checkbox-group v-model="dynamicTags">
-      <el-checkbox v-for="city in cities" :label="city" :key="city">{{ city }}</el-checkbox>
+      <el-checkbox v-for="tag in tagList" :label="tag.name" :key="tag.id">{{ tag.name }}</el-checkbox>
     </el-checkbox-group>
   </div>
 </template>
 
 <script>
-const cityOptions = ['上海', '北京', '广州', '深圳']
 export default {
   name: 'Tag',
   data() {
@@ -33,10 +32,24 @@ export default {
       dynamicTags: [],
       inputVisible: false,
       inputValue: '',
-      cities: cityOptions
+      tagList: []
     }
   },
+  mounted() {
+    this.getTagList()
+  },
   methods: {
+    getTagList() {
+      this.api.getTagList(this.reqVo).then(response => {
+        const res = response.data
+        if (res && res.code === 200) {
+          const data = res.data
+          this.tagList = data.list
+        } else {
+          console.log(res.code + res.message)
+        }
+      })
+    },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
     },
