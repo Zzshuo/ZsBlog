@@ -33,7 +33,7 @@ export const constantRouterMap = [
     children: [{
       path: '/home',
       component: () => import('@/views/home/index'),
-      meta: { title: '首页', icon: 'component' },
+      meta: { title: '首页', icon: 'component' }
     }]
   },
   {
@@ -48,20 +48,20 @@ export const constantRouterMap = [
     children: [
       {
         path: 'create',
-        component: () => import('@/views/home/index'),
+        component: () => import('@/views/article/create'),
         name: 'CreateArticle',
         meta: { title: 'createArticle', icon: 'edit' }
       },
       {
         path: 'edit/:id(\\d+)',
-        component: () => import('@/views/home/index'),
+        component: () => import('@/views/article/edit'),
         name: 'EditArticle',
         meta: { title: 'editArticle', noCache: true },
         hidden: true
       },
       {
         path: 'list',
-        component: () => import('@/views/home/index'),
+        component: () => import('@/views/article/list'),
         name: 'ArticleList',
         meta: { title: 'articleList', icon: 'list' }
       }
