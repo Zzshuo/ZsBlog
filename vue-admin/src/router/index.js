@@ -29,15 +29,11 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: '/home',
     name: 'home',
-    meta: {
-      title: '首页',
-      icon: 'component'
-    },
     children: [{
       path: '/home',
-      component: () => import('@/views/home/index')
+      component: () => import('@/views/home/index'),
+      meta: { title: '首页', icon: 'component' },
     }]
   },
   {
