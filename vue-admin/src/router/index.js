@@ -30,11 +30,46 @@ export const constantRouterMap = [
     path: '',
     component: Layout,
     redirect: '/home',
-    name: '首页',
+    name: 'home',
+    meta: {
+      title: '首页',
+      icon: 'documentation'
+    },
     children: [{
       path: '/home',
       component: () => import('@/views/home/index')
     }]
+  },
+  {
+    path: '/article',
+    component: Layout,
+    redirect: '/article/list',
+    name: 'article',
+    meta: {
+      title: '文章',
+      icon: 'documentation'
+    },
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/home/index'),
+        name: 'CreateArticle',
+        meta: { title: 'createArticle', icon: 'edit' }
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        component: () => import('@/views/home/index'),
+        name: 'EditArticle',
+        meta: { title: 'editArticle', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/home/index'),
+        name: 'ArticleList',
+        meta: { title: 'articleList', icon: 'list' }
+      }
+    ]
   },
 
   { path: '*', redirect: '/404', hidden: true }
