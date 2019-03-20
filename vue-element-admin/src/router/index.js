@@ -5,7 +5,6 @@ import Layout from '@/views/layout/Layout'
 /* Router Modules */
 import componentsRouter from './modules/components'
 import tableRouter from './modules/table'
-import treeTableRouter from './modules/tree-table'
 import nestedRouter from './modules/nested'
 
 Vue.use(Router)
@@ -190,7 +189,6 @@ export const asyncRouterMap = [
   componentsRouter,
   nestedRouter,
   tableRouter,
-  treeTableRouter,
   {
     path: '/error',
     component: Layout,
