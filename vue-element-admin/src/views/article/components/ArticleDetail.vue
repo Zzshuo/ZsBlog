@@ -22,10 +22,26 @@
           </el-col>
           <el-col :xs="24" :sm="12" :md="8" :lg="6">
             <el-form-item label="类型:" prop="original">
-              <el-radio-group v-model="postForm.original">
-                <el-radio-button label="原创" value="1"/>
-                <el-radio-button label="转载" value="0"/>
-              </el-radio-group>
+              <el-select v-model="postForm.original" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="24" :sm="12" :md="8" :lg="6">
+            <el-form-item label="标签:" prop="tagList">
+              <el-select
+                v-model="postForm.tagList"
+                multiple
+                filterable
+                allow-create
+                default-first-option
+                placeholder="请选择文章标签">
+                <el-option
+                  v-for="tag in tagOptions"
+                  :key="tag.name"
+                  :label="tag.name"
+                  :value="tag.name"/>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -52,20 +68,20 @@
 import Upload from '@/components/Upload/singleImage3'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
-import { fetchArticle } from '@/api/article'
 import { CommentDropdown } from './Dropdown'
-import { FormItemImage, FormItemTag, FormItemType } from './FormItem'
+import { FormItemImage, FormItemType } from './FormItem'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
 const defaultForm = {
   state: 1,
-  comment_disabled: false
+  comment_disabled: false,
+  tagList: []
 }
 
 export default {
   name: 'ArticleDetail',
-  components: { MDinput, Upload, Sticky, CommentDropdown, mavonEditor, FormItemImage, FormItemTag, FormItemType },
+  components: { MDinput, Upload, Sticky, CommentDropdown, mavonEditor, FormItemImage, FormItemType },
   props: {
     isEdit: {
       type: Boolean,
@@ -79,16 +95,15 @@ export default {
       rules: {
         title: [{ required: true, message: '请输入标题', trigger: 'change' }],
         content: [{ required: true, message: '请输入内容', trigger: 'change' }],
-        original: [{ required: true, message: '请选择类型', rigger: 'change' }],
+        original: [{ type: 'boolean', required: true, message: '请选择类型', rigger: 'change' }],
         typeId: [{ required: true, message: '请选择分类', trigger: 'change' }]
       },
-      tempRoute: {}
+      tempRoute: {},
+      options: [{ value: true, label: '原创' }, { value: false, label: '转载' }],
+      tagOptions: []
     }
   },
   computed: {
-    contentShortLength() {
-      return this.postForm.content_short.length
-    },
     lang() {
       return this.$store.getters.language
     }
@@ -100,7 +115,7 @@ export default {
     } else {
       this.postForm = Object.assign({}, defaultForm)
     }
-
+    this.getTagList()
     // Why need to make a copy of this.$route here?
     // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
     // https://github.com/PanJiaChen/vue-element-admin/issues/1221
@@ -108,16 +123,22 @@ export default {
   },
   methods: {
     fetchData(id) {
-      fetchArticle(id).then(response => {
-        this.postForm = response.data
-        // Just for test
-        this.postForm.title += `   Article Id:${this.postForm.id}`
-        this.postForm.content_short += `   Article Id:${this.postForm.id}`
-
-        // Set tagsview title
-        this.setTagsViewTitle()
-      }).catch(err => {
-        console.log(err)
+      this.api.getArticleById(id).then(response => {
+        const res = response.data
+        if (res && res.code === 200) {
+          this.postForm = res.data
+          // Set tagsview title
+          this.setTagsViewTitle()
+        }
+      })
+    },
+    getTagList() {
+      this.api.getTagList().then(response => {
+        const res = response.data
+        if (res && res.code === 200) {
+          const data = res.data
+          this.tagOptions = data.list
+        }
       })
     },
     setTagsViewTitle() {

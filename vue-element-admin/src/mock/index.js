@@ -2,8 +2,7 @@ import Mock from 'mockjs'
 import loginAPI from './login'
 import remoteSearchAPI from './remoteSearch'
 import transactionAPI from './transaction'
-import { getArticle, saveArticle } from './Article'
-import { getArticleList } from './ArticleList'
+import articleAPI from './Article'
 import { getTag } from './Tag.js'
 import { getTagList } from './TagList.js'
 import { getWebInfo } from './WebInfo.js'
@@ -36,9 +35,9 @@ Mock.mock(/\/search\/user/, 'get', remoteSearchAPI.searchUser)
 // 账单相关
 Mock.mock(/\/transaction\/list/, 'get', transactionAPI.getList)
 
-Mock.mock(/\/article\/get/, getArticle)
-Mock.mock(/\/article\/saveOrUpdate/, saveArticle)
-Mock.mock(/\/article\/list/, getArticleList)
+Mock.mock(/\/article\/get/, articleAPI.getArticle)
+Mock.mock(/\/article\/saveOrUpdate/, articleAPI.saveArticle)
+Mock.mock(/\/article\/list/, articleAPI.getArticleList)
 Mock.mock(/\/tag\/get/, getTag)
 Mock.mock(/\/tag\/list/, getTagList)
 Mock.mock(/\/web\/info/, getWebInfo)

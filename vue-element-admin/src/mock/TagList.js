@@ -16,17 +16,17 @@ const tagList = {
       },
       {
         'id': 3,
-        'name': 'Java', // 标签名称
+        'name': 'Java1', // 标签名称
         'count': 10 // 文章数量
       },
       {
         'id': 4,
-        'name': 'Java', // 标签名称
+        'name': 'Java2', // 标签名称
         'count': 10 // 文章数量
       },
       {
         'id': 5,
-        'name': 'Java', // 标签名称
+        'name': 'Java3', // 标签名称
         'count': 10 // 文章数量
       }
     ],
