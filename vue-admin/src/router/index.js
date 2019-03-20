@@ -33,7 +33,7 @@ export const constantRouterMap = [
     name: 'home',
     meta: {
       title: '首页',
-      icon: 'documentation'
+      icon: 'component'
     },
     children: [{
       path: '/home',
@@ -68,6 +68,18 @@ export const constantRouterMap = [
         component: () => import('@/views/home/index'),
         name: 'ArticleList',
         meta: { title: 'articleList', icon: 'list' }
+      }
+    ]
+  },
+  {
+    path: '/icon',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/svg-icons/index'),
+        name: 'Icons',
+        meta: { title: '图标', icon: 'icon', noCache: true }
       }
     ]
   },
