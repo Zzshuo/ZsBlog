@@ -2,32 +2,31 @@
   <div class="createPost-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" hide-required-asterisk class="form-container">
 
-      <sticky :class-name="'sub-navbar '+postForm.state">
-        <CommentDropdown v-model="postForm.comment_disabled" />
+      <sticky :class-name="'sub-navbar state'+postForm.state">
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm('postForm')">发布</el-button>
         <el-button v-loading="loading" type="warning" @click="draftForm">草稿</el-button>
       </sticky>
 
       <div class="createPost-main-container">
-        <el-form-item style="margin-bottom: 40px;" prop="title">
+        <el-form-item prop="title">
           <MDinput v-model="postForm.title" :maxlength="100" name="name" required>
             标题
           </MDinput>
         </el-form-item>
-        <el-row>
-          <el-col :xs="24" :sm="12" :md="8" :lg="6">
+        <el-row :gutter="20">
+          <el-col :xs="24" :sm="12" :md="8" :lg="8">
             <el-form-item label="分类:" prop="typeId">
               <form-item-type v-model="postForm.typeId"/>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="12" :md="8" :lg="6">
+          <el-col :xs="24" :sm="12" :md="8" :lg="8">
             <el-form-item label="类型:" prop="original">
               <el-select v-model="postForm.original" placeholder="请选择">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="12" :md="8" :lg="6">
+          <el-col :xs="24" :sm="12" :md="8" :lg="8">
             <el-form-item label="标签:" prop="tagList">
               <el-select
                 v-model="postForm.tagList"
@@ -45,9 +44,6 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="标签:" prop="tagList">
-          <form-item-tag v-model="postForm.tagList"/>
-        </el-form-item>
         <el-form-item prop="content" style="margin-bottom: 30px;">
           <mavon-editor
             ref="md"
@@ -68,20 +64,19 @@
 import Upload from '@/components/Upload/singleImage3'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
-import { CommentDropdown } from './Dropdown'
 import { FormItemImage, FormItemType } from './FormItem'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
 const defaultForm = {
-  state: 1,
-  comment_disabled: false,
+  // 0 未发布 1 发布,2 草稿
+  state: 0,
   tagList: []
 }
 
 export default {
   name: 'ArticleDetail',
-  components: { MDinput, Upload, Sticky, CommentDropdown, mavonEditor, FormItemImage, FormItemType },
+  components: { MDinput, Upload, Sticky, mavonEditor, FormItemImage, FormItemType },
   props: {
     isEdit: {
       type: Boolean,
@@ -95,8 +90,9 @@ export default {
       rules: {
         title: [{ required: true, message: '请输入标题', trigger: 'change' }],
         content: [{ required: true, message: '请输入内容', trigger: 'change' }],
-        original: [{ type: 'boolean', required: true, message: '请选择类型', rigger: 'change' }],
-        typeId: [{ required: true, message: '请选择分类', trigger: 'change' }]
+        original: [{ type: 'boolean', required: true, message: '请选择类型', trigger: 'change' }],
+        typeId: [{ required: true, message: '请选择分类', trigger: 'change' }],
+        tagList: [{ type: 'array', required: true, message: '请选择标签', trigger: 'change' }]
       },
       tempRoute: {},
       options: [{ value: true, label: '原创' }, { value: false, label: '转载' }],
@@ -150,18 +146,20 @@ export default {
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$message({
-            message: '发布文章成功',
-            type: 'success',
-            showClose: true,
-            duration: 2000
+          this.api.saveArticle(this.postForm).then(response => {
+            const res = response.data
+            if (res && res.code === 200) {
+              this.$message({
+                message: '发布文章成功',
+                type: 'success',
+                showClose: true,
+                duration: 1000
+              })
+              this.postForm.state = 1
+              this.loading = false
+              this.$router.push('/article/list')
+            }
           })
-          this.postForm.state = 1
-          this.loading = false
-          this.$router.push('/article/list')
-        } else {
-          console.log('error submit!!')
-          return false
         }
       })
     },
@@ -183,7 +181,7 @@ export default {
             showClose: true,
             duration: 1000
           })
-          this.postForm.state = 3
+          this.postForm.state = 2
           this.$router.push('/article/list')
         }
       })
@@ -233,6 +231,9 @@ export default {
     position: absolute;
     right: -10px;
     top: 0px;
+  }
+  .el-select {
+    width:100%
   }
 }
 .mavonEditor {
