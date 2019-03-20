@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import Layout from '@/views/layout/Layout'
 /* Router Modules */
 import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import treeTableRouter from './modules/tree-table'
 import nestedRouter from './modules/nested'
@@ -142,37 +141,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-  // {
-  //   path: '/article',
-  //   component: Layout,
-  //   redirect: '/article/list',
-  //   name: 'article',
-  //   meta: {
-  //     title: 'article',
-  //     icon: 'documentation'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'create',
-  //       component: () => import('@/views/article/create'),
-  //       name: 'createArticle',
-  //       meta: { title: 'createArticle', icon: 'edit' }
-  //     },
-  //     {
-  //       path: 'edit/:id(\\d+)',
-  //       component: () => import('@/views/article/edit'),
-  //       name: 'EditArticle',
-  //       meta: { title: 'editArticle', noCache: true },
-  //       hidden: true
-  //     },
-  //     {
-  //       path: 'list',
-  //       component: () => import('@/views/article/list'),
-  //       name: 'ArticleList',
-  //       meta: { title: 'articleList', icon: 'list' }
-  //     }
-  //   ]
-  // },
   {
     path: '/permission',
     component: Layout,
@@ -220,7 +188,6 @@ export const asyncRouterMap = [
 
   /** When your routing table is too long, you can split it into small modules**/
   componentsRouter,
-  chartsRouter,
   nestedRouter,
   tableRouter,
   treeTableRouter,
