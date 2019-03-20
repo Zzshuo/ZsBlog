@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import Layout from '@/views/layout/Layout'
 /* Router Modules */
 import componentsRouter from './modules/components'
-import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 
 Vue.use(Router)
@@ -84,19 +83,6 @@ export const constantRouterMap = [
         component: () => import('@/views/documentation/index'),
         name: 'Documentation',
         meta: { title: 'documentation', icon: 'documentation', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'guide', icon: 'guide', noCache: true }
       }
     ]
   }
@@ -188,7 +174,6 @@ export const asyncRouterMap = [
   /** When your routing table is too long, you can split it into small modules**/
   componentsRouter,
   nestedRouter,
-  tableRouter,
   {
     path: '/error',
     component: Layout,
