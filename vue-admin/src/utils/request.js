@@ -3,17 +3,20 @@ import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 import { getToken } from '@/utils/auth'
 
-// 创建axios实例
-const service = axios.create({
-  baseURL: process.env.BASE_API, // api 的 base_url
-  timeout: 5000 // 请求超时时间
-})
+const config = {
+  timeout: 5000,
+  // 在外部文件配置axios的基础路径 ip地址
+  baseURL: process.env.BASE_API,
+  headers: { 'Content-Type': 'application/json;charset=UTF-8;' },
+  dataType: 'json'
+}
 
 // request拦截器
-service.interceptors.request.use(
+axios.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+      // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers['X-Token'] = getToken()
     }
     return config
   },
@@ -25,7 +28,7 @@ service.interceptors.request.use(
 )
 
 // response 拦截器
-service.interceptors.response.use(
+axios.interceptors.response.use(
   response => {
     /**
      * code为非20000是抛错 可结合自己业务进行修改
@@ -70,4 +73,5 @@ service.interceptors.response.use(
   }
 )
 
-export default service
+const request = axios.create(config)
+export default request

@@ -28,7 +28,6 @@ export default {
   login: res => {
     const { username } = JSON.parse(res.body)
     const data = tokens[username]
-
     if (data) {
       return {
         code: 20000,

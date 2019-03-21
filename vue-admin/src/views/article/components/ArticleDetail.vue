@@ -93,14 +93,8 @@ export default {
         typeId: [{ required: true, message: '请选择分类', trigger: 'change' }],
         tagList: [{ type: 'array', required: true, message: '请选择标签', trigger: 'change' }]
       },
-      tempRoute: {},
       options: [{ value: true, label: '原创' }, { value: false, label: '转载' }],
       tagOptions: []
-    }
-  },
-  computed: {
-    lang() {
-      return this.$store.getters.language
     }
   },
   created() {
@@ -111,10 +105,6 @@ export default {
       this.postForm = Object.assign({}, defaultForm)
     }
     this.getTagList()
-    // Why need to make a copy of this.$route here?
-    // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
-    // https://github.com/PanJiaChen/vue-element-admin/issues/1221
-    this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
     fetchData(id) {
@@ -122,8 +112,6 @@ export default {
         const res = response.data
         if (res && res.code === 200) {
           this.postForm = res.data
-          // Set tagsview title
-          this.setTagsViewTitle()
         }
       })
     },
@@ -135,11 +123,6 @@ export default {
           this.tagOptions = data.list
         }
       })
-    },
-    setTagsViewTitle() {
-      const title = this.lang === 'zh' ? '编辑文章' : 'Edit Article'
-      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.id}` })
-      this.$store.dispatch('updateVisitedView', route)
     },
     submitForm() {
       this.$refs.postForm.validate(valid => {

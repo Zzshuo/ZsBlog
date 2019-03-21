@@ -9,9 +9,7 @@
       </el-table-column>
       <el-table-column min-width="300px" label="标题">
         <template slot-scope="scope">
-          <router-link :to="'/article/edit/'+scope.row.id" class="link-type">
-            <span>{{ scope.row.title }}</span>
-          </router-link>
+          <span>{{ scope.row.title }}</span>
         </template>
       </el-table-column>
 
@@ -68,7 +66,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination :total="total" :page.sync="reqVo.pageNum" :limit.sync="reqVo.pageSize" @pagination="getList" />
+    <pagination :total="total" :page.sync="reqVo.pageNum" :limit.sync="reqVo.pageSize" @pagination="getArticleList" />
 
   </div>
 </template>
@@ -119,11 +117,11 @@ export default {
     },
     handleSizeChange(val) {
       this.reqVo.pageSize = val
-      this.getList()
+      this.getArticleList()
     },
     handleCurrentChange(val) {
       this.reqVo.pageNum = val
-      this.getList()
+      this.getArticleList()
     }
   }
 }

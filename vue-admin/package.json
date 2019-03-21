@@ -5,13 +5,10 @@
   "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
   "author": "Pan <panfree23@gmail.com>",
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "build": "node build/build.js",
-    "build:report": "npm_config_report=true npm run build",
+    "dev": "BABEL_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "build:prod": "NODE_ENV=production env_config=prod node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "test": "npm run lint",
-    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
+    "test": "npm run lint"
   },
   "dependencies": {
     "axios": "0.18.0",

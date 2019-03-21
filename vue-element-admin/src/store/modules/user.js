@@ -52,6 +52,7 @@ const user = {
           const data = response.data
           commit('SET_TOKEN', data.token)
           setToken(response.data.token)
+          console.log(response)
           resolve()
         }).catch(error => {
           reject(error)
