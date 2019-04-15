@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ServletComponentScan
 @EnableTransactionManagement
-public class BlogWebApplication {
+public class BlogAdminApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BlogWebApplication.class, args);
+        SpringApplication.run(BlogAdminApplication.class, args);
     }
 }

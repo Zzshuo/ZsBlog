@@ -5,6 +5,8 @@ import com.zs.blog.vo.request.TagPageReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;
 
+import java.util.List;
+
 /**
  * @author zshuo
  * @date 2019/2/28
@@ -48,4 +50,11 @@ public interface TagService {
      * @return
      */
     PageInfo<TagVo> list(TagPageReqVo reqVo);
+
+    /**
+     * 获取所有标签
+     *
+     * @return
+     */
+    List<TagVo> getAll();
 }

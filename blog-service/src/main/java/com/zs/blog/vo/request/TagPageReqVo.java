@@ -11,4 +11,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class TagPageReqVo extends RequestVo {
+    private Integer id;
+
+    /**
+     * 标签名
+     */
+    private String name;
 }

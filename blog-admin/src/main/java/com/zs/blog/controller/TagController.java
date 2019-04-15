@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author zshuo
  * @date 2019/2/28
@@ -52,5 +54,12 @@ public class TagController {
     public ResponseVo list(@RequestBody TagPageReqVo reqVo) {
         PageInfo<TagVo> pageInfo = tagService.list(reqVo);
         return ResponseUtil.success(pageInfo);
+    }
+
+    @BusinessLog("获取所有标签")
+    @PostMapping("/getAll")
+    public ResponseVo getAll() {
+        List<TagVo> list = tagService.getAll();
+        return ResponseUtil.success(list);
     }
 }

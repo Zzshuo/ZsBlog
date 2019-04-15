@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zshuo
@@ -69,7 +70,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public PageInfo<TagVo> list(TagPageReqVo reqVo) {
-        TagExample example = new TagExample();
+        TagExample example = genExample(reqVo);
 
         PageHelperUtil.startPage(reqVo);
         List<Tag> tags = tagMapper.selectByExample(example);
@@ -80,6 +81,26 @@ public class TagServiceImpl implements TagService {
         }
 
         return PageHelperUtil.result(tags, page);
+    }
+
+    @Override
+    public List<TagVo> getAll() {
+        List<Tag> tags = tagMapper.selectAll();
+        return tags.stream()
+                .map(this::genTagVo)
+                .collect(Collectors.toList());
+    }
+
+    private TagExample genExample(TagPageReqVo reqVo) {
+        TagExample example = new TagExample();
+        TagExample.Criteria criteria = example.createCriteria();
+        if (reqVo.getId() != null) {
+            criteria.andIdEqualTo(reqVo.getId());
+        }
+        if (reqVo.getName() != null) {
+            criteria.andNameEqualTo(reqVo.getName());
+        }
+        return example;
     }
 
     private TagVo genTagVo(Tag tag) {
