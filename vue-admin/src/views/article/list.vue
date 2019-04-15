@@ -34,7 +34,7 @@
 
       <el-table-column width="100px" align="center" label="状态">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.state | stateFilter">{{ scope.row.state }}</el-tag>
+          <el-tag :type="scope.row.state | stateFilter">{{ scope.row.state | parseState }}</el-tag>
         </template>
       </el-table-column>
 
@@ -74,16 +74,25 @@
 <script>
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 export default {
+
   name: 'ArticleList',
   components: { Pagination },
   filters: {
-    stateFilter(status) {
+    stateFilter(state) {
       const stateMap = {
-        '1': 'success',
-        '2': 'info',
-        '3': 'danger'
+        1: 'success',
+        2: 'info',
+        3: 'danger'
       }
-      return stateMap[status]
+      return stateMap[state]
+    },
+    parseState(state) {
+      const stateMap = {
+        1: '发布',
+        2: '草稿',
+        3: '删除'
+      }
+      return stateMap[state]
     }
   },
   data() {

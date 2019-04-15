@@ -1,5 +1,8 @@
 package com.zs.blog.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Objects;
 
 /**
@@ -8,44 +11,18 @@ import java.util.Objects;
  * @author zshuo
  * @date 2018/11/6
  **/
+@AllArgsConstructor
+@Getter
 public enum YesNoEnum {
 
-    /**
-     * 是
-     */
     YES(1, true, "YES", "是"),
-    /**
-     * 否
-     */
-    NO(0, false, "NO", "否");
+    NO(0, false, "NO", "否"),
+    ;
 
     private Integer value;
     private Boolean bool;
     private String ename;
     private String cname;
-
-    YesNoEnum(Integer value, Boolean bool, String ename, String cname) {
-        this.value = value;
-        this.bool = bool;
-        this.ename = ename;
-        this.cname = cname;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public Boolean getBool() {
-        return bool;
-    }
-
-    public String getEname() {
-        return ename;
-    }
-
-    public String getCname() {
-        return cname;
-    }
 
     public YesNoEnum getEnumByValue(Integer value) {
         if (Objects.isNull(value)) {
