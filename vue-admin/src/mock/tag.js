@@ -1,13 +1,16 @@
 export default {
-  getTag: req => {
-    return tag
+  getTagById: req => {
+    return getTagById
   },
   getTagList: req => {
     return tagList
+  },
+  getAllTag: req => {
+    return allTags
   }
 }
 
-const tag = {
+const getTagById = {
   'code': 200,
   'message': '操作成功！',
   'data': {
@@ -71,5 +74,27 @@ const tagList = {
     'navigateFirstPage': 1,
     'navigateLastPage': 4
   }
+}
+
+const allTags = {
+  'code': 200,
+  'message': '操作成功！',
+  'data': [
+    {
+      'id': 1,
+      'name': 'java',
+      'count': 4
+    },
+    {
+      'id': 2,
+      'name': 'python',
+      'count': 2
+    },
+    {
+      'id': 3,
+      'name': 'vue',
+      'count': 0
+    }
+  ]
 }
 

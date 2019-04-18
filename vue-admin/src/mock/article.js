@@ -1,6 +1,6 @@
 export default {
   getArticle: req => {
-    return article
+    return getArticle
   },
   saveArticle: req => {
     return success
@@ -10,7 +10,7 @@ export default {
   }
 }
 
-const article = {
+const getArticle = {
   'code': 200,
   'message': '操作成功！',
   'data': {

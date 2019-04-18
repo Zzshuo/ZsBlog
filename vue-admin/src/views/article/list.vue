@@ -73,26 +73,21 @@
 
 <script>
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import { mapGetters } from 'vuex'
 export default {
 
   name: 'ArticleList',
   components: { Pagination },
   filters: {
     stateFilter(state) {
-      const stateMap = {
+      const stateFilter = {
         1: 'success',
         2: 'info',
         3: 'danger'
       }
-      return stateMap[state]
+      return stateFilter[state]
     },
     parseState(state) {
-      const stateMap = {
-        1: '发布',
-        2: '草稿',
-        3: '删除'
-      }
-      return stateMap[state]
     }
   },
   data() {
@@ -106,8 +101,14 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'stateMap'
+    ])
+  },
   created() {
     this.getArticleList()
+    console.log(this.$store)
   },
   methods: {
     getArticleList() {

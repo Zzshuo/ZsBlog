@@ -57,8 +57,8 @@ public class TagController {
     }
 
     @BusinessLog("获取所有标签")
-    @PostMapping("/getAll")
-    public ResponseVo getAll() {
+    @PostMapping("/getAllTag")
+    public ResponseVo getAllTag() {
         List<TagVo> list = tagService.getAll();
         return ResponseUtil.success(list);
     }

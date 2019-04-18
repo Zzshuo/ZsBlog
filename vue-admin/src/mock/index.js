@@ -3,6 +3,8 @@ import userApi from './user'
 import articleApi from './article'
 import tagApi from './tag'
 import webInfoApi from './webInfo'
+import commonApi from './common'
+import typeApi from './type'
 
 // Fix an issue with setting withCredentials = true, cross-domain request lost cookies
 // https://github.com/nuysoft/Mock/issues/300
@@ -22,11 +24,22 @@ Mock.mock(/\/user\/login/, 'post', userApi.login)
 Mock.mock(/\/user\/info/, 'get', userApi.getInfo)
 Mock.mock(/\/user\/logout/, 'post', userApi.logout)
 
-// 文章相关
-Mock.mock(/\/article\/get/s, articleApi.getArticle)
+// article
+Mock.mock(/\/article\/get/, articleApi.getArticle)
 Mock.mock(/\/article\/saveOrUpdate/, articleApi.saveArticle)
 Mock.mock(/\/article\/list/, articleApi.getArticleList)
-Mock.mock(/\/tag\/get/, tagApi.getTag)
+
+// tag
+Mock.mock(/\/tag\/getTagById/, tagApi.getTag)
 Mock.mock(/\/tag\/list/, tagApi.getTagList)
+Mock.mock(/\/tag\/getAllTag/, tagApi.getAllTag())
+
+// web
 Mock.mock(/\/web\/info/, webInfoApi.getWebInfo)
+
+// common
+Mock.mock(/common\/getArticleStateMap/, commonApi.getArticleStateMap())
+
+// type
+Mock.mock(/\/type\/getAllType/, typeApi.getAllType())
 export default Mock
