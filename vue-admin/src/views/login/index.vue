@@ -78,11 +78,6 @@ export default {
       immediate: true
     }
   },
-  created() {
-    this.$store.dispatch('getStateMap')
-    this.$store.dispatch('getAllType')
-    this.$store.dispatch('getAllTag')
-  },
   methods: {
     showPwd() {
       if (this.pwdType === 'password') {
