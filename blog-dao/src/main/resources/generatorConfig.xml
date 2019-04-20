@@ -53,34 +53,34 @@
         </javaClientGenerator>
 
         <table tableName="article"
-               enableCountByExample="true" enableUpdateByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <columnOverride column="state" javaType="java.lang.Integer"/>
         </table>
         <table tableName="article_tag"
-               enableCountByExample="true" enableUpdateByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
         <table tableName="tag"
-               enableCountByExample="true" enableUpdateByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
         <table tableName="type"
-               enableCountByExample="true" enableUpdateByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
         <table tableName="user"
-               enableCountByExample="true" enableUpdateByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
         <table tableName="role"
-               enableCountByExample="true" enableUpdateByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>

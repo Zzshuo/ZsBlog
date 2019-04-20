@@ -1,16 +1,14 @@
 package com.zs.blog.model;
 
+import java.util.Date;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import java.util.Date;
-
 /**
-* Created by Mybatis Generator on 2019/03/05
+* Created by Mybatis Generator on 2019/04/20
 */
 @Data
 @Builder
@@ -42,7 +40,7 @@ public class Article {
     private String image;
 
     /**
-     * 1:发布,2:草稿,3:删除
+     * 1:正常,2:删除,3:草稿
      */
     private Integer state;
 
