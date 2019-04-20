@@ -28,13 +28,13 @@
 
       <el-table-column width="150px" align="center" label="标签">
         <template slot-scope="scope">
-          <el-tag v-for="tag in scope.row.tagList" :key="tag.id">{{ tag.name }}</el-tag>
+          <el-tag v-for="tagId in scope.row.tagIdList" :key="tagId">{{ FormatUtil.formatTag(tagId) }}</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column width="100px" align="center" label="状态">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.state | stateFilter">{{ scope.row.state | parseState }}</el-tag>
+          <el-tag :type="scope.row.state | stateFilter">{{ FormatUtil.formatState(scope.row.state) }}</el-tag>
         </template>
       </el-table-column>
 
@@ -86,12 +86,11 @@ export default {
         3: 'danger'
       }
       return stateFilter[state]
-    },
-    parseState(state) {
     }
   },
   data() {
     return {
+      s111: [],
       articleList: null,
       total: 0,
       listLoading: true,
@@ -108,7 +107,6 @@ export default {
   },
   created() {
     this.getArticleList()
-    console.log(this.$store)
   },
   methods: {
     getArticleList() {
