@@ -62,7 +62,6 @@ const common = {
           const res = response.data
           if (res && res.code === 200) {
             commit('SET_ALLTAG', res.data)
-            console.log(res.data)
             resolve()
           } else {
             reject(res)

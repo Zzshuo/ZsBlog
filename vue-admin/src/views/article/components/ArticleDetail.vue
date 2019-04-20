@@ -52,9 +52,9 @@
             class="mavonEditor"
             @imgAdd="$imgAdd"/>
         </el-form-item>
-        <!--<el-form-item label="封面图:">-->
-        <!--<form-item-image v-model="postForm.image"/>-->
-        <!--</el-form-item>-->
+        <el-form-item label="封面图:">
+          <form-item-image v-model="postForm.imageUrl"/>
+        </el-form-item>
       </div>
     </el-form>
   </div>
