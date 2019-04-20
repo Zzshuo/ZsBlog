@@ -22,7 +22,7 @@
 
       <el-table-column width="100px" align="center" label="分类">
         <template slot-scope="scope">
-          <span>{{ scope.row.typeId }}</span>
+          <span>{{ FormatUtil.formatTag(scope.row.typeId) }}</span>
         </template>
       </el-table-column>
 
@@ -34,7 +34,7 @@
 
       <el-table-column width="100px" align="center" label="状态">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.state | stateFilter">{{ FormatUtil.formatState(scope.row.state) }}</el-tag>
+          <el-tag :type="FormatUtil.formatStateColor(scope.row.state)">{{ FormatUtil.formatState(scope.row.state) }}</el-tag>
         </template>
       </el-table-column>
 
@@ -73,7 +73,6 @@
 
 <script>
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
-import { mapGetters } from 'vuex'
 export default {
 
   name: 'ArticleList',
@@ -99,11 +98,6 @@ export default {
         pageSize: 10
       }
     }
-  },
-  computed: {
-    ...mapGetters([
-      'stateMap'
-    ])
   },
   created() {
     this.getArticleList()

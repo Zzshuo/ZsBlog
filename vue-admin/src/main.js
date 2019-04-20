@@ -16,7 +16,7 @@ import '@/icons' // icon
 import '@/permission'
 import api from './api/api' // permission control
 import * as filters from './filters' // global filters
-import * as formats from './utils/formatUtil'
+import * as formatUtil from './utils/formatUtil'
 
 /**
  * This project originally used easy-mock to simulate data,
@@ -37,7 +37,7 @@ Object.keys(filters).forEach(key => {
 Vue.config.productionTip = false
 //  将API方法绑定到全局
 Vue.prototype.api = api
-Vue.prototype.FormatUtil = formats
+Vue.prototype.FormatUtil = formatUtil
 new Vue({
   el: '#app',
   router,
