@@ -27,6 +27,7 @@ router.beforeEach((to, from, next) => {
         store.dispatch('getStateMap')
         store.dispatch('getAllType')
         store.dispatch('getAllTag')
+        store.dispatch('getOriginal')
       } else {
         next()
       }

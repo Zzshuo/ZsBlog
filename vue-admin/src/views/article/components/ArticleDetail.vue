@@ -22,24 +22,24 @@
           <el-col :xs="24" :sm="12" :md="8" :lg="8">
             <el-form-item label="类型:" prop="original">
               <el-select v-model="postForm.original" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
+                <el-option v-for="item in this.$store.getters.original" :key="item.value" :label="item.name" :value="item.value"/>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="8" :lg="8">
             <el-form-item label="标签:" prop="tagList">
               <el-select
-                v-model="postForm.tagList"
+                v-model="postForm.tagIdList"
                 multiple
                 filterable
                 allow-create
                 default-first-option
                 placeholder="请选择文章标签">
                 <el-option
-                  v-for="tag in tagOptions"
-                  :key="tag.name"
+                  v-for="tag in this.$store.getters.allTag"
+                  :key="tag.id"
                   :label="tag.name"
-                  :value="tag.name"/>
+                  :value="tag.id"/>
               </el-select>
             </el-form-item>
           </el-col>
@@ -66,11 +66,12 @@ import Sticky from '@/components/Sticky' // 粘性header组件
 import { FormItemImage, FormItemType } from './FormItem'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import { mapGetters } from 'vuex'
 
 const defaultForm = {
   // 0 未发布 1 发布,2 草稿
   state: 0,
-  tagList: []
+  tagIdList: []
 }
 
 export default {
@@ -91,11 +92,14 @@ export default {
         content: [{ required: true, message: '请输入内容', trigger: 'change' }],
         original: [{ type: 'boolean', required: true, message: '请选择类型', trigger: 'change' }],
         typeId: [{ required: true, message: '请选择分类', trigger: 'change' }],
-        tagList: [{ type: 'array', required: true, message: '请选择标签', trigger: 'change' }]
-      },
-      options: [{ value: true, label: '原创' }, { value: false, label: '转载' }],
-      tagOptions: []
+        tagIdList: [{ type: 'array', required: true, message: '请选择标签', trigger: 'change' }]
+      }
     }
+  },
+  computed: {
+    ...mapGetters([
+      'allTag'
+    ])
   },
   created() {
     if (this.isEdit) {
@@ -104,7 +108,6 @@ export default {
     } else {
       this.postForm = Object.assign({}, defaultForm)
     }
-    this.getTagList()
   },
   methods: {
     fetchData(id) {
@@ -112,15 +115,6 @@ export default {
         const res = response.data
         if (res && res.code === 200) {
           this.postForm = res.data
-        }
-      })
-    },
-    getTagList() {
-      this.api.getTagList().then(response => {
-        const res = response.data
-        if (res && res.code === 200) {
-          const data = res.data
-          this.tagOptions = data.list
         }
       })
     },

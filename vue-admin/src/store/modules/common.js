@@ -7,7 +7,8 @@ const common = {
     // 文章分类
     allType: [],
     // 标签
-    allTag: []
+    allTag: [],
+    original: []
   },
 
   mutations: {
@@ -19,6 +20,9 @@ const common = {
     },
     SET_ALLTAG: (state, allTag) => {
       state.allTag = allTag
+    },
+    SET_ORIGINAL: (state, original) => {
+      state.original = original
     }
   },
 
@@ -58,12 +62,18 @@ const common = {
           const res = response.data
           if (res && res.code === 200) {
             commit('SET_ALLTAG', res.data)
+            console.log(res.data)
             resolve()
           } else {
             reject(res)
           }
         })
       })
+    },
+    //
+    getOriginal({ commit }) {
+      const options = [{ value: true, name: '原创' }, { value: false, name: '转载' }]
+      commit('SET_ORIGINAL', options)
     }
   }
 }

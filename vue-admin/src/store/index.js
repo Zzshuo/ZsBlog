@@ -29,7 +29,8 @@ const store = new Vuex.Store({
         tagNames.push(tag.name)
       }
       return tagNames
-    }
+    },
+    original: state => state.common.original
   }
 })
 

@@ -20,3 +20,7 @@ export function formatTag(tagId) {
 export function formatType(typeId) {
   return store.getters.allType.find((type) => { return type.id === typeId }).name
 }
+
+export function formatOriginal(value) {
+  return store.getters.original.find((item) => { return item.value === value }).name
+}

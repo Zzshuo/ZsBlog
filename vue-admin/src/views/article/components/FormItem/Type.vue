@@ -1,14 +1,15 @@
 <template>
   <el-select v-model="typeId" placeholder="请选择">
     <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"/>
+      v-for="type in this.$store.getters.allType"
+      :key="type.id"
+      :label="type.name"
+      :value="type.id"/>
   </el-select>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Type',
   props: {
@@ -32,6 +33,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'allType'
+    ]),
     typeId: {
       get() {
         return this.value
