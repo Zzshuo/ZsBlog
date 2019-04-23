@@ -1,6 +1,5 @@
 package com.zs.blog.model;
 
-import java.util.Date;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,24 +13,27 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Type {
+public class Config {
     @Id
     private Integer id;
 
     /**
-     * 文章类型名
+     * key
+     */
+    private String key;
+
+    /**
+     * 名称
      */
     private String name;
 
     /**
-     * 创建时间
+     * 值
      */
-    @Column(name = "create_time")
-    private Date createTime;
+    private String value;
 
     /**
-     * 更新时间
+     * 分类
      */
-    @Column(name = "update_time")
-    private Date updateTime;
+    private Integer type;
 }

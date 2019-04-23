@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zs.blog.mapper.TypeMapper">
-  <resultMap id="BaseResultMap" type="com.zs.blog.model.Type">
+<mapper namespace="com.zs.blog.mapper.ConfigMapper">
+  <resultMap id="BaseResultMap" type="com.zs.blog.model.Config">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -46,13 +47,13 @@
     <!--
       WARNING - @mbg.generated
     -->
-    id, name, create_time, update_time
+    id, key, name, value, type
   </sql>
-  <select id="countByExample" parameterType="com.zs.blog.model.TypeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.zs.blog.model.ConfigExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->
-    select count(*) from type
+    select count(*) from config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

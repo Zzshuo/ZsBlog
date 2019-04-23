@@ -14,7 +14,6 @@ import com.zs.blog.util.PageHelperUtil;
 import com.zs.blog.vo.request.TagPageReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public void addOrUpdate(TagReqVo reqVo) {
         Tag tag = new Tag();
-        BeanUtils.copyProperties(reqVo, tag);
+        BeanUtil.copy(reqVo, tag);
         if (tag.getId() != null) {
             tagMapper.updateByPrimaryKeySelective(tag);
         } else {
@@ -64,7 +63,7 @@ public class TagServiceImpl implements TagService {
             throw new BusinessException(ErrorEnum.ERROR_NO_TAG);
         }
         TagVo tagVo = new TagVo();
-        BeanUtils.copyProperties(tag, tagVo);
+        BeanUtil.copy(tag, tagVo);
         return tagVo;
     }
 
@@ -105,7 +104,7 @@ public class TagServiceImpl implements TagService {
 
     private TagVo genTagVo(Tag tag) {
         TagVo tagVo = new TagVo();
-        BeanUtils.copyProperties(tag, tagVo);
+        BeanUtil.copy(tag, tagVo);
 
         // TODO 后面换成从redis获取
         ArticleTagExample example = new ArticleTagExample();

@@ -11,6 +11,7 @@ import com.zs.blog.model.ArticleExample;
 import com.zs.blog.model.Tag;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.service.TagService;
+import com.zs.blog.util.BeanUtil;
 import com.zs.blog.util.PageHelperUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
@@ -19,7 +20,6 @@ import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
 import com.zs.blog.vo.response.TagVo;
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
         }
 
         Article article = new Article();
-        BeanUtils.copyProperties(reqVo, article);
+        BeanUtil.copy(reqVo, article);
         if (article.getId() != null) {
             articleMapper.updateByPrimaryKeySelective(article);
         } else {
@@ -79,14 +79,14 @@ public class ArticleServiceImpl implements ArticleService {
             throw new BusinessException(ErrorEnum.ERROR_NO_ARTICLE);
         }
         ArticleVo articleVo = new ArticleVo();
-        BeanUtils.copyProperties(article, articleVo);
+        BeanUtil.copy(article, articleVo);
 
         List<Tag> tagList = selfMapper.getTagByArticleId(id);
         List<TagVo> collect = tagList
                 .stream()
                 .map(tag -> {
                     TagVo tagVo = new TagVo();
-                    BeanUtils.copyProperties(tag, tagVo);
+                    BeanUtil.copy(tag, tagVo);
                     return tagVo;
                 })
                 .collect(Collectors.toList());
@@ -109,7 +109,7 @@ public class ArticleServiceImpl implements ArticleService {
         Page<ArticleBriefVo> page = new Page<>();
         for (Article o : articles) {
             ArticleBriefVo articleBriefVo = new ArticleBriefVo();
-            BeanUtils.copyProperties(o, articleBriefVo);
+            BeanUtil.copy(o, articleBriefVo);
             page.add(articleBriefVo);
         }
 

@@ -53,29 +53,29 @@
         </javaClientGenerator>
 
         <table tableName="article"
-               enableCountByExample="false" enableUpdateByExample="false"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <columnOverride column="state" javaType="java.lang.Integer"/>
         </table>
         <table tableName="article_tag"
-               enableCountByExample="false" enableUpdateByExample="false"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
         <table tableName="tag"
-               enableCountByExample="false" enableUpdateByExample="false"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
         <table tableName="type"
-               enableCountByExample="false" enableUpdateByExample="false"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
         <table tableName="user"
-               enableCountByExample="false" enableUpdateByExample="false"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>

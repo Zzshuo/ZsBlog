@@ -6,7 +6,6 @@ import com.zs.blog.object.BaseReqVo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
-import com.zs.blog.util.redis.RedisUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/article")
 public class ArticleController {
-    @Autowired
-    private RedisUtil redisUtil;
 
     @Autowired
     private ArticleService articleService;
