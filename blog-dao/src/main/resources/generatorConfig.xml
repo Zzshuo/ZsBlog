@@ -80,7 +80,12 @@
                selectByExampleQueryId="false">
         </table>
         <table tableName="role"
-               enableCountByExample="false" enableUpdateByExample="false"
+               enableCountByExample="true" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="config"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
