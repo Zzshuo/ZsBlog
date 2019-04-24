@@ -3,6 +3,7 @@ package com.zs.blog.vo.request;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ConfigReqVo {
@@ -12,20 +13,21 @@ public class ConfigReqVo {
      * key
      */
     @NotBlank
-    private String key;
+    private String configKey;
 
     /**
      * 名称
      */
-    private String name;
+    private String configName;
 
     /**
      * 值
      */
-    private String value;
+    private String configValue;
 
     /**
      * 分类
      */
-    private Integer type;
+    @NotNull
+    private Integer configType;
 }

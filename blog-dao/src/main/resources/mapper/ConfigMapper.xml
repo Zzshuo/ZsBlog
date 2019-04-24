@@ -6,10 +6,12 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="key" jdbcType="VARCHAR" property="key" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="value" jdbcType="VARCHAR" property="value" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="config_key" jdbcType="VARCHAR" property="configKey" />
+    <result column="config_name" jdbcType="VARCHAR" property="configName" />
+    <result column="config_value" jdbcType="VARCHAR" property="configValue" />
+    <result column="config_type" jdbcType="INTEGER" property="configType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -47,7 +49,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    id, key, name, value, type
+    id, config_key, config_name, config_value, config_type, create_time, update_time
   </sql>
   <select id="countByExample" parameterType="com.zs.blog.model.ConfigExample" resultType="java.lang.Long">
     <!--

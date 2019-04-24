@@ -1,30 +1,40 @@
 package com.zs.blog.vo.response;
 
-import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
-@Builder
 public class ConfigVo {
     private Integer id;
 
     /**
      * key
      */
-    private String key;
+    private String configKey;
 
     /**
      * 名称
      */
-    private String name;
+    private String configName;
 
     /**
      * 值
      */
-    private String value;
+    private String configValue;
 
     /**
      * 分类
      */
-    private Integer type;
+    private Integer configType;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 }

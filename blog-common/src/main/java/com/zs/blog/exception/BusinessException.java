@@ -2,11 +2,13 @@ package com.zs.blog.exception;
 
 import com.zs.blog.enums.ErrorEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author zshuo
  * @date 2018/11/9
  **/
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class BusinessException extends RuntimeException {
 

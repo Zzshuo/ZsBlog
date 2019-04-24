@@ -1,6 +1,7 @@
 package com.zs.blog.service.impl;
 
 import com.zs.blog.enums.ConfigEnum;
+import com.zs.blog.enums.ConfigTypeEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ConfigMapper;
 import com.zs.blog.model.Config;
@@ -17,6 +18,9 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author zshuo
+ */
 @Service
 @Slf4j
 public class ConfigServiceImpl implements ConfigService {
@@ -29,7 +33,7 @@ public class ConfigServiceImpl implements ConfigService {
         for (ConfigEnum value : ConfigEnum.values()) {
             Config config = getConfigByKey(value.getKey());
             if (config == null) {
-                configMapper.insertSelective(Config.builder().key(value.getKey()).name(value.getName()).build());
+                configMapper.insertSelective(Config.builder().configKey(value.getKey()).configName(value.getName()).build());
             }
         }
         log.info("init config");
@@ -37,34 +41,34 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public void save(ConfigReqVo reqVo) {
-        String key = reqVo.getKey();
-        ConfigEnum configEnum = ConfigEnum.getEnumByKey(key);
+        ConfigEnum configEnum = ConfigEnum.getEnumByKey(reqVo.getConfigKey());
         if (configEnum == null) {
-            throw new BusinessException("没有此配置key");
+            throw new BusinessException("没有此configKey");
+        }
+
+        ConfigTypeEnum configTypeEnum = ConfigTypeEnum.getEnumById(reqVo.getId());
+        if (configTypeEnum == null) {
+            throw new BusinessException("没有此ConfigType");
         }
 
         Config config = new Config();
         BeanUtil.copy(reqVo, config);
 
-        int i = configMapper.insertSelective(config);
-        if (i <= 0) {
-            configMapper.updateByPrimaryKeySelective(config);
-        }
+        configMapper.updateByPrimaryKeySelective(config);
     }
 
     @Override
     public Config getConfigByKey(String key) {
         ConfigExample example = new ConfigExample();
-        example.createCriteria().andKeyEqualTo(key);
+        example.createCriteria().andConfigKeyEqualTo(key);
         return configMapper.selectOneByExample(example);
     }
-
 
     @Override
     public List<ConfigVo> getConfigsByType(Integer type) {
         ConfigExample example = new ConfigExample();
         if (type != null) {
-            example.createCriteria().andTypeEqualTo(type);
+            example.createCriteria().andConfigTypeEqualTo(type);
         }
         List<Config> configs = configMapper.selectByExample(example);
         return configs.stream()
@@ -74,9 +78,7 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public List<ConfigVo> getAllConfig() {
-        return configMapper.selectAll().stream()
-                .map(this::genConfigVo)
-                .collect(Collectors.toList());
+        return getConfigsByType(null);
     }
 
     private ConfigVo genConfigVo(Config config) {

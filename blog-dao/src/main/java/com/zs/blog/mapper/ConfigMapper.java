@@ -5,7 +5,7 @@ import com.zs.blog.model.ConfigExample;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
-* Created by Mybatis Generator on 2019/04/23
+* Created by Mybatis Generator
 */
 public interface ConfigMapper extends Mapper<Config> {
     long countByExample(ConfigExample example);

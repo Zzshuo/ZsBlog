@@ -24,8 +24,8 @@ public class ResponseUtil {
         return new ResponseVo<>(ErrorEnum.ERROR);
     }
 
-    public static ResponseVo error(Object data) {
-        return new ResponseVo<>(ErrorEnum.ERROR, data);
+    public static ResponseVo error(String message) {
+        return new ResponseVo<>(ErrorEnum.ERROR.getCode(), message);
     }
 
     public static ResponseVo error(ErrorEnum state) {

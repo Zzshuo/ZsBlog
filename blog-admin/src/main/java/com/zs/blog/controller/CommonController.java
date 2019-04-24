@@ -2,6 +2,7 @@ package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.enums.ArticleEnums;
+import com.zs.blog.enums.ConfigTypeEnum;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,16 @@ public class CommonController {
     public ResponseVo getArticleStateMap() {
         Map<Integer, String> map = new HashMap<>();
         for (ArticleEnums.StateEnum value : ArticleEnums.StateEnum.values()) {
+            map.put(value.getId(), value.getName());
+        }
+        return ResponseUtil.success(map);
+    }
+
+    @BusinessLog("文章状态")
+    @PostMapping("/getConfigTypeMap")
+    public ResponseVo getConfigTypeMap() {
+        Map<Integer, String> map = new HashMap<>();
+        for (ConfigTypeEnum value : ConfigTypeEnum.values()) {
             map.put(value.getId(), value.getName());
         }
         return ResponseUtil.success(map);

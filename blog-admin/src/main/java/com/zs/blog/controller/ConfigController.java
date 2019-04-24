@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class ConfigController {
 
     @BusinessLog("保存配置")
     @PostMapping("/save")
-    public ResponseVo save(@RequestBody ConfigReqVo reqVo) {
+    public ResponseVo save(@RequestBody @Valid ConfigReqVo reqVo) {
         configService.save(reqVo);
         return ResponseUtil.success();
     }
@@ -31,7 +32,7 @@ public class ConfigController {
     @BusinessLog("配置列表")
     @PostMapping("/getListByType")
     public ResponseVo list(@RequestBody ConfigReqVo reqVo) {
-        List<ConfigVo> list = configService.getConfigsByType(reqVo.getType());
+        List<ConfigVo> list = configService.getConfigsByType(reqVo.getConfigType());
         return ResponseUtil.success(list);
     }
 }

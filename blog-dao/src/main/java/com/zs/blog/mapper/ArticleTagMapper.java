@@ -5,7 +5,7 @@ import com.zs.blog.model.ArticleTagExample;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
-* Created by Mybatis Generator on 2019/04/23
+* Created by Mybatis Generator
 */
 public interface ArticleTagMapper extends Mapper<ArticleTag> {
     long countByExample(ArticleTagExample example);
