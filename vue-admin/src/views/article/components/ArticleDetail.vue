@@ -113,7 +113,7 @@ export default {
     fetchData(id) {
       this.api.getArticleById(id).then(response => {
         const res = response.data
-        if (res && res.code === 200) {
+        if (res && res.code === 20000) {
           this.postForm = res.data
         }
       })
@@ -124,7 +124,7 @@ export default {
           this.loading = true
           this.api.saveArticle(this.postForm).then(response => {
             const res = response.data
-            if (res && res.code === 200) {
+            if (res && res.code === 20000) {
               this.$message({
                 message: '发布文章成功',
                 type: 'success',
@@ -150,7 +150,7 @@ export default {
       }
       this.api.saveArticle(this.postForm).then(response => {
         const res = response.data
-        if (res && res.code === 200) {
+        if (res && res.code === 20000) {
           this.$message({
             message: '保存草稿成功',
             type: 'success',

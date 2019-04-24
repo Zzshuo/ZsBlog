@@ -107,7 +107,7 @@ export default {
       this.listLoading = true
       this.api.getArticleList(this.reqVo).then(response => {
         const res = response.data
-        if (res && res.code === 200) {
+        if (res && res.code === 20000) {
           const data = res.data
           this.articleList = data.list
           this.total = data.total

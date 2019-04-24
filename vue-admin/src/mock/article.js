@@ -11,7 +11,7 @@ export default {
 }
 
 const getArticle = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': {
     'id': 1,
@@ -30,13 +30,13 @@ const getArticle = {
 }
 
 const success = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': {}
 }
 
 const articleList = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': {
     'total': 33,

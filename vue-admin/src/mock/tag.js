@@ -11,7 +11,7 @@ export default {
 }
 
 const getTagById = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': {
     'id': 1,
@@ -21,7 +21,7 @@ const getTagById = {
 }
 
 const tagList = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': {
     'total': 33,
@@ -77,7 +77,7 @@ const tagList = {
 }
 
 const allTags = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': [
     {

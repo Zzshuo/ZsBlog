@@ -5,7 +5,7 @@ export default {
 }
 
 const getArticleStateMap = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': {
     '1': '发布',

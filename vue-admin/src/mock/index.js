@@ -20,26 +20,26 @@ Mock.XHR.prototype.send = function() {
 // })
 
 // User
-Mock.mock(/\/user\/login/, 'post', userApi.login)
-Mock.mock(/\/user\/info/, 'get', userApi.getInfo)
-Mock.mock(/\/user\/logout/, 'post', userApi.logout)
+Mock.mock(/\/api\/user\/login/, 'post', userApi.login)
+Mock.mock(/\/api\/user\/info/, 'get', userApi.getInfo)
+Mock.mock(/\/api\/user\/logout/, 'post', userApi.logout)
 
 // article
-Mock.mock(/\/article\/get/, articleApi.getArticle)
-Mock.mock(/\/article\/saveOrUpdate/, articleApi.saveArticle)
-Mock.mock(/\/article\/list/, articleApi.getArticleList)
+Mock.mock(/\/api\/article\/get/, articleApi.getArticle)
+Mock.mock(/\/api\/article\/saveOrUpdate/, articleApi.saveArticle)
+Mock.mock(/\/api\/article\/list/, articleApi.getArticleList)
 
 // tag
-Mock.mock(/\/tag\/getTagById/, tagApi.getTag)
-Mock.mock(/\/tag\/list/, tagApi.getTagList)
-Mock.mock(/\/tag\/getAllTag/, tagApi.getAllTag())
+Mock.mock(/\/api\/tag\/getTagById/, tagApi.getTag)
+Mock.mock(/\/api\/tag\/list/, tagApi.getTagList)
+Mock.mock(/\/api\/tag\/getAllTag/, tagApi.getAllTag())
 
 // web
-Mock.mock(/\/web\/info/, webInfoApi.getWebInfo)
+Mock.mock(/\/api\/web\/info/, webInfoApi.getWebInfo)
 
 // common
-Mock.mock(/common\/getArticleStateMap/, commonApi.getArticleStateMap())
+Mock.mock(/\/api\/common\/getArticleStateMap/, commonApi.getArticleStateMap())
 
 // type
-Mock.mock(/\/type\/getAllType/, typeApi.getAllType())
+Mock.mock(/\/api\/type\/getAllType/, typeApi.getAllType())
 export default Mock

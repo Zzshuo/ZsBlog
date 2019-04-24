@@ -5,7 +5,7 @@ export default {
 }
 
 const allType = {
-  'code': 200,
+  'code': 20000,
   'message': '操作成功！',
   'data': [
     {

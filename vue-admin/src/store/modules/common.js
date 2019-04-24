@@ -32,7 +32,7 @@ const common = {
       return new Promise((resolve, reject) => {
         api.getArticleStateMap().then(response => {
           const res = response.data
-          if (res && res.code === 200) {
+          if (res && res.code === 20000) {
             commit('SET_STATEMAP', res.data)
             resolve()
           } else {
@@ -46,7 +46,7 @@ const common = {
       return new Promise((resolve, reject) => {
         api.getAllType().then(response => {
           const res = response.data
-          if (res && res.code === 200) {
+          if (res && res.code === 20000) {
             commit('SET_ALLTYPE', res.data)
             resolve()
           } else {
@@ -60,7 +60,7 @@ const common = {
       return new Promise((resolve, reject) => {
         api.getAllTag().then(response => {
           const res = response.data
-          if (res && res.code === 200) {
+          if (res && res.code === 20000) {
             commit('SET_ALLTAG', res.data)
             resolve()
           } else {
