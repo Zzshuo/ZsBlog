@@ -1,6 +1,6 @@
 package com.zs.blog.object;
 
-import com.zs.blog.enums.ErrorEnum;
+import com.zs.blog.enums.ResponseEnum;
 import lombok.Data;
 
 /**
@@ -13,7 +13,7 @@ public class ResponseVo<T> {
     private String message;
     private T data;
 
-    public ResponseVo(ErrorEnum state) {
+    public ResponseVo(ResponseEnum state) {
         this.code = state.getCode();
         this.message = state.getMessage();
     }
@@ -23,7 +23,7 @@ public class ResponseVo<T> {
         this.message = message;
     }
 
-    public ResponseVo(ErrorEnum state, T data) {
+    public ResponseVo(ResponseEnum state, T data) {
         this.code = state.getCode();
         this.message = state.getMessage();
         this.data = data;

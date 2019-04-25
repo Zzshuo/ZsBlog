@@ -1,6 +1,6 @@
 package com.zs.blog.util;
 
-import com.zs.blog.enums.ErrorEnum;
+import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.object.ResponseVo;
 
 /**
@@ -10,22 +10,22 @@ import com.zs.blog.object.ResponseVo;
 public class ResponseUtil {
 
     public static ResponseVo success() {
-        return new ResponseVo<>(ErrorEnum.SUCCESS);
+        return new ResponseVo<>(ResponseEnum.SUCCESS);
     }
 
     public static ResponseVo success(Object data) {
-        return new ResponseVo<>(ErrorEnum.SUCCESS, data);
+        return new ResponseVo<>(ResponseEnum.SUCCESS, data);
     }
 
     public static ResponseVo error() {
-        return new ResponseVo<>(ErrorEnum.ERROR);
+        return new ResponseVo<>(ResponseEnum.ERROR);
     }
 
     public static ResponseVo error(String message) {
-        return new ResponseVo<>(ErrorEnum.ERROR.getCode(), message);
+        return new ResponseVo<>(ResponseEnum.ERROR.getCode(), message);
     }
 
-    public static ResponseVo error(ErrorEnum state) {
+    public static ResponseVo error(ResponseEnum state) {
         return new ResponseVo<>(state);
     }
 

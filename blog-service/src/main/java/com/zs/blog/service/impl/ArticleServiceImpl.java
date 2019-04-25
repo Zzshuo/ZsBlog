@@ -2,7 +2,7 @@ package com.zs.blog.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.zs.blog.enums.ErrorEnum;
+import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleMapper;
 import com.zs.blog.mapper.SelfMapper;
@@ -68,7 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
     public void delete(Integer id) {
         int i = articleMapper.deleteByPrimaryKey(id);
         if (i <= 0) {
-            throw new BusinessException(ErrorEnum.ERROR_NO_ARTICLE);
+            throw new BusinessException(ResponseEnum.ERROR_NO_ARTICLE);
         }
     }
 
@@ -76,7 +76,7 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleVo get(Integer id) {
         Article article = articleMapper.selectByPrimaryKey(id);
         if (article == null) {
-            throw new BusinessException(ErrorEnum.ERROR_NO_ARTICLE);
+            throw new BusinessException(ResponseEnum.ERROR_NO_ARTICLE);
         }
         ArticleVo articleVo = new ArticleVo();
         BeanUtil.copy(article, articleVo);

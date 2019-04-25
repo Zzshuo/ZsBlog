@@ -1,6 +1,6 @@
 package com.zs.blog.exception;
 
-import com.zs.blog.enums.ErrorEnum;
+import com.zs.blog.enums.ResponseEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,19 +12,19 @@ import lombok.EqualsAndHashCode;
 @Data
 public class BusinessException extends RuntimeException {
 
-    private ErrorEnum errorEnum;
+    private ResponseEnum responseEnum;
     private Object[] params;
 
     public BusinessException(String message) {
         super(message);
     }
 
-    public BusinessException(ErrorEnum errorEnum) {
-        this.errorEnum = errorEnum;
+    public BusinessException(ResponseEnum responseEnum) {
+        this.responseEnum = responseEnum;
     }
 
-    public BusinessException(ErrorEnum errorEnum, Object[] params) {
-        this.errorEnum = errorEnum;
+    public BusinessException(ResponseEnum responseEnum, Object[] params) {
+        this.responseEnum = responseEnum;
         this.params = params;
     }
 }

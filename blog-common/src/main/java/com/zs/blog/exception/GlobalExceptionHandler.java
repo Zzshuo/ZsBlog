@@ -1,6 +1,6 @@
 package com.zs.blog.exception;
 
-import com.zs.blog.enums.ErrorEnum;
+import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,14 +47,14 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = BusinessException.class)
     public ResponseVo errorHandler(BusinessException ex) {
-        ErrorEnum errorEnum = ex.getErrorEnum();
-        if (Objects.nonNull(errorEnum)) {
-            String message = errorEnum.getMessage();
+        ResponseEnum responseEnum = ex.getResponseEnum();
+        if (Objects.nonNull(responseEnum)) {
+            String message = responseEnum.getMessage();
             if (Objects.nonNull(ex.getParams())) {
                 message = MessageFormat.format(message, ex.getParams());
             }
             log.error(message);
-            return ResponseUtil.error(errorEnum.getCode(), message);
+            return ResponseUtil.error(responseEnum.getCode(), message);
         }
         log.error(ex.getMessage());
         return ResponseUtil.error(ex.getMessage());

@@ -9,7 +9,7 @@ import lombok.Getter;
  **/
 @AllArgsConstructor
 @Getter
-public enum ErrorEnum {
+public enum ResponseEnum {
 
     SUCCESS(20000, "操作成功！"),
     ERROR(50000, "系统错误！"),

@@ -2,7 +2,7 @@ package com.zs.blog.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.zs.blog.enums.ErrorEnum;
+import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleTagMapper;
 import com.zs.blog.mapper.TagMapper;
@@ -48,7 +48,7 @@ public class TagServiceImpl implements TagService {
     public void delete(Integer id) {
         int i = tagMapper.deleteByPrimaryKey(id);
         if (i <= 0) {
-            throw new BusinessException(ErrorEnum.ERROR_NO_TAG);
+            throw new BusinessException(ResponseEnum.ERROR_NO_TAG);
         }
     }
 
@@ -61,7 +61,7 @@ public class TagServiceImpl implements TagService {
     public TagVo get(Integer id) {
         Tag tag = tagMapper.selectByPrimaryKey(id);
         if (tag == null) {
-            throw new BusinessException(ErrorEnum.ERROR_NO_TAG);
+            throw new BusinessException(ResponseEnum.ERROR_NO_TAG);
         }
         TagVo tagVo = new TagVo();
         BeanUtil.copy(tag, tagVo);
