@@ -34,19 +34,17 @@ public class BusinessLogAspect {
         Method method = AspectUtil.getMethod(point);
         //获取操作名称
         BusinessLog annotation = method.getAnnotation(BusinessLog.class);
-        String value = "";
+        String value = "请求方法";
         if (annotation != null) {
             value = annotation.value();
         }
         String ua = RequestUtil.getUa();
 
-        log.info("{}: {}.{}, IP: {}, Method: {}", value, className, method.getName(), RequestUtil.getIp(), RequestUtil.getMethod());
-        log.info("Request URL: {}, Params: {}", RequestUtil.getRequestUrl(), JSON.toJSONString(point.getArgs()));
-        log.info("User-Agent: {}", ua);
+        log.info("{}: {}.{} \r\n Request URL: {} ,IP: {}, Method: {}, Params: {} \r\n User-Agent: {}", value, className, method.getName(), RequestUtil.getRequestUrl(), RequestUtil.getIp(), RequestUtil.getMethod(), JSON.toJSONString(point.getArgs()), ua);
     }
 
     @AfterReturning(value = "pointcut()", returning = "result")
     public void after(JoinPoint point, Object result) {
-        log.info("return:{}", JSON.toJSONString(result));
+        log.info("return: {}", JSON.toJSONString(result));
     }
 }
