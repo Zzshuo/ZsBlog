@@ -1,6 +1,6 @@
 package com.zs.blog.util;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.util.StringUtils;
@@ -19,7 +19,7 @@ public class AspectUtil {
      *
      * @param point 当前切面执行的方法
      */
-    public static String getKeyOfClassPrefix(ProceedingJoinPoint point, String prefix) {
+    public static String getKeyOfClassPrefix(JoinPoint point, String prefix) {
         StringBuilder keyPrefix = new StringBuilder();
         if (!StringUtils.isEmpty(prefix)) {
             keyPrefix.append(prefix);
@@ -33,8 +33,8 @@ public class AspectUtil {
      *
      * @param point 当前切面执行的方法
      */
-    public static String getClassName(ProceedingJoinPoint point) {
-        return point.getTarget().getClass().getName().replaceAll("\\.", "_");
+    public static String getClassName(JoinPoint point) {
+        return point.getTarget().getClass().getName();
     }
 
     /**
@@ -43,7 +43,7 @@ public class AspectUtil {
      * @param point 当前切面执行的方法
      * @throws NoSuchMethodException
      */
-    public static Method getMethod(ProceedingJoinPoint point) throws NoSuchMethodException {
+    public static Method getMethod(JoinPoint point) throws NoSuchMethodException {
         Signature sig = point.getSignature();
         MethodSignature methodSignature = (MethodSignature) sig;
         Object target = point.getTarget();
@@ -58,7 +58,7 @@ public class AspectUtil {
      * @param prefix key前缀 （非必选）
      * @throws NoSuchMethodException
      */
-    public static String getKey(ProceedingJoinPoint point, String extra, String prefix) throws NoSuchMethodException {
+    public static String getKey(JoinPoint point, String extra, String prefix) throws NoSuchMethodException {
         Method currentMethod = AspectUtil.getMethod(point);
         String methodName = currentMethod.getName();
         StringBuilder key = new StringBuilder();

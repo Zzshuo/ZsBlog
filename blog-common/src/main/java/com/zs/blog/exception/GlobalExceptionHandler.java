@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public ResponseVo errorHandler(Exception ex) {
-        log.error(ex.getMessage());
+        log.error("全局异常", ex);
         return ResponseUtil.error(ex.getMessage());
     }
 
@@ -53,10 +53,10 @@ public class GlobalExceptionHandler {
             if (Objects.nonNull(ex.getParams())) {
                 message = MessageFormat.format(message, ex.getParams());
             }
-            log.error(message);
+            log.info("error code:{},{}", responseEnum.getCode(), message);
             return ResponseUtil.error(responseEnum.getCode(), message);
         }
-        log.error(ex.getMessage());
+        log.info("error code:{},{}", ResponseEnum.ERROR.getCode(), ex.getMessage());
         return ResponseUtil.error(ex.getMessage());
     }
 
