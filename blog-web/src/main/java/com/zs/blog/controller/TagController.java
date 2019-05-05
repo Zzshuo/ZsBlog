@@ -1,7 +1,7 @@
 package com.zs.blog.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.zs.blog.annotation.BusinessLog;
+import com.zs.blog.object.PageInfo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.TagService;
 import com.zs.blog.util.ResponseUtil;

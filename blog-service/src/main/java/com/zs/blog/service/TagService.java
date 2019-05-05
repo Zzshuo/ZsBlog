@@ -1,6 +1,6 @@
 package com.zs.blog.service;
 
-import com.github.pagehelper.PageInfo;
+import com.zs.blog.object.PageInfo;
 import com.zs.blog.vo.request.TagPageReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;

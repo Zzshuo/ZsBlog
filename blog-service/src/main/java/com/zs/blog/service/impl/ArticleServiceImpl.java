@@ -1,7 +1,6 @@
 package com.zs.blog.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.PageHelper;
 import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleMapper;
@@ -9,10 +8,10 @@ import com.zs.blog.mapper.SelfMapper;
 import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
 import com.zs.blog.model.Tag;
+import com.zs.blog.object.PageInfo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.service.TagService;
 import com.zs.blog.util.BeanUtil;
-import com.zs.blog.util.PageHelperUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.request.TagReqVo;
@@ -103,17 +102,17 @@ public class ArticleServiceImpl implements ArticleService {
             criteria.andTypeIdEqualTo(reqVo.getTypeId());
         }
 
-        PageHelperUtil.startPage(reqVo);
+        PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Article> articles = articleMapper.selectByExample(example);
 
-        Page<ArticleBriefVo> page = new Page<>();
-        for (Article o : articles) {
+        List<ArticleBriefVo> collect = articles.stream().map(article -> {
             ArticleBriefVo articleBriefVo = new ArticleBriefVo();
-            BeanUtil.copy(o, articleBriefVo);
-            page.add(articleBriefVo);
-        }
+            BeanUtil.copy(article, articleBriefVo);
+            return articleBriefVo;
+        }).collect(Collectors.toList());
 
-        return PageHelperUtil.result(articles, page);
+
+        return new PageInfo(collect, articles);
     }
 
 }

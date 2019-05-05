@@ -1,7 +1,6 @@
 package com.zs.blog.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.PageHelper;
 import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleTagMapper;
@@ -9,9 +8,9 @@ import com.zs.blog.mapper.TagMapper;
 import com.zs.blog.model.ArticleTagExample;
 import com.zs.blog.model.Tag;
 import com.zs.blog.model.TagExample;
+import com.zs.blog.object.PageInfo;
 import com.zs.blog.service.TagService;
 import com.zs.blog.util.BeanUtil;
-import com.zs.blog.util.PageHelperUtil;
 import com.zs.blog.vo.request.TagPageReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;
@@ -72,15 +71,12 @@ public class TagServiceImpl implements TagService {
     public PageInfo<TagVo> list(TagPageReqVo reqVo) {
         TagExample example = genExample(reqVo);
 
-        PageHelperUtil.startPage(reqVo);
+        PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Tag> tags = tagMapper.selectByExample(example);
 
-        Page<TagVo> page = new Page<>();
-        for (Tag o : tags) {
-            page.add(genTagVo(o));
-        }
+        List<TagVo> collect = tags.stream().map(this::genTagVo).collect(Collectors.toList());
 
-        return PageHelperUtil.result(tags, page);
+        return new PageInfo(collect, tags);
     }
 
     @Override
