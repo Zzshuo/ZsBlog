@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface ConfigService {
 
-
     void save(ConfigReqVo reqVo);
 
     Config getConfigByKey(String key);
+
+    String getConfigValueByKey(String key);
 
     List<ConfigVo> getConfigsByType(Integer type);
 

@@ -65,6 +65,15 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
+    public String getConfigValueByKey(String key) {
+        Config config = getConfigByKey(key);
+        if (config != null) {
+            return config.getConfigValue();
+        }
+        return "";
+    }
+
+    @Override
     public List<ConfigVo> getConfigsByType(Integer type) {
         ConfigExample example = new ConfigExample();
         if (type != null) {

@@ -1,7 +1,7 @@
 package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.enums.ArticleEnums;
+import com.zs.blog.enums.ArticleEnum;
 import com.zs.blog.enums.ConfigTypeEnum;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
@@ -24,7 +24,7 @@ public class CommonController {
     @PostMapping("/getArticleStateMap")
     public ResponseVo getArticleStateMap() {
         Map<Integer, String> map = new HashMap<>();
-        for (ArticleEnums.StateEnum value : ArticleEnums.StateEnum.values()) {
+        for (ArticleEnum.StateEnum value : ArticleEnum.StateEnum.values()) {
             map.put(value.getId(), value.getName());
         }
         return ResponseUtil.success(map);

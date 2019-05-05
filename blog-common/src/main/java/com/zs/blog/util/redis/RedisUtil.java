@@ -104,6 +104,37 @@ public class RedisUtil {
     }
 
     /**
+     * 普通缓存获取
+     *
+     * @param key 键
+     * @return 值
+     */
+    public String getAsString(String key) {
+        return key == null ? null : redisTemplate.opsForValue().get(key).toString();
+    }
+
+    /**
+     * 普通缓存获取
+     *
+     * @param key 键
+     * @return 值
+     */
+    public Long getAsLong(String key) {
+        return key == null ? null : Long.valueOf(redisTemplate.opsForValue().get(key).toString());
+    }
+
+    /**
+     * 普通缓存获取
+     *
+     * @param key 键
+     * @return 值
+     */
+    public Integer getAsInt(String key) {
+        return key == null ? null : Integer.valueOf(redisTemplate.opsForValue().get(key).toString());
+    }
+
+
+    /**
      * 普通缓存放入
      *
      * @param key   键
@@ -183,6 +214,17 @@ public class RedisUtil {
      */
     public Object hget(String key, String item) {
         return redisTemplate.opsForHash().get(key, item);
+    }
+
+    /**
+     * HashGet
+     *
+     * @param key  键 不能为null
+     * @param item 项 不能为null
+     * @return 值
+     */
+    public String hgetAsString(String key, String item) {
+        return redisTemplate.opsForHash().get(key, item).toString();
     }
 
     /**

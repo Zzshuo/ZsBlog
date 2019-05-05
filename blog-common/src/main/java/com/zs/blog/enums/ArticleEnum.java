@@ -7,7 +7,7 @@ import lombok.Getter;
  * @author zshuo
  * @date 2019/4/9
  **/
-public class ArticleEnums {
+public class ArticleEnum {
 
     @AllArgsConstructor
     @Getter
