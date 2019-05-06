@@ -3,6 +3,7 @@ package com.zs.blog.services;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.CannedAccessControlList;
 import com.zs.blog.enums.ConfigEnum;
+import com.zs.blog.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
@@ -20,15 +21,15 @@ public class OssService {
     private static OSSClient ossClient;
 
     @Autowired
-    private RedisService redisService;
+    private ConfigService configService;
 
     public OSSClient getInstance() {
         if (ossClient == null) {
             synchronized (OssService.class) {
                 if (ossClient == null) {
-                    String endpoint = redisService.getConfigValueByConfigKey(ConfigEnum.ALI_OSS_END_POINT.getKey());
-                    String accessKeyId = redisService.getConfigValueByConfigKey(ConfigEnum.ALI_OSS_ACCESSKEY_ID.getKey());
-                    String accessKeySecret = redisService.getConfigValueByConfigKey(ConfigEnum.ALI_OSS_ACCESSKEY_SECRET.getKey());
+                    String endpoint = configService.getConfigValueByKey(ConfigEnum.ALI_OSS_END_POINT.getKey());
+                    String accessKeyId = configService.getConfigValueByKey(ConfigEnum.ALI_OSS_ACCESSKEY_ID.getKey());
+                    String accessKeySecret = configService.getConfigValueByKey(ConfigEnum.ALI_OSS_ACCESSKEY_SECRET.getKey());
                     ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
                     checkBucket();
                 }
@@ -38,7 +39,7 @@ public class OssService {
     }
 
     private String getBucketName() {
-        return redisService.getConfigValueByConfigKey(ConfigEnum.ALI_OSS_BUCKET_NAME.getKey());
+        return configService.getConfigValueByKey(ConfigEnum.ALI_OSS_BUCKET_NAME.getKey());
     }
 
     /**

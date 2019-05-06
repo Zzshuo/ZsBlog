@@ -1,5 +1,6 @@
 package com.zs.blog.annotation;
 
+import com.zs.blog.enums.RedisEnum;
 import com.zs.blog.util.AspectUtil;
 import com.zs.blog.util.redis.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -36,12 +37,12 @@ public class RedisCacheAspect {
         RedisCache cache = currentMethod.getAnnotation(RedisCache.class);
         boolean flush = cache.flush();
         if (flush) {
-            String classPrefix = AspectUtil.getKeyOfClassPrefix(point, CACHE_PREFIX);
+            String classPrefix = AspectUtil.getKeyOfClassPrefix(point, RedisEnum.REDIS_CACHE_PREFIX.getRedisKey());
             log.info("清空缓存 - {}*", classPrefix);
             redisUtil.del(classPrefix);
             return point.proceed();
         }
-        String key = AspectUtil.getKey(point, cache.key(), CACHE_PREFIX);
+        String key = AspectUtil.getKey(point, cache.key(), RedisEnum.REDIS_CACHE_PREFIX.getRedisKey());
         boolean hasKey = redisUtil.hasKey(key);
         if (hasKey) {
             try {

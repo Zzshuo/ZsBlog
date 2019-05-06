@@ -2,12 +2,14 @@ package com.zs.blog.service.impl;
 
 import com.zs.blog.enums.ConfigEnum;
 import com.zs.blog.enums.ConfigTypeEnum;
+import com.zs.blog.enums.RedisEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ConfigMapper;
 import com.zs.blog.model.Config;
 import com.zs.blog.model.ConfigExample;
 import com.zs.blog.service.ConfigService;
 import com.zs.blog.util.BeanUtil;
+import com.zs.blog.util.redis.RedisUtil;
 import com.zs.blog.vo.request.ConfigReqVo;
 import com.zs.blog.vo.response.ConfigVo;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,8 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Autowired
     private ConfigMapper configMapper;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @PostConstruct
     private void init() {
@@ -59,9 +63,15 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public Config getConfigByKey(String key) {
-        ConfigExample example = new ConfigExample();
-        example.createCriteria().andConfigKeyEqualTo(key);
-        return configMapper.selectOneByExample(example);
+        String redisKey = RedisEnum.CONFIG.getRedisKey();
+        Config config = redisUtil.hget(redisKey, key, Config.class);
+        if (config == null) {
+            ConfigExample example = new ConfigExample();
+            example.createCriteria().andConfigKeyEqualTo(key);
+            config = configMapper.selectOneByExample(example);
+            redisUtil.hset(redisKey, key, config);
+        }
+        return config;
     }
 
     @Override
