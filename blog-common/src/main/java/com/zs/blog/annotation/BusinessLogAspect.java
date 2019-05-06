@@ -33,18 +33,27 @@ public class BusinessLogAspect {
         String className = AspectUtil.getClassName(point);
         Method method = AspectUtil.getMethod(point);
         //获取操作名称
-        BusinessLog annotation = method.getAnnotation(BusinessLog.class);
-        String value = "请求方法";
-        if (annotation != null) {
-            value = annotation.value();
-        }
+        String value = getBusinessName(method);
         String ua = RequestUtil.getUa();
 
         log.info("{}: {}.{} \r\n Request URL: {} ,IP: {}, Method: {}, Params: {} \r\n User-Agent: {}", value, className, method.getName(), RequestUtil.getRequestUrl(), RequestUtil.getIp(), RequestUtil.getMethod(), JSON.toJSONString(point.getArgs()), ua);
     }
 
     @AfterReturning(value = "pointcut()", returning = "result")
-    public void after(JoinPoint point, Object result) {
-        log.info("return: {}", JSON.toJSONString(result));
+    public void after(JoinPoint point, Object result) throws NoSuchMethodException {
+        Method method = AspectUtil.getMethod(point);
+        String value = getBusinessName(method);
+        log.info("{} return: {}", value, JSON.toJSONString(result));
+    }
+
+    private String getBusinessName(Method method) throws NoSuchMethodException {
+        BusinessLog annotation = method.getAnnotation(BusinessLog.class);
+        String value;
+        if (annotation != null) {
+            value = annotation.value();
+        } else {
+            value = method.getName();
+        }
+        return value;
     }
 }
