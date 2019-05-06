@@ -109,8 +109,18 @@ public class RedisUtil {
      * @param key 键
      * @return 值
      */
+    public <T> T get(String key, Class<T> t) {
+        return (T) get(key);
+    }
+
+    /**
+     * 普通缓存获取
+     *
+     * @param key 键
+     * @return 值
+     */
     public String getAsString(String key) {
-        return key == null ? null : redisTemplate.opsForValue().get(key).toString();
+        return key == null ? null : get(key).toString();
     }
 
     /**
@@ -120,7 +130,7 @@ public class RedisUtil {
      * @return 值
      */
     public Long getAsLong(String key) {
-        return key == null ? null : Long.valueOf(redisTemplate.opsForValue().get(key).toString());
+        return key == null ? null : Long.valueOf(getAsString(key));
     }
 
     /**
@@ -130,7 +140,7 @@ public class RedisUtil {
      * @return 值
      */
     public Integer getAsInt(String key) {
-        return key == null ? null : Integer.valueOf(redisTemplate.opsForValue().get(key).toString());
+        return key == null ? null : Integer.valueOf(getAsString(key));
     }
 
 
@@ -224,7 +234,7 @@ public class RedisUtil {
      * @return 值
      */
     public String hgetAsString(String key, String item) {
-        return redisTemplate.opsForHash().get(key, item).toString();
+        return hget(key, item).toString();
     }
 
     /**
@@ -235,7 +245,7 @@ public class RedisUtil {
      * @return 值
      */
     public <T> T hget(String key, String item, Class<T> t) {
-        return (T) redisTemplate.opsForHash().get(key, item);
+        return (T) hget(key, item);
     }
 
     /**
@@ -246,6 +256,10 @@ public class RedisUtil {
      */
     public Map<Object, Object> hmget(String key) {
         return redisTemplate.opsForHash().entries(key);
+    }
+
+    public <K, V> Map<K, V> hmget(String key, Class<K> k, Class<V> v) {
+        return (Map<K, V>) hmget(key);
     }
 
     /**
