@@ -24,7 +24,7 @@ public class ArticleVo {
     private Boolean original;
 
     /**
-     * 类型
+     * 分类
      */
     private Integer typeId;
 
@@ -32,6 +32,11 @@ public class ArticleVo {
      * 文章封面图片
      */
     private String image;
+
+    /**
+     * 1:正常,2:删除,3:草稿
+     */
+    private Integer state;
 
     /**
      * 创建时间
@@ -51,5 +56,15 @@ public class ArticleVo {
     /**
      * 标签列表
      */
-    private List<TagVo> tagList;
+    private List<Integer> tagIdList;
+
+    /**
+     * 浏览次数
+     */
+    private Integer views;
+
+    /**
+     * 评论次数
+     */
+    private Integer comments;
 }

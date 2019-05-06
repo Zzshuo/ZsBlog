@@ -69,7 +69,7 @@ import 'mavon-editor/dist/css/index.css'
 import { mapGetters } from 'vuex'
 
 const defaultForm = {
-  // 0 未发布 1 发布,2 草稿
+  // 1:正常,2:删除,3:草稿
   state: 0,
   tagIdList: []
 }
@@ -93,7 +93,8 @@ export default {
         original: [{ type: 'boolean', required: true, message: '请选择类型', trigger: 'change' }],
         typeId: [{ required: true, message: '请选择分类', trigger: 'change' }],
         tagIdList: [{ type: 'array', required: true, message: '请选择标签', trigger: 'change' }]
-      }
+      },
+      reqVo: {}
     }
   },
   computed: {
@@ -111,7 +112,8 @@ export default {
   },
   methods: {
     fetchData(id) {
-      this.api.getArticleById(id).then(response => {
+      this.reqVo.id = id;
+      this.api.getArticleById(this.reqVo).then(response => {
         const res = response.data
         if (res && res.code === 20000) {
           this.postForm = res.data
@@ -141,13 +143,7 @@ export default {
     },
     // 保存草稿
     draftForm() {
-      if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
-        this.$message({
-          message: '请填写必要的标题和内容',
-          type: 'warning'
-        })
-        return
-      }
+      this.postForm.state = 2
       this.api.saveArticle(this.postForm).then(response => {
         const res = response.data
         if (res && res.code === 20000) {
@@ -157,7 +153,6 @@ export default {
             showClose: true,
             duration: 1000
           })
-          this.postForm.state = 2
           this.$router.push('/article/list')
         }
       })

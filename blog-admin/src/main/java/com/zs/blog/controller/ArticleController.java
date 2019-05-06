@@ -28,9 +28,9 @@ public class ArticleController {
     private ArticleService articleService;
 
     @BusinessLog("发布/修改文章")
-    @PostMapping("/addOrUpdate")
-    public ResponseVo addOrUpdate(@RequestBody ArticleReqVo reqVo) {
-        articleService.addOrUpdate(reqVo);
+    @PostMapping("/save")
+    public ResponseVo save(@RequestBody ArticleReqVo reqVo) {
+        articleService.save(reqVo);
         return ResponseUtil.success();
     }
 

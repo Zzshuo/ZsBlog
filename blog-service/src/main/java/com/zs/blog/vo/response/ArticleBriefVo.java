@@ -3,6 +3,7 @@ package com.zs.blog.vo.response;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zshuo
@@ -23,9 +24,14 @@ public class ArticleBriefVo {
     private Boolean original;
 
     /**
-     * 类型
+     * 分类
      */
     private Integer typeId;
+
+    /**
+     * 标签id
+     */
+    private List<Integer> tagIdList;
 
     /**
      * 文章封面图片
@@ -33,7 +39,27 @@ public class ArticleBriefVo {
     private String image;
 
     /**
+     * 1:正常,2:删除,3:草稿
+     */
+    private Integer state;
+
+    /**
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+
+    /**
+     * 浏览次数
+     */
+    private Integer views;
+
+    /**
+     * 评论次数
+     */
+    private Integer comments;
 }

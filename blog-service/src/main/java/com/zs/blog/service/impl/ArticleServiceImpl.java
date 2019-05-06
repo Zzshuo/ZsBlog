@@ -7,7 +7,6 @@ import com.zs.blog.mapper.ArticleMapper;
 import com.zs.blog.mapper.SelfMapper;
 import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
-import com.zs.blog.model.Tag;
 import com.zs.blog.object.PageInfo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.service.TagService;
@@ -17,7 +16,6 @@ import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
-import com.zs.blog.vo.response.TagVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +41,7 @@ public class ArticleServiceImpl implements ArticleService {
     private TagService tagService;
 
     @Override
-    public void addOrUpdate(ArticleReqVo reqVo) {
+    public void save(ArticleReqVo reqVo) {
         List<TagReqVo> tagList = reqVo.getTagList();
         if (CollectionUtils.isNotEmpty(tagList)) {
             for (TagReqVo tagReqVo : tagList) {
@@ -80,16 +78,8 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleVo articleVo = new ArticleVo();
         BeanUtil.copy(article, articleVo);
 
-        List<Tag> tagList = selfMapper.getTagByArticleId(id);
-        List<TagVo> collect = tagList
-                .stream()
-                .map(tag -> {
-                    TagVo tagVo = new TagVo();
-                    BeanUtil.copy(tag, tagVo);
-                    return tagVo;
-                })
-                .collect(Collectors.toList());
-        articleVo.setTagList(collect);
+        List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(id);
+        articleVo.setTagIdList(tagIdList);
         return articleVo;
     }
 
@@ -108,9 +98,15 @@ public class ArticleServiceImpl implements ArticleService {
         List<ArticleBriefVo> collect = articles.stream().map(article -> {
             ArticleBriefVo articleBriefVo = new ArticleBriefVo();
             BeanUtil.copy(article, articleBriefVo);
+
+            // tagIdList
+            List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(article.getId());
+            articleBriefVo.setTagIdList(tagIdList);
+            // 浏览次数 评论次数
+            articleBriefVo.setViews(0);
+            articleBriefVo.setComments(0);
             return articleBriefVo;
         }).collect(Collectors.toList());
-
 
         return new PageInfo(collect, articles);
     }

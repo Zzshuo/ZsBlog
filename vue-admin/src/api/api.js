@@ -3,7 +3,7 @@ import request from '../utils/request'
 const api = {
   // 保存文章
   saveArticle(data = {}) {
-    const path = 'api/article/saveOrUpdate'
+    const path = 'api/article/save'
     return request({ url: path, method: 'post', data })
   },
   // 获取文章列表

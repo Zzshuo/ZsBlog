@@ -17,7 +17,7 @@ public interface ArticleService {
      *
      * @param reqVo
      */
-    void addOrUpdate(ArticleReqVo reqVo);
+    void save(ArticleReqVo reqVo);
 
     /**
      * 删除文章
