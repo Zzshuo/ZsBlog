@@ -11,14 +11,14 @@ import lombok.Getter;
 @Getter
 public enum RedisEnum {
 
-    REDIS_CACHE_PREFIX("redis_cache_prefix", "redis 缓存"),
+    REDIS_CACHE_PREFIX("redis_cache_", "redis 缓存"),
     CONFIG("config", "配置缓存"),
     ;
 
     private String redisKey;
     private String name;
 
-    private static final String REDIS_PREFIX = "zshuo";
+    private static final String REDIS_PREFIX = "zshuo_";
 
     public String getRedisKey() {
         return REDIS_PREFIX + redisKey;
