@@ -1,5 +1,6 @@
 package com.zs.blog.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Article {
+public class Article implements Serializable {
     @Id
     private Integer id;
 
@@ -60,4 +61,6 @@ public class Article {
      * 文章内容
      */
     private String content;
+
+    private static final long serialVersionUID = 1L;
 }

@@ -38,7 +38,6 @@ public class LombokPlugin extends PluginAdapter {
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine("* Created by Mybatis Generator");
         topLevelClass.addJavaDocLine("*/");
-
         return true;
     }
 

@@ -1,5 +1,6 @@
 package com.zs.blog.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Role implements Serializable {
     @Id
     private Integer id;
 
@@ -49,4 +50,6 @@ public class Role {
      */
     @Column(name = "update_time")
     private Date updateTime;
+
+    private static final long serialVersionUID = 1L;
 }
