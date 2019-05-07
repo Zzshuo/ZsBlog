@@ -1,7 +1,7 @@
 package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.object.BaseReqVo;
+import com.zs.blog.object.IdReqVo;
 import com.zs.blog.object.PageInfo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
@@ -36,14 +36,14 @@ public class ArticleController {
 
     @BusinessLog("删除文章")
     @PostMapping("/delete")
-    public ResponseVo delete(@RequestBody BaseReqVo reqVo) {
+    public ResponseVo delete(@RequestBody IdReqVo reqVo) {
         articleService.delete(reqVo.getId());
         return ResponseUtil.success();
     }
 
     @BusinessLog("获取文章")
     @PostMapping("/get")
-    public ResponseVo get(@RequestBody BaseReqVo reqVo) {
+    public ResponseVo get(@RequestBody IdReqVo reqVo) {
         ArticleVo articleVo = articleService.get(reqVo.getId());
         return ResponseUtil.success(articleVo);
     }

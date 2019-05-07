@@ -1,6 +1,6 @@
 package com.zs.blog.vo.request;
 
-import com.zs.blog.object.RequestVo;
+import com.zs.blog.object.PageReqVo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserReqVo extends RequestVo {
+public class UserReqVo extends PageReqVo {
     private String username;
 
     private String password;

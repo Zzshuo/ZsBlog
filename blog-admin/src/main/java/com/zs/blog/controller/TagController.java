@@ -1,7 +1,7 @@
 package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.object.BaseReqVo;
+import com.zs.blog.object.IdReqVo;
 import com.zs.blog.object.PageInfo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.TagService;
@@ -37,14 +37,14 @@ public class TagController {
 
     @BusinessLog("删除标签")
     @PostMapping("/delete")
-    public ResponseVo delete(@RequestBody BaseReqVo reqVo) {
+    public ResponseVo delete(@RequestBody IdReqVo reqVo) {
         tagService.delete(reqVo.getId());
         return ResponseUtil.success();
     }
 
     @BusinessLog("获取标签")
     @PostMapping("/get")
-    public ResponseVo get(@RequestBody BaseReqVo reqVo) {
+    public ResponseVo get(@RequestBody IdReqVo reqVo) {
         TagVo tagVo = tagService.get(reqVo.getId());
         return ResponseUtil.success(tagVo);
     }

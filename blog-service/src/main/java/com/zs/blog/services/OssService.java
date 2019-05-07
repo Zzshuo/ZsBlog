@@ -5,6 +5,7 @@ import com.aliyun.oss.model.CannedAccessControlList;
 import com.zs.blog.enums.ConfigEnum;
 import com.zs.blog.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.net.URL;
  * @author zshuo
  * @date 2019-04-29
  **/
+@Service
 public class OssService {
 
     private static OSSClient ossClient;
@@ -23,7 +25,7 @@ public class OssService {
     @Autowired
     private ConfigService configService;
 
-    public OSSClient getInstance() {
+    public OSSClient ossClient() {
         if (ossClient == null) {
             synchronized (OssService.class) {
                 if (ossClient == null) {
@@ -47,40 +49,56 @@ public class OssService {
      */
     private void checkBucket() {
         String bucketName = getBucketName();
-        if (getInstance().doesBucketExist(bucketName)) {
+        if (ossClient().doesBucketExist(bucketName)) {
             return;
         }
-        getInstance().createBucket(bucketName);
+        ossClient().createBucket(bucketName);
         // 设置bucket的访问权限，public-read-write权限
-        getInstance().setBucketAcl(bucketName, CannedAccessControlList.PublicRead);
+        ossClient().setBucketAcl(bucketName, CannedAccessControlList.PublicRead);
     }
 
     /**
      * 上传文件流
      */
-    public void uploadFile(String key, InputStream inputStream) {
-        getInstance().putObject(getBucketName(), key, inputStream);
+    public String uploadFile(String key, InputStream inputStream) {
+        if (!ossClient().doesObjectExist(getBucketName(), key)) {
+            ossClient().putObject(getBucketName(), key, inputStream);
+        }
+        return getFullFilePath(key);
     }
 
     /**
      * 上传Byte数组
      */
-    public void uploadFile(String key, byte[] bytes) {
-        getInstance().putObject(getBucketName(), key, new ByteArrayInputStream(bytes));
+    public String uploadFile(String key, byte[] bytes) {
+        ossClient().putObject(getBucketName(), key, new ByteArrayInputStream(bytes));
+        return getFullFilePath(key);
     }
 
     /**
      * 上传网络流
      */
-    public void uploadFile(String key, String url) throws IOException {
+    public String uploadFile(String key, String url) throws IOException {
         InputStream inputStream = new URL(url).openStream();
-        getInstance().putObject(getBucketName(), key, inputStream);
+        ossClient().putObject(getBucketName(), key, inputStream);
+        return getFullFilePath(key);
     }
 
     /**
      * 文件上传
      */
-    public void uploadFile(String key, File file) {
-        getInstance().putObject(getBucketName(), key, file);
+    public String uploadFile(String key, File file) {
+        ossClient().putObject(getBucketName(), key, file);
+        return getFullFilePath(key);
+    }
+
+    /**
+     * 获得完全访问地址
+     *
+     * @param key
+     * @return
+     */
+    private String getFullFilePath(String key) {
+        return "https://" + getBucketName() + "." + configService.getConfigValueByKey(ConfigEnum.ALI_OSS_END_POINT.getKey()) + File.separator + key;
     }
 }

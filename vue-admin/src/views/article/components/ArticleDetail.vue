@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     fetchData(id) {
-      this.reqVo.id = id;
+      this.reqVo.id = id
       this.api.getArticleById(this.reqVo).then(response => {
         const res = response.data
         if (res && res.code === 20000) {
@@ -158,10 +158,27 @@ export default {
       })
     },
     $imgAdd(pos, $file) {
-      console.log('111')
       // 第一步.将图片上传到服务器.
-      var formdata = new FormData()
-      formdata.append('image', $file)
+      const formdata = new FormData();
+      formdata.append('file', $file)
+
+
+
+      this.api.addArticleImage(formdata).then(response => {
+        const res = response.data
+        if (res && res.code === 20000) {
+          // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+          /**
+           * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+           * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+           * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+           */
+          console.log(res.data)
+          const $vm = this.$refs.md;
+          $vm.$img2Url(pos, res.data)
+        }
+      })
+
       // axios({
       //   url: 'server url',
       //   method: 'post',

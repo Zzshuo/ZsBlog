@@ -47,6 +47,17 @@ const api = {
   getArticleStateMap(data = {}) {
     const path = 'api/common/getArticleStateMap'
     return request({ url: path, method: 'post', data })
+  },
+
+  // 上传文章图片
+  addArticleImage(data = {}) {
+    const path = 'api/file/addArticleImage'
+    return request({ url: path, method: 'post', data, headers: { 'Content-Type': 'multipart/form-data' }})
+  },
+  // 上传封面图片
+  addCoverImage(data = {}) {
+    const path = 'api/file/addCoverImage'
+    return request({ url: path, method: 'post', data, headers: { 'Content-Type': 'multipart/form-data' }})
   }
 }
 
