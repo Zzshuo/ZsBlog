@@ -18,12 +18,7 @@ public interface TagService {
      *
      * @param reqVo
      */
-    void addOrUpdate(TagReqVo reqVo);
-
-    /**
-     * 添加标签
-     */
-    void add(String tagName);
+    void save(TagReqVo reqVo);
 
     /**
      * 删除标签

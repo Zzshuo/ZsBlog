@@ -17,6 +17,7 @@ public enum ResponseEnum {
     ERROR_NO_ARTICLE(50100, "没有该文章！"),
     ERROR_NO_TAG(50101, "没有该标签！"),
     ERROR_EXIST_TAG(50102, "{}标签已存在"),
+    ERROR_TAG_USED(50103, "标签使用中,不能删除！"),
     ;
 
     private Integer code;

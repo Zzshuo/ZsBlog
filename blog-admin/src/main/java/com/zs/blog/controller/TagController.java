@@ -29,9 +29,9 @@ public class TagController {
     private TagService tagService;
 
     @BusinessLog("添加/修改标签")
-    @PostMapping("/addOrUpdate")
-    public ResponseVo addOrUpdate(@RequestBody TagReqVo reqVo) {
-        tagService.addOrUpdate(reqVo);
+    @PostMapping("/save")
+    public ResponseVo save(@RequestBody TagReqVo reqVo) {
+        tagService.save(reqVo);
         return ResponseUtil.success();
     }
 

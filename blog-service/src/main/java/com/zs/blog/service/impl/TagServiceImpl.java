@@ -33,14 +33,7 @@ public class TagServiceImpl implements TagService {
     private ArticleTagMapper articleTagMapper;
 
     @Override
-    public void add(String tagName) {
-        checkTagExist(tagName);
-        Tag tag = Tag.builder().name(tagName).build();
-        tagMapper.insertSelective(tag);
-    }
-
-    @Override
-    public void addOrUpdate(TagReqVo reqVo) {
+    public void save(TagReqVo reqVo) {
         checkTagExist(reqVo.getName());
 
         Tag tag = new Tag();
@@ -63,6 +56,14 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void delete(Integer id) {
+        ArticleTagExample example = new ArticleTagExample();
+        example.createCriteria()
+                .andTagIdEqualTo(id);
+        int count = articleTagMapper.selectCountByExample(example);
+        if (count > 0) {
+            throw new BusinessException(ResponseEnum.ERROR_TAG_USED);
+        }
+
         int i = tagMapper.deleteByPrimaryKey(id);
         if (i <= 0) {
             throw new BusinessException(ResponseEnum.ERROR_NO_TAG);
