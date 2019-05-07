@@ -2,10 +2,10 @@
   <div>
     <el-upload
       :show-file-list="false"
-      :on-success="handleAvatarSuccess"
       :before-upload="beforeAvatarUpload"
+      :http-request="addCoverImage"
       class="avatar-uploader"
-      action="https://jsonplaceholder.typicode.com/posts/">
+      action="none">
       <img v-if="imageUrl" :src="imageUrl" class="avatar">
       <i v-else class="el-icon-plus avatar-uploader-icon"/>
     </el-upload>
@@ -14,18 +14,13 @@
 
 <script>
 export default {
-  name: 'Image',
+  name: 'ImageItem',
   props: {
     value: {
       type: String,
       default: ''
     }
   },
-  // data() {
-  //   return {
-  //     imageUrl: ''
-  //   };
-  // },
   computed: {
     imageUrl: {
       get() {
@@ -51,6 +46,16 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    },
+    addCoverImage(param){
+      const formdata = new FormData()
+      formdata.append('file', param.file)
+      this.api.addCoverImage(formdata).then(response => {
+        const res = response.data
+        if (res && res.code === 20000) {
+          this.imageUrl = res.data
+        }
+      })
     }
   }
 }

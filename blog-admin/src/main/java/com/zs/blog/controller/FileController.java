@@ -35,7 +35,7 @@ public class FileController {
     @BusinessLog("上传封面图")
     @PostMapping("/addCoverImage")
     public ResponseVo addCoverImage(MultipartFile file) {
-        String url = fileService.addImage(file, CommonConst.ALI_OSS_IMG_ARTICLE_PATH);
+        String url = fileService.addImage(file, CommonConst.ALI_OSS_IMG_COVER_PATH);
         return ResponseUtil.success(url);
     }
 }
