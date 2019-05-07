@@ -25,7 +25,7 @@ const getArticle = {
     'content': '# jjjj  \r ```java \r  @BusinessLog("退出登录") \r  @PostMapping("/logout") \r  public ModelAndView logout() { \r  //退出   SecurityUtils.getSubject().logout();\r   return ResponseUtil.view("/admin/logout");} \r  ```\r### 引用 Blo在插入处先键入 两个以上的 空格然后回车即可ckquotes\r> 引用文本 Blockquotes\r引用的行内混合 Blockquotes\r> 引用：如果想要插入空白换行`即<br />标签`，在插入处先键入两个以上的空格然后回车即可，[普通链接](http://localhost/)\r### 引用 Blo在插入处先键入 两个以上的 空格然后回车即可ckquotes\r### 引用 Blo在插入处先键入 两个以上的 空格然后回车即可ckquotes\r#### 引用 Blo在插入处先键入 两个以上的 空格然后回车即可ckquotes\r# 引用 Blo在插入处先键入 两个以上的 空格然后回车即可ckquotes\r##### 引用 Blo在插入处先键入 两个以上的 空格然后回车即可ckquotes\r',
     'views': 999,
     'comments': 888,
-    'imageUrl': 'http://img95.699pic.com/photo/40113/1486.jpg_wh860.jpg'
+    'image': 'http://img95.699pic.com/photo/40113/1486.jpg_wh860.jpg'
   }
 }
 
