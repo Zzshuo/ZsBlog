@@ -14,11 +14,16 @@ import java.util.List;
 public interface TagService {
 
     /**
-     * 发布/修改标签
+     * 添加/修改标签
      *
      * @param reqVo
      */
     void addOrUpdate(TagReqVo reqVo);
+
+    /**
+     * 添加标签
+     */
+    void add(String tagName);
 
     /**
      * 删除标签

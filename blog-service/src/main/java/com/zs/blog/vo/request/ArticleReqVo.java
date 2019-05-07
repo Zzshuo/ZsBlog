@@ -45,5 +45,5 @@ public class ArticleReqVo {
     /**
      * 标签列表
      */
-    private List<TagReqVo> tagList;
+    private List<Integer> tagIdList;
 }

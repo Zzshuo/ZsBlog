@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 public class BusinessException extends RuntimeException {
 
     private ResponseEnum responseEnum;
-    private Object[] params;
+    private Object params;
 
     public BusinessException(String message) {
         super(message);
@@ -23,7 +23,7 @@ public class BusinessException extends RuntimeException {
         this.responseEnum = responseEnum;
     }
 
-    public BusinessException(ResponseEnum responseEnum, Object[] params) {
+    public BusinessException(ResponseEnum responseEnum, Object params) {
         this.responseEnum = responseEnum;
         this.params = params;
     }

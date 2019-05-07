@@ -33,13 +33,31 @@ public class TagServiceImpl implements TagService {
     private ArticleTagMapper articleTagMapper;
 
     @Override
+    public void add(String tagName) {
+        checkTagExist(tagName);
+        Tag tag = Tag.builder().name(tagName).build();
+        tagMapper.insertSelective(tag);
+    }
+
+    @Override
     public void addOrUpdate(TagReqVo reqVo) {
+        checkTagExist(reqVo.getName());
+
         Tag tag = new Tag();
         BeanUtil.copy(reqVo, tag);
         if (tag.getId() != null) {
             tagMapper.updateByPrimaryKeySelective(tag);
         } else {
             tagMapper.insertSelective(tag);
+        }
+    }
+
+    private void checkTagExist(String tagName) {
+        TagExample example = new TagExample();
+        example.createCriteria().andNameEqualTo(tagName);
+        Tag exist = tagMapper.selectOneByExample(example);
+        if (exist != null) {
+            throw new BusinessException(ResponseEnum.ERROR_EXIST_TAG, tagName);
         }
     }
 

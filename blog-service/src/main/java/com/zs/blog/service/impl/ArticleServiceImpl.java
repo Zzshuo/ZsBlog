@@ -4,21 +4,22 @@ import com.github.pagehelper.PageHelper;
 import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleMapper;
+import com.zs.blog.mapper.ArticleTagMapper;
 import com.zs.blog.mapper.SelfMapper;
 import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
+import com.zs.blog.model.ArticleTag;
+import com.zs.blog.model.ArticleTagExample;
 import com.zs.blog.object.PageInfo;
 import com.zs.blog.service.ArticleService;
-import com.zs.blog.service.TagService;
 import com.zs.blog.util.BeanUtil;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
-import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,20 +39,11 @@ public class ArticleServiceImpl implements ArticleService {
     private SelfMapper selfMapper;
 
     @Autowired
-    private TagService tagService;
+    private ArticleTagMapper articleTagMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(ArticleReqVo reqVo) {
-        List<TagReqVo> tagList = reqVo.getTagList();
-        if (CollectionUtils.isNotEmpty(tagList)) {
-            for (TagReqVo tagReqVo : tagList) {
-                // 标签不存在添加标签
-                if (!tagService.exist(tagReqVo.getId())) {
-                    tagService.addOrUpdate(tagReqVo);
-                }
-            }
-        }
-
         Article article = new Article();
         BeanUtil.copy(reqVo, article);
         if (article.getId() != null) {
@@ -59,14 +51,37 @@ public class ArticleServiceImpl implements ArticleService {
         } else {
             articleMapper.insertSelective(article);
         }
+
+        List<Integer> tagIdList = reqVo.getTagIdList();
+        for (Integer tagId : tagIdList) {
+            ArticleTagExample example = new ArticleTagExample();
+            example.createCriteria()
+                    .andArticleIdEqualTo(article.getId())
+                    .andTagIdEqualTo(tagId);
+            int count = articleTagMapper.selectCountByExample(example);
+
+            if (count == 0) {
+                ArticleTag articleTag = ArticleTag
+                        .builder()
+                        .tagId(tagId)
+                        .articleId(article.getId())
+                        .build();
+                articleTagMapper.insertSelective(articleTag);
+            }
+        }
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Integer id) {
         int i = articleMapper.deleteByPrimaryKey(id);
         if (i <= 0) {
             throw new BusinessException(ResponseEnum.ERROR_NO_ARTICLE);
         }
+        ArticleTagExample example = new ArticleTagExample();
+        example.createCriteria()
+                .andArticleIdEqualTo(id);
+        articleTagMapper.deleteByExample(example);
     }
 
     @Override
