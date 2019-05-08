@@ -6,14 +6,14 @@ import java.util.Date;
 
 /**
  * @author zshuo
- * @date 2019/2/28
+ * @date 2019-05-08
  **/
 @Data
-public class TagVo {
+public class TypeVo {
     private Integer id;
 
     /**
-     * 标签名
+     * 分类
      */
     private String name;
 

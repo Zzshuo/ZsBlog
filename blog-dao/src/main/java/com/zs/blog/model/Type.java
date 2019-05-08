@@ -21,7 +21,7 @@ public class Type implements Serializable {
     private Integer id;
 
     /**
-     * 文章类型名
+     * 分类
      */
     private String name;
 

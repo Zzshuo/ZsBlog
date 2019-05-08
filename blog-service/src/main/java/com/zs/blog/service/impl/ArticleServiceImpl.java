@@ -76,7 +76,7 @@ public class ArticleServiceImpl implements ArticleService {
     public void delete(Integer id) {
         int i = articleMapper.deleteByPrimaryKey(id);
         if (i <= 0) {
-            throw new BusinessException(ResponseEnum.ERROR_NO_ARTICLE);
+            throw new BusinessException(ResponseEnum.ARTICLE_NOT_EXIST);
         }
         ArticleTagExample example = new ArticleTagExample();
         example.createCriteria()
@@ -88,7 +88,7 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleVo get(Integer id) {
         Article article = articleMapper.selectByPrimaryKey(id);
         if (article == null) {
-            throw new BusinessException(ResponseEnum.ERROR_NO_ARTICLE);
+            throw new BusinessException(ResponseEnum.ARTICLE_NOT_EXIST);
         }
         ArticleVo articleVo = new ArticleVo();
         BeanUtil.copy(article, articleVo);

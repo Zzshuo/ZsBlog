@@ -14,10 +14,23 @@ public enum ResponseEnum {
     SUCCESS(20000, "操作成功！"),
     ERROR(50000, "系统错误！"),
 
-    ERROR_NO_ARTICLE(50100, "没有该文章！"),
-    ERROR_NO_TAG(50101, "没有该标签！"),
-    ERROR_EXIST_TAG(50102, "[{0}]标签已存在"),
-    ERROR_TAG_USED(50103, "标签使用中,不能删除！"),
+    /**
+     * 文章
+     */
+    ARTICLE_NOT_EXIST(50100, "文章不存在！"),
+    /**
+     * 标签
+     */
+    TAG_NOT_EXIST(50200, "标签不存在！"),
+    TAG_EXIST(50201, "[{0}]标签已存在"),
+    TAG_IN_USE(50202, "标签使用中,不能删除！"),
+
+    /**
+     * 分类
+     */
+    TYPE_NOT_EXIST(50200, "分类不存在！"),
+    TYPE_EXIST(50201, "[{0}]分类已存在"),
+    TYPE_IN_USE(50202, "分类使用中,不能删除！"),
     ;
 
     private Integer code;

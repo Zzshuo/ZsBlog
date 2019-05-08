@@ -92,7 +92,7 @@ public class User implements Serializable {
     /**
      * 1:正常,2:删除
      */
-    private Byte state;
+    private Integer state;
 
     /**
      * 创建时间

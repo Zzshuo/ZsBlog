@@ -28,14 +28,6 @@ public interface TagService {
     void delete(Integer id);
 
     /**
-     * 标签是否存在
-     *
-     * @param id
-     * @return
-     */
-    boolean exist(Integer id);
-
-    /**
      * 获取标签
      *
      * @param id

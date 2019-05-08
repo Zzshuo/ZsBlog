@@ -50,7 +50,7 @@ public class TagServiceImpl implements TagService {
         example.createCriteria().andNameEqualTo(tagName);
         Tag exist = tagMapper.selectOneByExample(example);
         if (exist != null) {
-            throw new BusinessException(ResponseEnum.ERROR_EXIST_TAG, tagName);
+            throw new BusinessException(ResponseEnum.TAG_EXIST, tagName);
         }
     }
 
@@ -61,25 +61,21 @@ public class TagServiceImpl implements TagService {
                 .andTagIdEqualTo(id);
         int count = articleTagMapper.selectCountByExample(example);
         if (count > 0) {
-            throw new BusinessException(ResponseEnum.ERROR_TAG_USED);
+            throw new BusinessException(ResponseEnum.TAG_IN_USE);
         }
 
         int i = tagMapper.deleteByPrimaryKey(id);
         if (i <= 0) {
-            throw new BusinessException(ResponseEnum.ERROR_NO_TAG);
+            throw new BusinessException(ResponseEnum.TAG_NOT_EXIST);
         }
     }
 
-    @Override
-    public boolean exist(Integer id) {
-        return tagMapper.existsWithPrimaryKey(id);
-    }
 
     @Override
     public TagVo get(Integer id) {
         Tag tag = tagMapper.selectByPrimaryKey(id);
         if (tag == null) {
-            throw new BusinessException(ResponseEnum.ERROR_NO_TAG);
+            throw new BusinessException(ResponseEnum.TAG_NOT_EXIST);
         }
         TagVo tagVo = new TagVo();
         BeanUtil.copy(tag, tagVo);
@@ -93,9 +89,11 @@ public class TagServiceImpl implements TagService {
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Tag> tags = tagMapper.selectByExample(example);
 
-        List<TagVo> collect = tags.stream().map(this::genTagVo).collect(Collectors.toList());
+        List<TagVo> tagVos = tags.stream()
+                .map(this::genTagVo)
+                .collect(Collectors.toList());
 
-        return new PageInfo(collect, tags);
+        return new PageInfo(tagVos, tags);
     }
 
     @Override
