@@ -26,8 +26,36 @@ const api = {
   },
 
   /**
+   * 分类
+   */
+  saveType(data = {}) {
+    const path = 'api/type/save'
+    return request({ url: path, method: 'post', data })
+  },
+  deleteType(data = {}) {
+    const path = 'api/type/delete'
+    return request({ url: path, method: 'post', data })
+  },
+  getTypeList(data = {}) {
+    const path = 'api/type/list'
+    return request({ url: path, method: 'post', data })
+  },
+  getAllType(data = {}) {
+    const path = 'api/type/getAllType'
+    return request({ url: path, method: 'post', data })
+  },
+
+  /**
    * 标签
    */
+  saveTag(data = {}) {
+    const path = 'api/tag/save'
+    return request({ url: path, method: 'post', data })
+  },
+  deleteTag(data = {}) {
+    const path = 'api/tag/delete'
+    return request({ url: path, method: 'post', data })
+  },
   // 获取标签列表
   getTagList(data = {}) {
     const path = 'api/tag/list'
@@ -38,16 +66,20 @@ const api = {
     const path = 'api/tag/getAllTag'
     return request({ url: path, method: 'post', data })
   },
-  getTagById(data = {}) {
-    const path = 'api/tag/getTagById'
-    return request({ url: path, method: 'post', data })
-  },
 
   /**
-   * 分类
+   * 配置
    */
-  getAllType(data = {}) {
-    const path = 'api/type/getAllType'
+  saveConfig(data = {}) {
+    const path = 'api/config/save'
+    return request({ url: path, method: 'post', data })
+  },
+  getConfigListByType(data = {}) {
+    const path = 'api/config/getListByType'
+    return request({ url: path, method: 'post', data })
+  },
+  getConfigTypeMap(data = {}) {
+    const path = 'api/config/getConfigTypeMap'
     return request({ url: path, method: 'post', data })
   },
 
