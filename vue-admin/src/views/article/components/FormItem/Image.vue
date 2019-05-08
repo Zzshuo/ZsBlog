@@ -50,11 +50,8 @@ export default {
     addCoverImage(param) {
       const formdata = new FormData()
       formdata.append('file', param.file)
-      this.api.addCoverImage(formdata).then(response => {
-        const res = response.data
-        if (res && res.code === 20000) {
-          this.imageUrl = res.data
-        }
+      this.api.addCoverImage(formdata).then(data => {
+        this.imageUrl = data
       })
     }
   }

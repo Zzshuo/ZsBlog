@@ -11,8 +11,10 @@ const config = {
   dataType: 'json'
 }
 
+const request = axios.create(config)
+
 // request拦截器
-axios.interceptors.request.use(
+request.interceptors.request.use(
   config => {
     if (store.getters.token) {
       // 让每个请求携带自定义token 请根据实际情况自行修改
@@ -28,7 +30,7 @@ axios.interceptors.request.use(
 )
 
 // response 拦截器
-axios.interceptors.response.use(
+request.interceptors.response.use(
   response => {
     /**
      * code为非20000是抛错 可结合自己业务进行修改
@@ -59,7 +61,7 @@ axios.interceptors.response.use(
       }
       return Promise.reject('error')
     } else {
-      return response.data
+      return res.data
     }
   },
   error => {
@@ -73,5 +75,4 @@ axios.interceptors.response.use(
   }
 )
 
-const request = axios.create(config)
 export default request

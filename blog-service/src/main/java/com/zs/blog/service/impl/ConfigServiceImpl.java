@@ -50,7 +50,7 @@ public class ConfigServiceImpl implements ConfigService {
             throw new BusinessException("没有此configKey");
         }
 
-        ConfigTypeEnum configTypeEnum = ConfigTypeEnum.getEnumById(reqVo.getId());
+        ConfigTypeEnum configTypeEnum = ConfigTypeEnum.getEnumById(reqVo.getConfigType());
         if (configTypeEnum == null) {
             throw new BusinessException("没有此ConfigType");
         }

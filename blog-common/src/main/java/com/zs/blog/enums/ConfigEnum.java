@@ -19,7 +19,7 @@ public enum ConfigEnum {
     private String name;
 
     public static ConfigEnum getEnumByKey(String key) {
-        if (StringUtils.isNotBlank(key)) {
+        if (StringUtils.isBlank(key)) {
             return null;
         }
         for (ConfigEnum configEnum : ConfigEnum.values()) {

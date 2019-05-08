@@ -30,42 +30,27 @@ const common = {
     // 获取文章状态
     getStateMap({ commit }) {
       return new Promise((resolve, reject) => {
-        api.getArticleStateMap().then(response => {
-          const res = response.data
-          if (res && res.code === 20000) {
-            commit('SET_STATEMAP', res.data)
-            resolve()
-          } else {
-            reject(res)
-          }
+        api.getArticleStateMap().then(data => {
+          commit('SET_STATEMAP', data)
+          resolve()
         })
       })
     },
     // 获取文章分类
     getAllType({ commit }) {
       return new Promise((resolve, reject) => {
-        api.getAllType().then(response => {
-          const res = response.data
-          if (res && res.code === 20000) {
-            commit('SET_ALLTYPE', res.data)
-            resolve()
-          } else {
-            reject(res)
-          }
+        api.getAllType().then(data => {
+          commit('SET_ALLTYPE', data)
+          resolve()
         })
       })
     },
     // 获取标签
     getAllTag({ commit }) {
       return new Promise((resolve, reject) => {
-        api.getAllTag().then(response => {
-          const res = response.data
-          if (res && res.code === 20000) {
-            commit('SET_ALLTAG', res.data)
-            resolve()
-          } else {
-            reject(res)
-          }
+        api.getAllTag().then(data => {
+          commit('SET_ALLTAG', data)
+          resolve()
         })
       })
     },

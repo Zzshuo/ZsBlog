@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
 
-    <el-table v-loading="listLoading" :data="articleList" border fit highlight-current-row style="width: 100%">
+    <el-table v-loading="listLoading" :data="articleList" stripe border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
@@ -105,15 +105,9 @@ export default {
   methods: {
     getArticleList() {
       this.listLoading = true
-      this.api.getArticleList(this.reqVo).then(response => {
-        const res = response.data
-        if (res && res.code === 20000) {
-          const data = res.data
-          this.articleList = data.list
-          this.total = data.total
-        } else {
-          console.log(res.code + res.message)
-        }
+      this.api.getArticleList(this.reqVo).then(data => {
+        this.articleList = data.list
+        this.total = data.total
         this.listLoading = false
       })
     },

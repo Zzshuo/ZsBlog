@@ -113,11 +113,8 @@ export default {
   methods: {
     fetchData(id) {
       this.reqVo.id = id
-      this.api.getArticleById(this.reqVo).then(response => {
-        const res = response.data
-        if (res && res.code === 20000) {
-          this.postForm = res.data
-        }
+      this.api.getArticleById(this.reqVo).then(data => {
+        this.postForm = data
       })
     },
     submitForm() {
@@ -125,18 +122,16 @@ export default {
         if (valid) {
           this.loading = true
           this.postForm.state = 1
-          this.api.saveArticle(this.postForm).then(response => {
-            const res = response.data
-            if (res && res.code === 20000) {
-              this.$message({
-                message: '发布文章成功',
-                type: 'success',
-                showClose: true,
-                duration: 1000
-              })
-              this.loading = false
-              this.$router.push('/article/list')
-            }
+          this.api.saveArticle(this.postForm).then(data => {
+            this.$message({
+              message: '发布文章成功',
+              type: 'success',
+              duration: 1000
+            })
+            this.loading = false
+            this.$router.push('/article/list')
+          }, () => {
+            this.loading = false
           })
         }
       })
@@ -144,37 +139,28 @@ export default {
     // 保存草稿
     draftForm() {
       this.postForm.state = 2
-      this.api.saveArticle(this.postForm).then(response => {
-        const res = response.data
-        if (res && res.code === 20000) {
-          this.$message({
-            message: '保存草稿成功',
-            type: 'success',
-            showClose: true,
-            duration: 1000
-          })
-          this.$router.push('/article/list')
-        }
+      this.api.saveArticle(this.postForm).then(data => {
+        this.$message({
+          message: '保存草稿成功',
+          type: 'success',
+          duration: 1000
+        })
+        this.$router.push('/article/list')
       })
     },
     addArticleImage(pos, $file) {
       // 第一步.将图片上传到服务器.
       const formdata = new FormData()
       formdata.append('file', $file)
-
-      this.api.addArticleImage(formdata).then(response => {
-        const res = response.data
-        if (res && res.code === 20000) {
-          // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-          /**
-           * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-           * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-           * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-           */
-          console.log(res.data)
-          const $vm = this.$refs.md
-          $vm.$img2Url(pos, res.data)
-        }
+      this.api.addArticleImage(formdata).then(data => {
+        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+        /**
+         * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+         * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+         * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+         */
+        const $vm = this.$refs.md
+        $vm.$img2Url(pos, data)
       })
     }
   }
