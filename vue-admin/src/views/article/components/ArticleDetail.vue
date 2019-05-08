@@ -69,7 +69,7 @@ import 'mavon-editor/dist/css/index.css'
 import { mapGetters } from 'vuex'
 
 const defaultForm = {
-  // 1:正常,2:删除,3:草稿
+  // 1:发布,2:草稿,0:删除
   state: 0,
   tagIdList: []
 }
@@ -124,6 +124,7 @@ export default {
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.postForm.state = 1
           this.api.saveArticle(this.postForm).then(response => {
             const res = response.data
             if (res && res.code === 20000) {
@@ -133,7 +134,6 @@ export default {
                 showClose: true,
                 duration: 1000
               })
-              this.postForm.state = 1
               this.loading = false
               this.$router.push('/article/list')
             }

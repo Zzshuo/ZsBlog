@@ -1,6 +1,7 @@
 package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
+import com.zs.blog.enums.ConfigTypeEnum;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ConfigService;
 import com.zs.blog.util.ResponseUtil;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/config")
@@ -34,5 +37,15 @@ public class ConfigController {
     public ResponseVo list(@RequestBody ConfigReqVo reqVo) {
         List<ConfigVo> list = configService.getConfigsByType(reqVo.getConfigType());
         return ResponseUtil.success(list);
+    }
+
+    @BusinessLog("配置分类")
+    @PostMapping("/getConfigTypeMap")
+    public ResponseVo getConfigTypeMap() {
+        Map<Integer, String> map = new HashMap<>();
+        for (ConfigTypeEnum value : ConfigTypeEnum.values()) {
+            map.put(value.getId(), value.getName());
+        }
+        return ResponseUtil.success(map);
     }
 }

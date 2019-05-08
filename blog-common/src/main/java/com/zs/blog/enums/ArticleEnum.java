@@ -14,7 +14,7 @@ public class ArticleEnum {
     public enum StateEnum {
         PUBLISH(1, "发布"),
         DRAFT(2, "草稿"),
-        DELETE(3, "删除"),
+        DELETE(0, "删除"),
         ;
         private Integer id;
         private String name;

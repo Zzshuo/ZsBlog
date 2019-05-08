@@ -90,7 +90,7 @@ public class User implements Serializable {
     private Date lastLoginTime;
 
     /**
-     * 1:正常,2:删除
+     * 1:正常,0:删除
      */
     private Integer state;
 

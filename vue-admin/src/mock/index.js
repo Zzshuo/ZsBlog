@@ -28,6 +28,7 @@ Mock.mock(/\/api\/user\/logout/, 'post', userApi.logout)
 Mock.mock(/\/api\/article\/get/, articleApi.getArticle)
 Mock.mock(/\/api\/article\/saveOrUpdate/, articleApi.saveArticle)
 Mock.mock(/\/api\/article\/list/, articleApi.getArticleList)
+Mock.mock(/\/api\/article\/getArticleStateMap/, articleApi.getArticleStateMap())
 
 // tag
 Mock.mock(/\/api\/tag\/getTagById/, tagApi.getTag)
@@ -36,9 +37,6 @@ Mock.mock(/\/api\/tag\/getAllTag/, tagApi.getAllTag())
 
 // web
 Mock.mock(/\/api\/web\/info/, webInfoApi.getWebInfo)
-
-// common
-Mock.mock(/\/api\/common\/getArticleStateMap/, commonApi.getArticleStateMap())
 
 // type
 Mock.mock(/\/api\/type\/getAllType/, typeApi.getAllType())

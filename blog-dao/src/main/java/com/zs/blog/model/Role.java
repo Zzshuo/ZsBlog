@@ -36,7 +36,7 @@ public class Role implements Serializable {
     private String permission;
 
     /**
-     * 1:正常,2:删除
+     * 1:正常,0:删除
      */
     private Integer state;
 

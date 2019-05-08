@@ -1,6 +1,7 @@
 package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
+import com.zs.blog.enums.ArticleEnum;
 import com.zs.blog.object.IdReqVo;
 import com.zs.blog.object.PageInfo;
 import com.zs.blog.object.ResponseVo;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zshuo
@@ -53,5 +57,15 @@ public class ArticleController {
     public ResponseVo list(@RequestBody ArticlePageReqVo reqVo) {
         PageInfo<ArticleBriefVo> pageInfo = articleService.list(reqVo);
         return ResponseUtil.success(pageInfo);
+    }
+
+    @BusinessLog("文章状态")
+    @PostMapping("/getArticleStateMap")
+    public ResponseVo getArticleStateMap() {
+        Map<Integer, String> map = new HashMap<>();
+        for (ArticleEnum.StateEnum value : ArticleEnum.StateEnum.values()) {
+            map.put(value.getId(), value.getName());
+        }
+        return ResponseUtil.success(map);
     }
 }

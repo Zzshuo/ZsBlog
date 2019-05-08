@@ -39,7 +39,7 @@ public class ArticleBriefVo {
     private String image;
 
     /**
-     * 1:正常,2:删除,3:草稿
+     * 1:发布,2:草稿,0:删除
      */
     private Integer state;
 

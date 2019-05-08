@@ -6,7 +6,7 @@ CREATE TABLE `article` (
   `type_id` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '类型',
   `image` varchar(200) DEFAULT NULL COMMENT '文章封面图片',
   `content` longtext COMMENT '文章内容',
-  `state` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '1:正常,2:删除,3:草稿',
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '1:发布,2:草稿,0:删除',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE

@@ -1,6 +1,9 @@
 import request from '../utils/request'
 
 const api = {
+  /**
+   * 文章
+   */
   // 保存文章
   saveArticle(data = {}) {
     const path = 'api/article/save'
@@ -16,7 +19,15 @@ const api = {
     const path = 'api/article/get'
     return request({ url: path, method: 'post', data })
   },
+  // 获取文章状态
+  getArticleStateMap(data = {}) {
+    const path = 'api/article/getArticleStateMap'
+    return request({ url: path, method: 'post', data })
+  },
 
+  /**
+   * 标签
+   */
   // 获取标签列表
   getTagList(data = {}) {
     const path = 'api/tag/list'
@@ -32,6 +43,9 @@ const api = {
     return request({ url: path, method: 'post', data })
   },
 
+  /**
+   * 分类
+   */
   getAllType(data = {}) {
     const path = 'api/type/getAllType'
     return request({ url: path, method: 'post', data })
@@ -43,12 +57,9 @@ const api = {
     return request({ url: path, method: 'post', data })
   },
 
-  // 获取文章状态
-  getArticleStateMap(data = {}) {
-    const path = 'api/common/getArticleStateMap'
-    return request({ url: path, method: 'post', data })
-  },
-
+  /**
+   * 上传文件
+   */
   // 上传文章图片
   addArticleImage(data = {}) {
     const path = 'api/file/addArticleImage'
