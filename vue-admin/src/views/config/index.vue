@@ -69,21 +69,21 @@ export default {
       this.api.getConfigListByType(this.reqVo).then(data => {
         this.configList = data.map(v => {
           this.$set(v, 'edit', false)
-          v.originalConfigValue = v.configValue
+          v.originalValue = v.configValue
           return v
         })
         this.listLoading = false
       })
     },
     cancelEdit(row) {
-      row.configValue = row.originalConfigValue
+      row.configValue = row.originalValue
       row.edit = false
     },
     confirmEdit(row) {
       this.listLoading = true
       this.api.saveConfig(row).then(data => {
         row.edit = false
-        row.originalConfigValue = row.configValue
+        row.originalValue = row.configValue
         this.$message({
           message: '保存配置成功',
           type: 'success',

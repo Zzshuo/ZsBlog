@@ -36,10 +36,6 @@ const api = {
     const path = 'api/type/delete'
     return request({ url: path, method: 'post', data })
   },
-  getTypeList(data = {}) {
-    const path = 'api/type/list'
-    return request({ url: path, method: 'post', data })
-  },
   getAllType(data = {}) {
     const path = 'api/type/getAllType'
     return request({ url: path, method: 'post', data })
@@ -54,11 +50,6 @@ const api = {
   },
   deleteTag(data = {}) {
     const path = 'api/tag/delete'
-    return request({ url: path, method: 'post', data })
-  },
-  // 获取标签列表
-  getTagList(data = {}) {
-    const path = 'api/tag/list'
     return request({ url: path, method: 'post', data })
   },
   // 获取所有标签
