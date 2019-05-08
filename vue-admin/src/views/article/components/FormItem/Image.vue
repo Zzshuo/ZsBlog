@@ -47,7 +47,7 @@ export default {
       }
       return isJPG && isLt2M
     },
-    addCoverImage(param){
+    addCoverImage(param) {
       const formdata = new FormData()
       formdata.append('file', param.file)
       this.api.addCoverImage(formdata).then(response => {

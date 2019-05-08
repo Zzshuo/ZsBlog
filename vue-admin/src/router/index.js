@@ -68,6 +68,42 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/type',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/type/index'),
+        name: 'type',
+        meta: { title: '分类', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/tag',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/tag/index'),
+        name: 'tag',
+        meta: { title: '标签', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/config',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/config/index'),
+        name: 'config',
+        meta: { title: '配置', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/icon',
     component: Layout,
     children: [
