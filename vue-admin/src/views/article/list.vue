@@ -2,16 +2,9 @@
   <div class="app-container">
 
     <el-table v-loading="listLoading" :data="articleList" stripe border fit highlight-current-row style="width: 100%">
-      <el-table-column align="center" label="ID" width="80">
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="300px" label="标题">
-        <template slot-scope="scope">
-          <span>{{ scope.row.title }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column align="center" label="ID" width="50" prop="id"/>
+
+      <el-table-column min-width="300px" label="标题" prop="title"/>
 
       <el-table-column width="100px" align="center" label="类型">
         <template slot-scope="scope">
@@ -26,7 +19,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="150px" align="center" label="标签">
+      <el-table-column min-width="150px" align="center" label="标签">
         <template slot-scope="scope">
           <el-tag v-for="tagId in scope.row.tagIdList" :key="tagId">{{ FormatUtil.formatTag(tagId) }}</el-tag>
         </template>
@@ -57,10 +50,10 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="Actions" width="120">
+      <el-table-column align="center" label="操作" width="100">
         <template slot-scope="scope">
           <router-link :to="'/article/edit/'+scope.row.id">
-            <el-button type="primary" size="small" icon="el-icon-edit">Edit</el-button>
+            <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
         </template>
       </el-table-column>

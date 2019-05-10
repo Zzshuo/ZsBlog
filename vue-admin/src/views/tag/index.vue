@@ -15,12 +15,8 @@
           <span v-else>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="文章数" width="80">
-        <template slot-scope="scope">
-          <span>{{ scope.row.count }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="操作" width="200">
+      <el-table-column align="center" label="文章数" width="70" prop="count"/>
+      <el-table-column align="center" label="操作" width="150">
         <template slot-scope="scope">
           <el-button v-if="scope.row.edit" type="success" size="small" @click="confirmEdit(scope.row)">保存</el-button>
           <el-button v-else type="primary" size="small" @click="scope.row.edit=!scope.row.edit">编辑</el-button>
