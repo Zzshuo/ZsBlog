@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-
     <el-table v-loading="listLoading" :data="articleList" stripe border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="50" prop="id"/>
 
@@ -21,7 +20,7 @@
 
       <el-table-column min-width="150px" align="center" label="标签">
         <template slot-scope="scope">
-          <el-tag v-for="tagId in scope.row.tagIdList" :key="tagId">{{ FormatUtil.formatTag(tagId) }}</el-tag>
+          <el-tag v-for="tagId in scope.row.tagIdList" :key="tagId" size="medium" style="margin: 1px">{{ FormatUtil.formatTag(tagId) }}</el-tag>
         </template>
       </el-table-column>
 
