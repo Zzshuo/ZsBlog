@@ -5,8 +5,7 @@
       <el-button slot="append" type="primary" @click="addTag()">添加标签</el-button>
     </div>
     <el-table v-loading="listLoading" :data="tagList" stripe border fit highlight-current-row style="width: 100%">
-      <el-table-column align="center" label="序号" type="index" width="80">
-      </el-table-column>
+      <el-table-column align="center" label="序号" type="index" width="80"/>
       <el-table-column label="标签名称" min-width="200">
         <template slot-scope="scope">
           <template v-if="scope.row.edit">
@@ -72,29 +71,29 @@ export default {
       row.edit = false
     },
     confirmEdit(row) {
-      if(row.name === ''){
-        this.$message({message: '请输入内容', type: 'error', duration: 1000})
+      if (row.name === '') {
+        this.$message({ message: '请输入内容', type: 'error', duration: 1000 })
       }
       this.listLoading = true
       this.api.saveTag(row).then(data => {
         row.edit = false
         row.originalValue = row.name
-        this.$message({message: '保存标签成功', type: 'success', duration: 1000})
+        this.$message({ message: '保存标签成功', type: 'success', duration: 1000 })
         this.listLoading = false
       }, () => {
         this.listLoading = false
       })
     },
     addTag() {
-      if(this.newTagName === ''){
-        this.$message({message: '请输入内容', type: 'error', duration: 1000})
-      }else{
+      if (this.newTagName === '') {
+        this.$message({ message: '请输入内容', type: 'error', duration: 1000 })
+      } else {
         this.reqVo = {}
         this.reqVo.name = this.newTagName
 
         this.listLoading = true
         this.api.saveTag(this.reqVo).then(data => {
-          this.$message({message: '添加标签成功', type: 'success', duration: 1000})
+          this.$message({ message: '添加标签成功', type: 'success', duration: 1000 })
           this.getAllTag()
           this.listLoading = false
         }, () => {

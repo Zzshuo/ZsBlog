@@ -123,11 +123,7 @@ export default {
           this.loading = true
           this.postForm.state = 1
           this.api.saveArticle(this.postForm).then(data => {
-            this.$message({
-              message: '发布文章成功',
-              type: 'success',
-              duration: 1000
-            })
+            this.$message({ message: '发布文章成功', type: 'success', duration: 1000 })
             this.loading = false
             this.$router.push('/article/list')
           }, () => {
@@ -140,11 +136,7 @@ export default {
     draftForm() {
       this.postForm.state = 2
       this.api.saveArticle(this.postForm).then(data => {
-        this.$message({
-          message: '保存草稿成功',
-          type: 'success',
-          duration: 1000
-        })
+        this.$message({ message: '保存草稿成功', type: 'success', duration: 1000 })
         this.$router.push('/article/list')
       })
     },

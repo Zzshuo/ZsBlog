@@ -84,11 +84,7 @@ export default {
       this.api.saveConfig(row).then(data => {
         row.edit = false
         row.originalValue = row.configValue
-        this.$message({
-          message: '保存配置成功',
-          type: 'success',
-          duration: 1000
-        })
+        this.$message({ message: '保存配置成功', type: 'success', duration: 1000 })
         this.listLoading = false
       }, () => {
         this.listLoading = false
