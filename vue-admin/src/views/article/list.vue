@@ -20,7 +20,7 @@
 
       <el-table-column min-width="150px" align="center" label="标签">
         <template slot-scope="scope">
-          <el-tag v-for="tagId in scope.row.tagIdList" :key="tagId" size="medium" style="margin: 1px">{{ FormatUtil.formatTag(tagId) }}</el-tag>
+          <el-tag v-for="tagId in scope.row.tagIdList" :key="tagId" style="margin: 1px">{{ FormatUtil.formatTag(tagId) }}</el-tag>
         </template>
       </el-table-column>
 
