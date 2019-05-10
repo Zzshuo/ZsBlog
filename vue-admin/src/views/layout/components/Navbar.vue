@@ -6,6 +6,12 @@
       <template v-if="device!=='mobile'">
         <error-log class="errLog-container right-menu-item hover-effect"/>
 
+        <!--布局大小-->
+        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+          <size-select class="right-menu-item hover-effect"/>
+        </el-tooltip>
+
+        <!--全屏-->
         <screenfull class="right-menu-item hover-effect"/>
       </template>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
@@ -34,13 +40,15 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
 import ErrorLog from '@/components/ErrorLog'
+import SizeSelect from '@/components/SizeSelect'
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
     ErrorLog,
-    Screenfull
+    Screenfull,
+    SizeSelect,
   },
   computed: {
     ...mapGetters([

@@ -6,7 +6,8 @@ const app = {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false
     },
-    device: 'desktop'
+    device: 'desktop',
+    size: Cookies.get('size') || 'medium'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
@@ -25,6 +26,10 @@ const app = {
     },
     TOGGLE_DEVICE: (state, device) => {
       state.device = device
+    },
+    SET_SIZE: (state, size) => {
+      state.size = size
+      Cookies.set('size', size)
     }
   },
   actions: {
@@ -36,6 +41,9 @@ const app = {
     },
     ToggleDevice({ commit }, device) {
       commit('TOGGLE_DEVICE', device)
+    },
+    setSize({ commit }, size) {
+      commit('SET_SIZE', size)
     }
   }
 }
