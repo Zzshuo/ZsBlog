@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class UserController {
 
-    @BusinessLog("进入登陆页面")
+    @BusinessLog("登陆")
     @PostMapping("/login")
     public ResponseVo login(@RequestBody UserReqVo userReqVo) {
         String username = userReqVo.getUsername();
@@ -29,7 +29,7 @@ public class UserController {
         return ResponseUtil.success(ImmutableMap.of("token", "admin-token"));
     }
 
-    @BusinessLog("进入登陆页面")
+    @BusinessLog("用户信息")
     @PostMapping("/info")
     public ResponseVo info() {
         // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
@@ -43,7 +43,7 @@ public class UserController {
         return ResponseUtil.success(map);
     }
 
-    @BusinessLog("进入登陆页面")
+    @BusinessLog("登出")
     @PostMapping("/logout")
     public ResponseVo logout() {
         return ResponseUtil.success();
