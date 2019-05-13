@@ -1,10 +1,11 @@
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+import Cookies from 'js-cookie'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
+// import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 
 import '@/styles/index.scss' // global css
 
@@ -19,7 +20,7 @@ import * as filters from './filters' // global filters
 import * as formatUtil from './utils/formatUtil'
 
 // if (process.env.NODE_ENV !== 'production') require('@/mock')
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, { size: Cookies.get('size') || 'medium' })
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {

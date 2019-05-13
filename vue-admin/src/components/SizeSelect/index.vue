@@ -35,11 +35,7 @@ export default {
       this.$message({ message: 'Switch Size Success', type: 'success' })
     },
     refreshView() {
-      // In order to make the cached page re-rendered
-      this.$store.dispatch('delAllCachedViews', this.$route)
-
       const { fullPath } = this.$route
-      console.log(fullPath)
       this.$nextTick(() => {
         this.$router.replace({
           path: '/redirect' + fullPath

@@ -48,7 +48,7 @@ export default {
     Hamburger,
     ErrorLog,
     Screenfull,
-    SizeSelect,
+    SizeSelect
   },
   computed: {
     ...mapGetters([
