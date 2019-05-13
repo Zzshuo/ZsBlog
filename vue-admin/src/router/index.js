@@ -40,9 +40,10 @@ export const constantRouterMap = [
   },
 
   {
-    path: '',
+    path: '/',
     component: Layout,
     name: 'home',
+    redirect: '/home',
     children: [{
       path: '/home',
       component: () => import('@/views/home/index'),
