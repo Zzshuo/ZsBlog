@@ -5,6 +5,7 @@ import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -34,6 +35,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseVo errorHandler(Exception ex) {
         log.error("全局异常", ex);
+        return ResponseUtil.error(ex.getMessage());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = AuthenticationException.class)
+    public ResponseVo errorHandler(AuthenticationException ex) {
+        log.error("shiro异常", ex);
         return ResponseUtil.error(ex.getMessage());
     }
 
@@ -109,5 +117,4 @@ public class GlobalExceptionHandler {
         }
         return ResponseUtil.error(message);
     }
-
 }

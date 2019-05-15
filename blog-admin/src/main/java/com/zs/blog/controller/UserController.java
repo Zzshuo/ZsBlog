@@ -2,10 +2,17 @@ package com.zs.blog.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.zs.blog.annotation.BusinessLog;
+import com.zs.blog.config.ShiroProperties;
+import com.zs.blog.exception.BusinessException;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.vo.request.UserReqVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class UserController {
 
-    @BusinessLog("登陆")
-    @PostMapping("/login")
-    public ResponseVo login(@RequestBody UserReqVo userReqVo) {
-        String username = userReqVo.getUsername();
-        String password = userReqVo.getPassword();
-
-        return ResponseUtil.success(ImmutableMap.of("token", "admin-token"));
-    }
+//    @BusinessLog("登陆")
+//    @PostMapping("/login")
+//    public ResponseVo login(@RequestBody UserReqVo userReqVo) {
+//        String username = userReqVo.getUsername();
+//        String password = userReqVo.getPassword();
+//
+//        String token = JwtUtil.createToken(username, DateUtils.addHours(new Date(), 2));
+//        return ResponseUtil.success(token);
+//    }
 
     @BusinessLog("用户信息")
     @PostMapping("/info")
@@ -43,9 +51,63 @@ public class UserController {
         return ResponseUtil.success(map);
     }
 
-    @BusinessLog("登出")
-    @PostMapping("/logout")
+    /**
+     * 登录
+     */
+    @BusinessLog("登陆")
+    @PostMapping("/login")
+    public ResponseVo login(@RequestBody UserReqVo userReqVo) {
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            String username = userReqVo.getUsername();
+            String password = userReqVo.getPassword();
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            subject.login(token);
+
+            String authorization = (String) subject.getSession().getId();
+            return ResponseUtil.success(authorization);
+
+        } catch (IncorrectCredentialsException e) {
+            throw new BusinessException("密码错误");
+        } catch (LockedAccountException e) {
+            throw new BusinessException("该用户已被禁用");
+        } catch (ExpiredCredentialsException e) {
+            throw new BusinessException("已过期");
+        } catch (AuthenticationException e) {
+            throw new BusinessException("该用户不存在");
+        }
+    }
+
+    /**
+     * 注销
+     */
+    @BusinessLog("注销")
+    @RequestMapping(value = "/logout")
     public ResponseVo logout() {
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.logout();
         return ResponseUtil.success();
+    }
+
+    /**
+     * 未登录
+     */
+    @RequestMapping(value = "/unauth")
+    public ResponseVo unauth() {
+        return ResponseUtil.error("请重新登陆");
+    }
+
+
+    public static void main(String[] args) {
+        ShiroProperties shiroProperties = new ShiroProperties();
+
+        String hashAlgorithmName = shiroProperties.getHashAlgorithmName();
+        int hashIterations = shiroProperties.getHashIterations();
+
+        String credentials = "test";
+        // 用户名当做盐值
+        ByteSource credentialsSalt = ByteSource.Util.bytes("test");
+        Object obj = new SimpleHash(hashAlgorithmName, credentials, credentialsSalt, hashIterations);
+        System.out.println(obj);
     }
 }

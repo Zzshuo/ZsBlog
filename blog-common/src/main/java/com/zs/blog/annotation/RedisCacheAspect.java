@@ -43,7 +43,7 @@ public class RedisCacheAspect {
             return point.proceed();
         }
         String key = AspectUtil.getKey(point, cache.key(), RedisEnum.REDIS_CACHE_PREFIX.getRedisKey());
-        boolean hasKey = redisUtil.hasKey(key);
+        boolean hasKey = redisUtil.exist(key);
         if (hasKey) {
             try {
                 log.info("{}从缓存中获取数据", key);

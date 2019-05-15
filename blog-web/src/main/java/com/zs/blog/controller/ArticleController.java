@@ -1,8 +1,8 @@
 package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
+import com.zs.blog.object.IdReqVo;
 import com.zs.blog.object.PageInfo;
-import com.zs.blog.object.RequestVo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
@@ -31,7 +31,7 @@ public class ArticleController {
 
     @BusinessLog("获取文章")
     @PostMapping("/get")
-    public ResponseVo get(@RequestBody RequestVo reqVo) {
+    public ResponseVo get(@RequestBody IdReqVo reqVo) {
         ArticleVo articleVo = articleService.get(reqVo.getId());
         return ResponseUtil.success(articleVo);
     }
