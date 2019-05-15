@@ -61,11 +61,12 @@ public class UserController {
             Subject subject = SecurityUtils.getSubject();
             String username = userReqVo.getUsername();
             String password = userReqVo.getPassword();
-            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-            subject.login(token);
+            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
+            subject.login(usernamePasswordToken);
 
-            String authorization = (String) subject.getSession().getId();
-            return ResponseUtil.success(authorization);
+            String token = (String) subject.getSession().getId();
+
+            return ResponseUtil.success(ImmutableMap.of("token", token));
 
         } catch (IncorrectCredentialsException e) {
             throw new BusinessException("密码错误");
@@ -104,9 +105,9 @@ public class UserController {
         String hashAlgorithmName = shiroProperties.getHashAlgorithmName();
         int hashIterations = shiroProperties.getHashIterations();
 
-        String credentials = "test";
+        String credentials = "admin";
         // 用户名当做盐值
-        ByteSource credentialsSalt = ByteSource.Util.bytes("test");
+        ByteSource credentialsSalt = ByteSource.Util.bytes("admin");
         Object obj = new SimpleHash(hashAlgorithmName, credentials, credentialsSalt, hashIterations);
         System.out.println(obj);
     }
