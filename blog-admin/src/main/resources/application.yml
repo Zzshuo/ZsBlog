@@ -14,7 +14,7 @@ spring:
     #开发时关闭缓存,不然没法看到实时页面
     cache: false
 server:
-  port: 8080
+  port: 8081
 
 # MyBatis
 mybatis:

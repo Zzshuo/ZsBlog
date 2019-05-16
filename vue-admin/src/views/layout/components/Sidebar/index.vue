@@ -1,6 +1,5 @@
 <template>
   <div class="sidebar-container has-logo">
-    <logo/>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="$route.path"
@@ -19,12 +18,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Logo from './Logo'
 import variables from '@/styles/variables.scss'
 import SidebarItem from './SidebarItem'
 
 export default {
-  components: { SidebarItem, Logo },
+  components: { SidebarItem },
   computed: {
     ...mapGetters([
       'sidebar'
