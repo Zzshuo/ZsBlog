@@ -76,7 +76,7 @@
             </properties>
             <build>
                 <!-- 产生的构件的文件名，默认值是${artifactId}-${version}-->
-                <finalName>${project.artifactId}-${project.version}</finalName>
+                <finalName>${project.artifactId}-dev-${project.version}</finalName>
             </build>
         </profile>
         <!--生产配置-->
@@ -87,7 +87,7 @@
             </properties>
             <build>
                 <!-- 产生的构件的文件名-->
-                <finalName>${project.artifactId}</finalName>
+                <finalName>${project.artifactId}-prod-${project.version}</finalName>
             </build>
         </profile>
     </profiles>
