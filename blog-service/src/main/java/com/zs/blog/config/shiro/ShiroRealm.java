@@ -1,4 +1,4 @@
-package com.zs.blog.config;
+package com.zs.blog.config.shiro;
 
 import com.zs.blog.consts.CommonConst;
 import com.zs.blog.model.Role;

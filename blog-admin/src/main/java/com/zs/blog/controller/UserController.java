@@ -2,7 +2,7 @@ package com.zs.blog.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.config.ShiroProperties;
+import com.zs.blog.config.shiro.ShiroProperties;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
@@ -26,16 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
-//    @BusinessLog("登陆")
-//    @PostMapping("/login")
-//    public ResponseVo login(@RequestBody UserReqVo userReqVo) {
-//        String username = userReqVo.getUsername();
-//        String password = userReqVo.getPassword();
-//
-//        String token = JwtUtil.createToken(username, DateUtils.addHours(new Date(), 2));
-//        return ResponseUtil.success(token);
-//    }
 
     @BusinessLog("用户信息")
     @PostMapping("/info")
