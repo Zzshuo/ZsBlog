@@ -15,7 +15,7 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission'
-import api from './api/api' // permission control
+import * as api from './api/api' // permission control
 import * as filters from './filters' // global filters
 import * as formatUtil from './utils/formatUtil'
 
