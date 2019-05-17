@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2019/2/28
  **/
 @RestController
-@RequestMapping("/api/tag")
+@RequestMapping("/admin/tag")
 public class TagController {
 
     @Autowired

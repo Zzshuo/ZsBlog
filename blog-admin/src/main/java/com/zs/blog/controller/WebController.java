@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/2/28
  **/
 @RestController
-@RequestMapping("/api/web")
+@RequestMapping("/admin/web")
 public class WebController {
-    
+
     @Autowired
     private WebService webService;
 

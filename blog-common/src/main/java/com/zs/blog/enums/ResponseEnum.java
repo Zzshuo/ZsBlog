@@ -14,6 +14,8 @@ public enum ResponseEnum {
     SUCCESS(20000, "操作成功！"),
     ERROR(50000, "系统错误！"),
 
+    USER_LOGOUT(50008, "请重新登录！"),
+
     /**
      * 文章
      */

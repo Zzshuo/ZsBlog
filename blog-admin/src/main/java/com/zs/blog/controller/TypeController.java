@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2019/4/15
  **/
 @RestController
-@RequestMapping("/api/type")
+@RequestMapping("/admin/type")
 public class TypeController {
 
     @Autowired

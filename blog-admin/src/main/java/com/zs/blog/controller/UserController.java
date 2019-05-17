@@ -3,6 +3,7 @@ package com.zs.blog.controller;
 import com.google.common.collect.ImmutableMap;
 import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.config.ShiroProperties;
+import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Slf4j
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/admin/user")
 public class UserController {
 
     @BusinessLog("用户信息")
@@ -85,7 +86,7 @@ public class UserController {
      */
     @RequestMapping(value = "/unauth")
     public ResponseVo unauth() {
-        return ResponseUtil.error("请重新登陆");
+        throw new BusinessException(ResponseEnum.USER_LOGOUT);
     }
 
 

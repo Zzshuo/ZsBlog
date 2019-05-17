@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2019/2/28
  **/
 @RestController
-@RequestMapping("/api/article")
+@RequestMapping("/admin/article")
 public class ArticleController {
 
     @Autowired

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/config")
+@RequestMapping("/admin/config")
 public class ConfigController {
 
     @Autowired
