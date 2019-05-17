@@ -2,7 +2,7 @@ package com.zs.blog.service.impl;
 
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.service.FileService;
-import com.zs.blog.services.OssService;
+import com.zs.blog.service.OssService;
 import com.zs.blog.util.FileUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -36,9 +36,6 @@ public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ShiroProperties shiroProperties;
-
     /**
      * 用户名信息验证
      * 主要是用来进行身份认证的，即验证用户输入的账号和密码是否正确

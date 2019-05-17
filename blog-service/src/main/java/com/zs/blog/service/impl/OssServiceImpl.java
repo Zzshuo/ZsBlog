@@ -1,9 +1,10 @@
-package com.zs.blog.services;
+package com.zs.blog.service.impl;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.CannedAccessControlList;
 import com.zs.blog.enums.ConfigEnum;
 import com.zs.blog.service.ConfigService;
+import com.zs.blog.service.OssService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.net.URL;
  * @date 2019-04-29
  **/
 @Service
-public class OssService {
+public class OssServiceImpl implements OssService {
 
     private static OSSClient ossClient;
 
@@ -27,7 +28,7 @@ public class OssService {
 
     public OSSClient ossClient() {
         if (ossClient == null) {
-            synchronized (OssService.class) {
+            synchronized (OssServiceImpl.class) {
                 if (ossClient == null) {
                     String endpoint = configService.getConfigValueByKey(ConfigEnum.ALI_OSS_END_POINT.getKey());
                     String accessKeyId = configService.getConfigValueByKey(ConfigEnum.ALI_OSS_ACCESSKEY_ID.getKey());
@@ -60,6 +61,7 @@ public class OssService {
     /**
      * 上传文件流
      */
+    @Override
     public String uploadFile(String key, InputStream inputStream) {
         if (!ossClient().doesObjectExist(getBucketName(), key)) {
             ossClient().putObject(getBucketName(), key, inputStream);
@@ -70,6 +72,7 @@ public class OssService {
     /**
      * 上传Byte数组
      */
+    @Override
     public String uploadFile(String key, byte[] bytes) {
         ossClient().putObject(getBucketName(), key, new ByteArrayInputStream(bytes));
         return getFullFilePath(key);
@@ -78,6 +81,7 @@ public class OssService {
     /**
      * 上传网络流
      */
+    @Override
     public String uploadFile(String key, String url) throws IOException {
         InputStream inputStream = new URL(url).openStream();
         ossClient().putObject(getBucketName(), key, inputStream);
@@ -87,6 +91,7 @@ public class OssService {
     /**
      * 文件上传
      */
+    @Override
     public String uploadFile(String key, File file) {
         ossClient().putObject(getBucketName(), key, file);
         return getFullFilePath(key);

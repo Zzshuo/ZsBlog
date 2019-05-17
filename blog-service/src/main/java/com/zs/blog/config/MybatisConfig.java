@@ -1,4 +1,4 @@
-package com.zs.blog.config.shiro;
+package com.zs.blog.config;
 
 import org.springframework.stereotype.Component;
 import tk.mybatis.spring.annotation.MapperScan;
