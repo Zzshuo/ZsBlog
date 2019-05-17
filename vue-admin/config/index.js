@@ -56,7 +56,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../../blog-admin/src/main/resources/static'),
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: '',
 
     /**
      * You can set by youself according to actual condition
