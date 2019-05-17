@@ -40,12 +40,12 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //注意过滤器配置顺序 不能颠倒
         //anon. 配置不会被拦截的请求 顺序判断
-        filterChainDefinitionMap.put("/api/user/logout", "anon");
-        filterChainDefinitionMap.put("/api/user/login", "anon");
+        filterChainDefinitionMap.put("/admin/user/logout", "anon");
+        filterChainDefinitionMap.put("/admin/user/login", "anon");
         //authc. 配置拦截的请求
-        filterChainDefinitionMap.put("/api/**", "authc");
+        filterChainDefinitionMap.put("/admin/**", "authc");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
-        shiroFilterFactoryBean.setLoginUrl("/api/user/unauth");
+        shiroFilterFactoryBean.setLoginUrl("/admin/user/unauth");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         log.info("shiroFilter注册完成");
         return shiroFilterFactoryBean;
