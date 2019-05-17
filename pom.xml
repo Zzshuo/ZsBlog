@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zs</groupId>
+    <groupId>com.zs.blog</groupId>
     <artifactId>blog</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -45,17 +45,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.zs</groupId>
+                <groupId>com.zs.blog</groupId>
                 <artifactId>blog-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zs</groupId>
+                <groupId>com.zs.blog</groupId>
                 <artifactId>blog-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zs</groupId>
+                <groupId>com.zs.blog</groupId>
                 <artifactId>blog-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
