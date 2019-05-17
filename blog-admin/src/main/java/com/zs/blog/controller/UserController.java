@@ -2,7 +2,7 @@ package com.zs.blog.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.zs.blog.annotation.BusinessLog;
-import com.zs.blog.config.shiro.ShiroProperties;
+import com.zs.blog.config.ShiroProperties;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;

@@ -1,4 +1,4 @@
-package com.zs.blog.config.shiro;
+package com.zs.blog.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

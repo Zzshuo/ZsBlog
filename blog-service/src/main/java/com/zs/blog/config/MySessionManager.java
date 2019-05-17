@@ -1,4 +1,4 @@
-package com.zs.blog.config.shiro;
+package com.zs.blog.config;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
