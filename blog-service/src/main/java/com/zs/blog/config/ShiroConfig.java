@@ -56,14 +56,27 @@ public class ShiroConfig {
      * 权限管理，这个类组合了登陆，登出，权限，session的处理
      */
     @Bean
-    public SessionsSecurityManager securityManager(ShiroRealm shiroRealm) {
+    public SessionsSecurityManager securityManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(shiroRealm);
+        manager.setRealm(shiroRealm());
         manager.setSessionManager(sessionManager());
         //注入记住我管理器
         manager.setRememberMeManager(rememberMeManager());
         log.info("securityManager注册完成");
         return manager;
+    }
+
+    /**
+     * 注入Realm
+     *
+     * @return ShiroRealm
+     */
+    @Bean
+    public ShiroRealm shiroRealm() {
+        ShiroRealm shiroRealm = new ShiroRealm();
+        shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        log.info("shiroRealm注册完成");
+        return shiroRealm;
     }
 
     /**
@@ -81,6 +94,7 @@ public class ShiroConfig {
     /**
      * 2.自定义sessionManager，用户的唯一标识，即Token或Authorization的认证
      */
+    @Bean
     public SessionManager sessionManager() {
         MySessionManager mySessionManager = new MySessionManager();
         mySessionManager.setSessionDAO(redisSessionDAO());
@@ -92,6 +106,7 @@ public class ShiroConfig {
      *
      * @return
      */
+    @Bean
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(shiroProperties.getHost() + ":" + shiroProperties.getPort());
@@ -100,6 +115,7 @@ public class ShiroConfig {
         return redisManager;
     }
 
+    @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         // 自定义session管理 使用redis
@@ -110,6 +126,7 @@ public class ShiroConfig {
     /**
      * 此处对应前端“记住我”的功能，获取用户关联信息而无需登录
      */
+    @Bean
     public SimpleCookie rememberMeCookie() {
         //这个参数是cookie的名称，对应前端的checkbox的name = remember
         SimpleCookie simpleCookie = new SimpleCookie("remember");
@@ -117,6 +134,7 @@ public class ShiroConfig {
         return simpleCookie;
     }
 
+    @Bean
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());

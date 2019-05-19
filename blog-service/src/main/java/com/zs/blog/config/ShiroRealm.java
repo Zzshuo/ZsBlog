@@ -1,12 +1,9 @@
 package com.zs.blog.config;
 
-import com.zs.blog.consts.CommonConst;
 import com.zs.blog.model.Role;
 import com.zs.blog.model.User;
 import com.zs.blog.service.RoleService;
 import com.zs.blog.service.UserService;
-import com.zs.blog.util.JwtUtil;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -60,8 +57,8 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        Integer userId = (Integer) SecurityUtils.getSubject().getPrincipal();
-        String username = JwtUtil.getClaim(principals.toString(), CommonConst.USERNAME);
+//        String userName = (String) SecurityUtils.getSubject().getPrincipal();
+        String username = (String) principals.getPrimaryPrincipal();
         User user = userService.getByUserName(username);
 
         //获取用户角色
