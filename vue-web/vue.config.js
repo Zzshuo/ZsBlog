@@ -1,58 +1,115 @@
-'use strict'
-// Template version: 1.3.1
-// see http://vuejs-templates.github.io/webpack for documentation.
-
-const path = require('path')
-
-const resolve = dir => {
-  //__dirname是获取当前文件绝对路径的全局对象
-  return path.join(__dirname, dir)
-}
-
-// 项目部署基础
-// 默认情况下，我们假设你的应用将被部署在域的根目录下,
-// 例如：https://www.my-app.com/
-// 默认：'/'
-// 如果您的应用程序部署在子路径中，则需要在这指定子路径
-// 例如：https://www.foobar.com/my-app/
-// 需要将它改为'/my-app/'
-// iview-admin线上演示打包路径： https://file.iviewui.com/admin-dist/
-const BASE_URL = process.env.NODE_ENV === 'production'
-  ? '/'
-  : '/'
-
+const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = {
-  publicPath: BASE_URL,
-  // 构建输出目录
-  outputDir: path.resolve(__dirname, '../blog-web/src/main/resources/static'),
-  //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
-  assetsDir: '',
-  // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径。
-  indexPath: path.resolve(__dirname, '../blog-web/src/main/resources/static/index.html'),
+  // 部署生产环境和开发环境下的URL。
+  // 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
+  // 例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 baseUrl 为 /my-app/。
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
 
-  // 如果你不需要使用eslint，把lintOnSave设为false即可
-  lintOnSave: true,
+  // outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称（要和baseUrl的生产环境路径一致）
+  outputDir: 'dist',
+  // 用于放置生成的静态资源 (js、css、img、fonts) 的；（项目打包之后，静态资源会放在这个文件夹下）
+  assetsDir: 'assets',
 
-  chainWebpack: config => {
-    config.resolve.alias
-      .set('@', resolve('src')) // key,value自行定义，比如.set('@@', resolve('src/components'))
-      .set('_c', resolve('src/components'))
-  },
-  // 设为false打包时不生成.map文件
+  //   lintOnSave：{ type:Boolean default:true } 问你是否使用eslint,设置为时true，eslint-loader将发出lint错误作为警告。默认情况下，警告仅记录到终端，并且不会使编译失败。
+  // 如果你想要在生产构建时禁用 eslint-loader，你可以用如下配置
+  lintOnSave: process.env.NODE_ENV !== 'production',
+
+  // 是否使用包含运行时编译器的 Vue 构建版本。设置为 true 后你就可以在 Vue 组件中使用 template 选项了，但是这会让你的应用额外增加 10kb 左右。(默认false)
+  runtimeCompiler: false,
+
+  // 不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建,map就是为了方便打印错误位置。
   productionSourceMap: false,
+  css: {
+    extract: true, // 是否使用css分离插件 ExtractTextPlugin
+    sourceMap: false, // 开启 CSS source maps
+    loaderOptions: {}, // css预设器配置项
+    modules: false // 启用 CSS modules for all css / pre-processor files.
+  },
+
+  // 它支持webPack-dev-server的所有选项
   devServer: {
-    open: true,
-    host: '0.0.0.0',
-    port: 8090,
-    // 路由接口代理配置
+    host: 'localhost',
+    port: 8080, // 端口号
+    https: false, // https:{type:Boolean}
+    open: true, // 配置自动启动浏览器
+    // proxy: 'http://localhost:9000' // 配置跨域处理,只有一个代理
+
+    // 配置多个代理
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true, //可否跨域
-        pathRewrite: {
-          '^/api': ''
-        }
+        target: '<url>', // 目标主机
+        ws: true, // 代理的WebSockets
+        changeOrigin: true // 需要虚拟主机站点
+      },
+      '/api2': {
+        target: '<other_url>'
       }
     }
+  },
+  pluginOptions: {
+    // 第三方插件配置
+    // ...
+  },
+  chainWebpack: config => {
+    // 这里是对环境的配置，不同环境对应不同的BASE_URL，以便axios的请求地址不同
+    config.plugin('define').tap(args => {
+      args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL)
+      return args
+    })
+    if (process.env.NODE_ENV === 'production') {
+      // #region 启用GZip压缩
+      config.plugin('compression').use(CompressionPlugin, {
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
+        threshold: 10240, // 只有大小大于该值的资源会被处理
+        minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+        cache: true
+      })
+      // #endregion
+    }
+
+    if (process.env.NODE_ENV === 'production') {
+      config.externals(externals)
+    }
+    /**
+         * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+         */
+    config.plugin('html').tap(args => {
+      if (process.env.NODE_ENV === 'production') {
+        args[0].cdn = cdn.build
+      }
+      if (process.env.NODE_ENV === 'development') {
+        args[0].cdn = cdn.dev
+      }
+      return args
+    })
+  }
+}
+
+// 不打包
+const externals = {
+//   vue: 'Vue',
+//   'vue-router': 'VueRouter',
+//   vuex: 'Vuex',
+//   axios: 'axios',
+//   'js-cookie': 'Cookies',
+//   'ant-design-vue': 'ant-design-vue'
+}
+
+const cdn = {
+  // 开发环境
+  dev: {
+    css: [],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: [],
+    js: [
+      'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
+      'https://cdn.bootcss.com/vue-router/3.0.3/vue-router.min.js',
+      'https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js'
+    ]
   }
 }
