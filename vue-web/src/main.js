@@ -5,6 +5,8 @@ import store from './store'
 import Antd from 'ant-design-vue'
 import * as api from './api/api'
 import 'ant-design-vue/dist/antd.css'
+import 'lib-flexible'
+import './styles/index.scss' // global css
 
 Vue.config.productionTip = false
 

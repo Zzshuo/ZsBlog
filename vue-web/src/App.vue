@@ -1,21 +1,21 @@
 <template>
-  <div id="app">
-    <Header></Header>
+  <div id="app" class="app-container">
+    <my-header></my-header>
     <router-view/>
-    <Footer></Footer>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
-import Header from "./views/common/header";
-import Footer from "./views/common/footer";
+import MyHeader from './views/common/MyHeader'
+import MyFooter from './views/common/MyFooter'
 export default {
   name: 'App',
   components: {
-    Header,
-    Footer
+    MyHeader,
+    MyFooter
   }
-} 
+}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 </style>
