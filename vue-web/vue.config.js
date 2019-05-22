@@ -1,9 +1,16 @@
 const CompressionPlugin = require('compression-webpack-plugin')
+const path = require('path')
+
+const resolve = dir => {
+  // __dirname是获取当前文件绝对路径的全局对象
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   // 部署生产环境和开发环境下的URL。
   // 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
   // 例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 baseUrl 为 /my-app/。
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/api',
 
   // outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称（要和baseUrl的生产环境路径一致）
   outputDir: 'dist',
@@ -25,8 +32,6 @@ module.exports = {
     loaderOptions: {}, // css预设器配置项
     modules: false // 启用 CSS modules for all css / pre-processor files.
   },
-
-  // 它支持webPack-dev-server的所有选项
   devServer: {
     host: 'localhost',
     port: 8080, // 端口号
@@ -37,9 +42,12 @@ module.exports = {
     // 配置多个代理
     proxy: {
       '/api': {
-        target: '<url>', // 目标主机
+        target: 'http://localhost:8082', // 目标主机
         ws: true, // 代理的WebSockets
-        changeOrigin: true // 需要虚拟主机站点
+        changeOrigin: true, // 能否跨域
+        pathRewrite: {
+          '^/api': ''
+        }
       },
       '/api2': {
         target: '<other_url>'
@@ -51,6 +59,10 @@ module.exports = {
     // ...
   },
   chainWebpack: config => {
+    // key,value自行定义，比如.set('@@', resolve('src/components'))
+    config.resolve.alias
+      .set('@', resolve('src'))
+
     // 这里是对环境的配置，不同环境对应不同的BASE_URL，以便axios的请求地址不同
     config.plugin('define').tap(args => {
       args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL)
@@ -73,8 +85,8 @@ module.exports = {
       config.externals(externals)
     }
     /**
-         * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
-         */
+     * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+     */
     config.plugin('html').tap(args => {
       if (process.env.NODE_ENV === 'production') {
         args[0].cdn = cdn.build
@@ -89,12 +101,12 @@ module.exports = {
 
 // 不打包
 const externals = {
-//   vue: 'Vue',
-//   'vue-router': 'VueRouter',
-//   vuex: 'Vuex',
-//   axios: 'axios',
-//   'js-cookie': 'Cookies',
-//   'ant-design-vue': 'ant-design-vue'
+  //   vue: 'Vue',
+  //   'vue-router': 'VueRouter',
+  //   vuex: 'Vuex',
+  //   axios: 'axios',
+  //   'js-cookie': 'Cookies',
+  //   'ant-design-vue': 'ant-design-vue'
 }
 
 const cdn = {
