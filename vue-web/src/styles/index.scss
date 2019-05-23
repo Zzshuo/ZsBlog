@@ -1,31 +1,47 @@
 body {
-  height: 100%;
   -moz-osx-font-smoothing: grayscale; //可以使页面上的字体抗锯齿,使用后字体看起来会更清晰舒服。
   -webkit-font-smoothing: antialiased; // 抗锯齿很好
+  background-color: #f4f5f5;
+  width: 100%;
 }
 
-.app-container {
-  padding: 0;
-  margin: 0;
-  background-color: #f4f5f5;
+$content-padding:10px;
+$color-white: #ffffff;
+
+.main-container {
+  width: 100%;
+  padding: 1.2675rem 0 0 0;
+  min-height: 80vh;
+  .main-content {
+    width: 100%;
+    max-width: 18rem;
+    padding: $content-padding $content-padding;
+  }
+}
+
+.container {
+  padding: $content-padding;
 }
 
 .my-header {
-  width: 100%;
-  background-color: #ffffff;
+  background-color: $color-white;
   top: 0;
   position: fixed;
   z-index: 9999; //拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面
   width: 100%;
   display: flex;
+  justify-content: center;
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 18rem;
+    padding: 0 $content-padding;
+  }
 }
 
 .my-footer {
-  background-color: #ffffff;
-}
-
-.container {
-  margin: 10px;
+  padding: 10px;
   width: 100%;
-  background-color: #ffffff;
+  text-align: center;
 }

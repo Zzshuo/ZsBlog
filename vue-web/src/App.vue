@@ -1,7 +1,13 @@
 <template>
-  <div id="app" class="app-container">
+  <div id="app">
     <my-header></my-header>
-    <router-view/>
+    <div class="main-container">
+      <a-row type="flex" justify="center">
+        <a-col class="main-content">
+          <router-view />
+        </a-col>
+      </a-row>
+    </div>
     <my-footer></my-footer>
   </div>
 </template>
@@ -16,6 +22,7 @@ export default {
     MyFooter
   }
 }
+
 </script>
 <style lang="scss" scoped>
 </style>
