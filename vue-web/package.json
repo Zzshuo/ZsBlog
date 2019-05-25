@@ -3,12 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --project-mode dev",
-    "pro": "vue-cli-service serve --project-mode pro",
-    "build:dev": "vue-cli-service build --project-mode dev",
-    "build:pro": "vue-cli-service build --project-mode pro",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vue-cli-service serve --mode dev",
+    "build:prod": "vue-cli-service build --mode prod"
   },
   "dependencies": {
     "@ant-design/icons": "^1.2.1",

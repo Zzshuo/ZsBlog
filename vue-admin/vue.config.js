@@ -39,7 +39,7 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
 
   // outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称（要和baseUrl的生产环境路径一致）
-  outputDir: 'dist',
+  outputDir: path.resolve(__dirname, '../blog-admin/src/main/resources/static'),
   // 用于放置生成的静态资源 (js、css、img、fonts) 的；（项目打包之后，静态资源会放在这个文件夹下）
   assetsDir: 'assets',
 
@@ -64,7 +64,7 @@ module.exports = {
     host: 'localhost',
     port: 8080, // 端口号
     https: false, // https:{type:Boolean}
-    open: true, // 配置自动启动浏览器
+    open: false, // 配置自动启动浏览器
     // proxy: 'http://localhost:9000' // 配置跨域处理,只有一个代理
 
     // 配置多个代理
@@ -87,9 +87,27 @@ module.exports = {
   },
   chainWebpack: config => {
     // 添加别名
-
     config.resolve.alias
       .set('@', resolve('src'))
+
+    // svg rule loader
+    const svgRule = config.module.rule('svg') // 找到svg-loader
+    svgRule.uses.clear() // 清除已有的loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除node_modules目录
+    svgRule // 添加svg新的loader处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]',
+      })
+
+    // 修改images loader 添加svg处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module
+      .rule('images')
+      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
 
     // 这里是对环境的配置，不同环境对应不同的BASE_URL，以便axios的请求地址不同
     config.plugin('define').tap(args => {
@@ -119,8 +137,8 @@ module.exports = {
       config.externals(externals)
     }
     /**
-         * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
-         */
+     * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+     */
     config.plugin('html').tap(args => {
       if (process.env.NODE_ENV === 'production') {
         args[0].cdn = cdn.build

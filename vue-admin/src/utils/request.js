@@ -6,7 +6,7 @@ import { getToken } from '@/utils/auth'
 const config = {
   timeout: 5000,
   // 在外部文件配置axios的基础路径 ip地址
-  baseURL: process.env.BASE_API,
+  baseURL: process.env.BASE_URL,
   headers: { 'Content-Type': 'application/json;charset=UTF-8;' },
   dataType: 'json'
 }
