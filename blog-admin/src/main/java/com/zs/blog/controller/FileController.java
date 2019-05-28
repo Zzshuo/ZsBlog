@@ -25,7 +25,6 @@ public class FileController {
 
     @BusinessLog("上传图片")
     @PostMapping("/addArticleImage")
-
     public ResponseVo addArticleImage(MultipartFile file) {
         String url = fileService.addImage(file, CommonConst.ALI_OSS_IMG_ARTICLE_PATH);
         return ResponseUtil.success(url);
