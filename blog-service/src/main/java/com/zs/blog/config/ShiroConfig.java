@@ -3,7 +3,6 @@ package com.zs.blog.config;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.codec.Base64;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -33,9 +32,9 @@ public class ShiroConfig {
     private ShiroProperties shiroProperties;
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean() {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        shiroFilterFactoryBean.setSecurityManager(securityManager());
         //拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //注意过滤器配置顺序 不能颠倒
@@ -58,7 +57,9 @@ public class ShiroConfig {
     @Bean
     public SessionsSecurityManager securityManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(shiroRealm());
+        ShiroRealm shiroRealm = shiroRealm();
+        shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        manager.setRealm(shiroRealm);
         manager.setSessionManager(sessionManager());
         //注入记住我管理器
         manager.setRememberMeManager(rememberMeManager());
@@ -81,7 +82,7 @@ public class ShiroConfig {
 
     /**
      * 密码凭证匹配器，作为自定义认证的基础
-     * （由于我们的密码校验交给Shiro的SimpleAuthenticationInfo进行处理了 ）
+     * 由于我们的密码校验交给Shiro的SimpleAuthenticationInfo进行处理了 ）
      */
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {

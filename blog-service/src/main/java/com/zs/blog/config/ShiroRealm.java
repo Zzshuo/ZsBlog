@@ -24,7 +24,6 @@ import java.util.Arrays;
  * @author zshuo
  * @date 2018/10/10
  **/
-@Service
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
