@@ -24,4 +24,21 @@ public class CommonConst {
     public static final String SHIRO_SALT = "zshuo_shiro_salt";
     public static final String ALI_OSS_IMG_ARTICLE_PATH = "img/article/";
     public static final String ALI_OSS_IMG_COVER_PATH = "img/cover/";
+
+    /**
+     * ali oss 存储目录
+     */
+    public static final String ALI_OSS_IMG_PATH = "img/";
+    /**
+     * ali oss 签名有效期(s)
+     */
+    public static final Integer ALI_OSS_EXPIRE = 300;
+    /**
+     * ali oss 文件大小(M)
+     */
+    public static final Integer ALI_OSS_MAX_SIZE = 10;
+    /**
+     * ali oss 回调地址
+     */
+    public static final String ALI_OSS_CALLBACK = "http://admin.zshuo.top/admin/oss/callback";
 }

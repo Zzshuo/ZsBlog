@@ -1,5 +1,9 @@
 package com.zs.blog.service;
 
+import com.zs.blog.vo.response.OssCallbackVo;
+import com.zs.blog.vo.response.OssPolicyVo;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,4 +33,15 @@ public interface OssService {
      * 文件上传
      */
     String uploadFile(String key, File file);
+
+
+    /**
+     * oss上传策略生成
+     */
+    OssPolicyVo policy();
+
+    /**
+     * oss上传成功回调
+     */
+    OssCallbackVo callback(HttpServletRequest request);
 }
