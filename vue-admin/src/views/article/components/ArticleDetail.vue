@@ -144,6 +144,7 @@ export default {
       // 第一步.将图片上传到服务器.
       const formdata = new FormData()
       formdata.append('file', $file)
+      console.log($file)
       this.api.addArticleImage(formdata).then(data => {
         // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
         /**

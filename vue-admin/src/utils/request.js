@@ -4,7 +4,7 @@ import store from '../store'
 import { getToken } from '@/utils/auth'
 
 const config = {
-  timeout: 5000,
+  timeout: 10000,
   // 在外部文件配置axios的基础路径 ip地址
   baseURL: process.env.BASE_URL,
   headers: { 'Content-Type': 'application/json;charset=UTF-8;' },
@@ -61,7 +61,7 @@ request.interceptors.response.use(
         duration: 5 * 1000
       })
 
-      return Promise.reject('error')
+      return Promise.reject(res.message)
     }
   },
   error => {

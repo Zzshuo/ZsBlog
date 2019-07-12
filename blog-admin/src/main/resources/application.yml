@@ -2,7 +2,9 @@ spring:
   profiles:
     # '@profileActive@'表示该属性值会在maven构建时被替换掉。
     active: '@profileActive@'
-
+  servlet:
+    multipart:
+      max-file-size: 15MB
 server:
   port: 8081
 
