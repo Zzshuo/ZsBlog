@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { checkImage, getPolicyAndUpload } from '@/utils/aliOss'
 export default {
   name: 'ImageItem',
   props: {
@@ -36,23 +37,23 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
+      return checkImage(file)
     },
     addCoverImage(param) {
-      const formdata = new FormData()
-      formdata.append('file', param.file)
-      this.api.addCoverImage(formdata).then(data => {
-        this.imageUrl = data
+      getPolicyAndUpload( param.file,'cover').then(response => {
+        console.log(response)
+        this.imageUrl = response
       })
+      .catch((err) => {
+        console.log("err == ", err)
+        this.$message({ message: err, type: 'error', duration: 5000 })
+      })
+
+      // const formdata = new FormData()
+      // formdata.append('file', param.file)
+      // this.api.addCoverImage(formdata).then(data => {
+      //   this.imageUrl = data
+      // })
     }
   }
 }
