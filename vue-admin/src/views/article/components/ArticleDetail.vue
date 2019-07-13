@@ -144,7 +144,6 @@ export default {
     addArticleImage(pos, $file) {
       if(checkImage($file)){
         getPolicyAndUpload($file,'article').then(response => {
-          console.log("response == ", response)
           const $vm = this.$refs.md
           $vm.$img2Url(pos, response)
         })

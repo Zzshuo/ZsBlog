@@ -18,11 +18,10 @@ export function getPolicyAndUpload(file,path){
         let formData = genFormData(file,path);
         axios.post(nowData.host, formData)
           .then(response => {
-            console.log("response == ", response)
             resolve(nowData.host + '/' + formData.get('key'))
           })
           .catch((err) => {
-            console.log("err == ", err)
+            console.log(err)
             reject(err);
           })
       }).catch(err => {
@@ -33,11 +32,10 @@ export function getPolicyAndUpload(file,path){
       let formData = genFormData(file,path);
       axios.post(nowData.host, formData)
         .then(response => {
-          console.log("response == ", response)
           resolve(nowData.host + '/' + formData.get('key'))
         })
         .catch((err) => {
-          console.log("err == ", err)
+          console.log(err)
           reject(err);
         })
     }

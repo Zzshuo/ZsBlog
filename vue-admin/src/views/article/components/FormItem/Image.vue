@@ -41,7 +41,6 @@ export default {
     },
     addCoverImage(param) {
       getPolicyAndUpload( param.file,'cover').then(response => {
-        console.log(response)
         this.imageUrl = response
       })
       .catch((err) => {
