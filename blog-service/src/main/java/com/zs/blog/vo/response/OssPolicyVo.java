@@ -17,4 +17,6 @@ public class OssPolicyVo {
     private String host;
     @ApiModelProperty("上传成功后的回调设置")
     private String callback;
+    @ApiModelProperty("签名过期时间")
+    private Long expire;
 }

@@ -161,6 +161,7 @@ public class OssServiceImpl implements OssService {
             result.setDir(dir);
             result.setCallback(callbackData);
             result.setHost(action);
+            result.setExpire(expireEndTime);
         } catch (Exception e) {
             throw new BusinessException("签名生成失败" + e.getMessage());
         }

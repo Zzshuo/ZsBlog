@@ -50,7 +50,8 @@
             v-model="postForm.content"
             :box-shadow = "false"
             class="mavonEditor"
-            @imgAdd="addArticleImage"/>
+            @imgAdd="addArticleImage"
+           />
         </el-form-item>
         <el-form-item label="封面图:">
           <form-item-image v-model="postForm.image"/>
@@ -67,7 +68,7 @@ import { FormItemImage, FormItemType } from './FormItem'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import { mapGetters } from 'vuex'
-
+import { checkImage, getPolicyAndUpload } from '@/utils/aliOss'
 const defaultForm = {
   // 1:发布,2:草稿,0:删除
   state: 0,
@@ -141,20 +142,33 @@ export default {
       })
     },
     addArticleImage(pos, $file) {
-      // 第一步.将图片上传到服务器.
-      const formdata = new FormData()
-      formdata.append('file', $file)
-      console.log($file)
-      this.api.addArticleImage(formdata).then(data => {
-        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-        /**
-         * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-         * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-         * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-         */
-        const $vm = this.$refs.md
-        $vm.$img2Url(pos, data)
-      })
+      if(checkImage($file)){
+        getPolicyAndUpload($file,'article').then(response => {
+          console.log("response == ", response)
+          const $vm = this.$refs.md
+          $vm.$img2Url(pos, response)
+        })
+        .catch((err) => {
+          console.log("err == ", err)
+          this.$message({ message: err, type: 'error', duration: 5000 })
+        })
+      }
+
+
+      // // 第一步.将图片上传到服务器.
+      // const formdata = new FormData()
+      // formdata.append('file', $file)
+      // console.log($file)
+      // this.api.addArticleImage(formdata).then(data => {
+      //   // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+      //   /**
+      //    * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+      //    * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+      //    * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+      //    */
+      //   const $vm = this.$refs.md
+      //   $vm.$img2Url(pos, data)
+      // })
     }
   }
 }

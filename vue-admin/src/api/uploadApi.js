@@ -29,3 +29,12 @@ export function addCoverImage(data = {}) {
     headers: { 'Content-Type': 'multipart/form-data; charset=utf-8' }
   })
 }
+
+// oss上传签名生成
+export function policy(data = {}) {
+  return request({
+    url:'/admin/oss/policy',
+    method:'post',
+    data
+  })
+}
