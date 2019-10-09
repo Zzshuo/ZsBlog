@@ -8,9 +8,10 @@ import com.zs.blog.mapper.TagMapper;
 import com.zs.blog.model.ArticleTagExample;
 import com.zs.blog.model.Tag;
 import com.zs.blog.model.TagExample;
-import com.zs.blog.object.PageInfo;
+import com.zs.blog.object.Page;
 import com.zs.blog.service.TagService;
 import com.zs.blog.util.BeanUtil;
+import com.zs.blog.util.PageUtils;
 import com.zs.blog.vo.request.TagPageReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;
@@ -83,17 +84,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public PageInfo<TagVo> list(TagPageReqVo reqVo) {
+    public Page<TagVo> list(TagPageReqVo reqVo) {
         TagExample example = genExample(reqVo);
 
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Tag> tags = tagMapper.selectByExample(example);
 
-        List<TagVo> tagVos = tags.stream()
-                .map(this::genTagVo)
-                .collect(Collectors.toList());
-
-        return new PageInfo(tagVos, tags);
+        return PageUtils.toPage(tags, this::genTagVo);
     }
 
     @Override
@@ -117,8 +114,7 @@ public class TagServiceImpl implements TagService {
     }
 
     private TagVo genTagVo(Tag tag) {
-        TagVo tagVo = new TagVo();
-        BeanUtil.copy(tag, tagVo);
+        TagVo tagVo = BeanUtil.copy(tag, TagVo.class);
 
         // TODO 后面换成从redis获取
         ArticleTagExample example = new ArticleTagExample();

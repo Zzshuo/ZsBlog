@@ -1,6 +1,6 @@
 package com.zs.blog.service;
 
-import com.zs.blog.object.PageInfo;
+import com.zs.blog.object.Page;
 import com.zs.blog.vo.request.TypePageReqVo;
 import com.zs.blog.vo.request.TypeReqVo;
 import com.zs.blog.vo.response.TypeVo;
@@ -41,7 +41,7 @@ public interface TypeService {
      * @param reqVo
      * @return
      */
-    PageInfo<TypeVo> list(TypePageReqVo reqVo);
+    Page<TypeVo> list(TypePageReqVo reqVo);
 
     /**
      * 获取所有分类

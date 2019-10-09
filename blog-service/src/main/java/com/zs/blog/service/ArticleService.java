@@ -1,6 +1,7 @@
 package com.zs.blog.service;
 
-import com.zs.blog.object.PageInfo;
+import com.zs.blog.object.Page;
+import com.zs.blog.vo.request.ArticleByTagPageReqVo;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
@@ -40,5 +41,7 @@ public interface ArticleService {
      * @param reqVo
      * @return
      */
-    PageInfo<ArticleBriefVo> list(ArticlePageReqVo reqVo);
+    Page<ArticleBriefVo> list(ArticlePageReqVo reqVo);
+
+    Page<ArticleBriefVo> getListByTagId(ArticleByTagPageReqVo reqVo);
 }

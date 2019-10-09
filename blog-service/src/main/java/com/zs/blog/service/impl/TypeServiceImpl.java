@@ -8,9 +8,10 @@ import com.zs.blog.mapper.TypeMapper;
 import com.zs.blog.model.ArticleExample;
 import com.zs.blog.model.Type;
 import com.zs.blog.model.TypeExample;
-import com.zs.blog.object.PageInfo;
+import com.zs.blog.object.Page;
 import com.zs.blog.service.TypeService;
 import com.zs.blog.util.BeanUtil;
+import com.zs.blog.util.PageUtils;
 import com.zs.blog.vo.request.TypePageReqVo;
 import com.zs.blog.vo.request.TypeReqVo;
 import com.zs.blog.vo.response.TypeVo;
@@ -84,7 +85,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public PageInfo<TypeVo> list(TypePageReqVo reqVo) {
+    public Page<TypeVo> list(TypePageReqVo reqVo) {
         TypeExample example = genExample(reqVo);
 
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
@@ -94,7 +95,7 @@ public class TypeServiceImpl implements TypeService {
                 .map(this::genTypeVo)
                 .collect(Collectors.toList());
 
-        return new PageInfo(typeVos, types);
+        return PageUtils.toPage(types, this::genTypeVo);
     }
 
     @Override

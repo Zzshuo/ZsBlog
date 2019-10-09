@@ -2,13 +2,12 @@ package com.zs.blog.controller;
 
 import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.object.IdReqVo;
-import com.zs.blog.object.PageInfo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.util.redis.RedisUtil;
+import com.zs.blog.vo.request.ArticleByTagPageReqVo;
 import com.zs.blog.vo.request.ArticlePageReqVo;
-import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +38,13 @@ public class ArticleController {
     @BusinessLog("文章列表")
     @PostMapping("/list")
     public ResponseVo list(@RequestBody ArticlePageReqVo reqVo) {
-        PageInfo<ArticleBriefVo> pageInfo = articleService.list(reqVo);
-        return ResponseUtil.success(pageInfo);
+        return ResponseUtil.success(articleService.list(reqVo));
     }
+
+    @BusinessLog("根据tagId获取文章列表")
+    @PostMapping("/list")
+    public ResponseVo getListByTagId(@RequestBody ArticleByTagPageReqVo reqVo) {
+        return ResponseUtil.success(articleService.getListByTagId(reqVo));
+    }
+
 }

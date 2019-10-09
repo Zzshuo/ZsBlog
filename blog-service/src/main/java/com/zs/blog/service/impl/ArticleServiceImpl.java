@@ -10,9 +10,11 @@ import com.zs.blog.model.Article;
 import com.zs.blog.model.ArticleExample;
 import com.zs.blog.model.ArticleTag;
 import com.zs.blog.model.ArticleTagExample;
-import com.zs.blog.object.PageInfo;
+import com.zs.blog.object.Page;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.BeanUtil;
+import com.zs.blog.util.PageUtils;
+import com.zs.blog.vo.request.ArticleByTagPageReqVo;
 import com.zs.blog.vo.request.ArticlePageReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
@@ -23,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author zshuo
@@ -95,11 +96,13 @@ public class ArticleServiceImpl implements ArticleService {
 
         List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(id);
         articleVo.setTagIdList(tagIdList);
+        articleVo.setViews(0);
+        articleVo.setComments(0);
         return articleVo;
     }
 
     @Override
-    public PageInfo<ArticleBriefVo> list(ArticlePageReqVo reqVo) {
+    public Page<ArticleBriefVo> list(ArticlePageReqVo reqVo) {
         ArticleExample example = new ArticleExample();
         ArticleExample.Criteria criteria = example.createCriteria();
 
@@ -110,20 +113,30 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Article> articles = articleMapper.selectByExample(example);
 
-        List<ArticleBriefVo> collect = articles.stream().map(article -> {
-            ArticleBriefVo articleBriefVo = new ArticleBriefVo();
-            BeanUtil.copy(article, articleBriefVo);
-
-            // tagIdList
-            List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(article.getId());
-            articleBriefVo.setTagIdList(tagIdList);
-            // 浏览次数 评论次数
-            articleBriefVo.setViews(0);
-            articleBriefVo.setComments(0);
-            return articleBriefVo;
-        }).collect(Collectors.toList());
-
-        return new PageInfo(collect, articles);
+        return PageUtils.toPage(articles, this::getArticleBriefVo);
     }
 
+    @Override
+    public Page<ArticleBriefVo> getListByTagId(ArticleByTagPageReqVo reqVo) {
+        if (Objects.isNull(reqVo.getTagId())) {
+            return null;
+        }
+
+        PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
+        List<Article> articles = selfMapper.getArticleByTagId(reqVo.getTagId());
+
+        return PageUtils.toPage(articles, this::getArticleBriefVo);
+    }
+
+    private ArticleBriefVo getArticleBriefVo(Article article) {
+        ArticleBriefVo articleBriefVo = BeanUtil.copy(article, ArticleBriefVo.class);
+
+        // tagIdList
+        List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(article.getId());
+        articleBriefVo.setTagIdList(tagIdList);
+        // 浏览次数 评论次数
+        articleBriefVo.setViews(0);
+        articleBriefVo.setComments(0);
+        return articleBriefVo;
+    }
 }
