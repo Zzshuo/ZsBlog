@@ -260,7 +260,7 @@ export default {
         this.needTotalList = this.needTotalList.map(item => {
           return {
             ...item,
-            total: selectedRows.reduce( (sum, val) => {
+            totalCount: selectedRows.reduce( (sum, val) => {
               return sum + val[item.dataIndex]
             }, 0)
           }

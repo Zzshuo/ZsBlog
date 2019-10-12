@@ -16,10 +16,10 @@ public class PageUtils {
         Page<R> page = new Page<>();
         if (list instanceof com.github.pagehelper.Page) {
             com.github.pagehelper.Page<T> list1 = (com.github.pagehelper.Page<T>) list;
-            page.setPageNum(list1.getPageNum());
+            page.setPageNo(list1.getPageNum());
             page.setPageSize(list1.getPageSize());
-            page.setTotal(list1.getTotal());
-            page.setPages(list1.getPages());
+            page.setTotalCount(list1.getTotal());
+            page.setTotalPage(list1.getPages());
         }
         List<R> result = new ArrayList<>();
         list.forEach(item -> {

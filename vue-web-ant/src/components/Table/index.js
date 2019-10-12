@@ -197,7 +197,7 @@ export default {
       return totalList
     },
     /**
-     * 用于更新已选中的列表数据 total 统计
+     * 用于更新已选中的列表数据 totalCount 统计
      * @param selectedRowKeys
      * @param selectedRows
      */

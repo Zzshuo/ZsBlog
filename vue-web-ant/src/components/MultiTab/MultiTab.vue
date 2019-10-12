@@ -15,7 +15,7 @@
       :tabBarStyle="{ background: '#FFF', margin: 0, paddingLeft: '16px', paddingTop: '1px' }"
       @edit="onEdit"
     >
-      <a-tab-pane v-for="page in pages" :style="{ height: 0 }" :tab="page.meta.title" :key="page.fullPath" :closable="pages.length > 1">
+      <a-tab-pane v-for="page in totalPage" :style="{ height: 0 }" :tab="page.meta.title" :key="page.fullPath" :closable="totalPage.length > 1">
       </a-tab-pane>
       <template slot="renderTabBar" slot-scope="props, DefaultTabBar">
         <component :is="DefaultTabBar" {...props} />

@@ -19,7 +19,7 @@ public class Page<T> implements Serializable {
     /**
      * 当前页
      */
-    private int pageNum;
+    private int pageNo;
     /**
      * 每页显示记录数
      */
@@ -27,9 +27,9 @@ public class Page<T> implements Serializable {
     /**
      * 总数
      */
-    private long total;
+    private long totalCount;
     /**
      * 总页数
      */
-    private long pages;
+    private long totalPage;
 }
