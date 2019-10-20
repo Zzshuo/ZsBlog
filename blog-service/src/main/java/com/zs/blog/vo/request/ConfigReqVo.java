@@ -1,12 +1,19 @@
 package com.zs.blog.vo.request;
 
+import com.zs.blog.object.PageReqVo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author zshuo
+ * @date 2019-05-08
+ **/
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class ConfigReqVo {
+public class ConfigReqVo extends PageReqVo {
     private Integer id;
 
     /**

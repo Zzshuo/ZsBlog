@@ -14,8 +14,7 @@ import com.zs.blog.object.Page;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.BeanUtil;
 import com.zs.blog.util.PageUtils;
-import com.zs.blog.vo.request.ArticleByTagPageReqVo;
-import com.zs.blog.vo.request.ArticlePageReqVo;
+import com.zs.blog.vo.request.ArticleByTagReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
@@ -102,7 +101,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<ArticleBriefVo> list(ArticlePageReqVo reqVo) {
+    public Page<ArticleBriefVo> list(ArticleReqVo reqVo) {
         ArticleExample example = new ArticleExample();
         ArticleExample.Criteria criteria = example.createCriteria();
 
@@ -117,7 +116,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<ArticleBriefVo> getListByTagId(ArticleByTagPageReqVo reqVo) {
+    public Page<ArticleBriefVo> getListByTagId(ArticleByTagReqVo reqVo) {
         if (Objects.isNull(reqVo.getTagId())) {
             return null;
         }

@@ -6,8 +6,7 @@ import com.zs.blog.object.IdReqVo;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.ArticleService;
 import com.zs.blog.util.ResponseUtil;
-import com.zs.blog.vo.request.ArticleByTagPageReqVo;
-import com.zs.blog.vo.request.ArticlePageReqVo;
+import com.zs.blog.vo.request.ArticleByTagReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +52,13 @@ public class ArticleController {
 
     @BusinessLog("文章列表")
     @PostMapping("/list")
-    public ResponseVo list(@RequestBody ArticlePageReqVo reqVo) {
+    public ResponseVo list(@RequestBody ArticleReqVo reqVo) {
         return ResponseUtil.success(articleService.list(reqVo));
     }
 
     @BusinessLog("根据tagId获取文章列表")
     @PostMapping("/getListByTagId")
-    public ResponseVo getListByTagId(@RequestBody ArticleByTagPageReqVo reqVo) {
+    public ResponseVo getListByTagId(@RequestBody ArticleByTagReqVo reqVo) {
         return ResponseUtil.success(articleService.getListByTagId(reqVo));
     }
 

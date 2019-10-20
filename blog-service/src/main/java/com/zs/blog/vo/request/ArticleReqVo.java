@@ -1,5 +1,6 @@
 package com.zs.blog.vo.request;
 
+import com.zs.blog.object.PageReqVo;
 import lombok.Data;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * @date 2019/3/6
  **/
 @Data
-public class ArticleReqVo {
+public class ArticleReqVo extends PageReqVo {
     private Integer id;
 
     /**

@@ -1,5 +1,6 @@
 package com.zs.blog.controller;
 
+import com.google.common.collect.ImmutableMap;
 import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.enums.ConfigTypeEnum;
 import com.zs.blog.object.ResponseVo;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/config")
@@ -40,12 +42,11 @@ public class ConfigController {
     }
 
     @BusinessLog("配置分类")
-    @PostMapping("/getConfigTypeMap")
-    public ResponseVo getConfigTypeMap() {
-        Map<Integer, String> map = new HashMap<>();
-        for (ConfigTypeEnum value : ConfigTypeEnum.values()) {
-            map.put(value.getId(), value.getName());
-        }
-        return ResponseUtil.success(map);
+    @PostMapping("/getAllConfigType")
+    public ResponseVo getAllConfigType() {
+        List<Map<Integer, String>> collect = Arrays.stream(ConfigTypeEnum.values())
+                .map(value -> new ImmutableMap.Builder<Integer, String>().put(value.getId(), value.getName()).build())
+                .collect(Collectors.toList());
+        return ResponseUtil.success(collect);
     }
 }

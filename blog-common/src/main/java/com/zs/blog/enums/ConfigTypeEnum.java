@@ -13,7 +13,8 @@ import java.util.Objects;
 @Getter
 public enum ConfigTypeEnum {
 
-    COMMON(1, "默认"),
+    COMMON(0, "默认"),
+    ALI(1, "阿里云"),
     ;
 
     private Integer id;

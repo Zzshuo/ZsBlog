@@ -1,7 +1,6 @@
 package com.zs.blog.service;
 
 import com.zs.blog.object.Page;
-import com.zs.blog.vo.request.TagPageReqVo;
 import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;
 
@@ -23,17 +22,17 @@ public interface TagService {
     /**
      * 删除标签
      *
-     * @param id
+     * @param reqVo
      */
-    void delete(Integer id);
+    void delete(TagReqVo reqVo);
 
     /**
      * 获取标签
      *
-     * @param id
+     * @param reqVo
      * @return
      */
-    TagVo get(Integer id);
+    TagVo get(TagReqVo reqVo);
 
     /**
      * 标签列表
@@ -41,7 +40,7 @@ public interface TagService {
      * @param reqVo
      * @return
      */
-    Page<TagVo> list(TagPageReqVo reqVo);
+    Page<TagVo> list(TagReqVo reqVo);
 
     /**
      * 获取所有标签

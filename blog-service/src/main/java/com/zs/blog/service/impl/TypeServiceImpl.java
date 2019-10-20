@@ -12,7 +12,6 @@ import com.zs.blog.object.Page;
 import com.zs.blog.service.TypeService;
 import com.zs.blog.util.BeanUtil;
 import com.zs.blog.util.PageUtils;
-import com.zs.blog.vo.request.TypePageReqVo;
 import com.zs.blog.vo.request.TypeReqVo;
 import com.zs.blog.vo.response.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +84,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public Page<TypeVo> list(TypePageReqVo reqVo) {
+    public Page<TypeVo> list(TypeReqVo reqVo) {
         TypeExample example = genExample(reqVo);
 
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
@@ -106,7 +105,7 @@ public class TypeServiceImpl implements TypeService {
                 .collect(Collectors.toList());
     }
 
-    private TypeExample genExample(TypePageReqVo reqVo) {
+    private TypeExample genExample(TypeReqVo reqVo) {
         TypeExample example = new TypeExample();
         TypeExample.Criteria criteria = example.createCriteria();
         if (reqVo.getId() != null) {

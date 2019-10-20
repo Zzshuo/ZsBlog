@@ -4,7 +4,7 @@ import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.TagService;
 import com.zs.blog.util.ResponseUtil;
-import com.zs.blog.vo.request.TagPageReqVo;
+import com.zs.blog.vo.request.TagReqVo;
 import com.zs.blog.vo.response.TagVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +27,7 @@ public class TagController {
 
     @BusinessLog("标签列表")
     @PostMapping("/list")
-    public ResponseVo list(@RequestBody TagPageReqVo reqVo) {
+    public ResponseVo list(@RequestBody TagReqVo reqVo) {
         return ResponseUtil.success(tagService.list(reqVo));
     }
 
