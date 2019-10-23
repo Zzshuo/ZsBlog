@@ -4,14 +4,19 @@ import lombok.Data;
 
 /**
  * @author zshuo
- * @date 2019-10-23
+ * @date 2019-05-08
  **/
 @Data
-public class TypeVo {
+public class TypeDetailVo {
     private Integer id;
 
     /**
      * 分类
      */
     private String name;
+
+    /**
+     * 数量
+     */
+    private Integer count;
 }

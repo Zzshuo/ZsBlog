@@ -26,7 +26,12 @@ public class ArticleVo {
     /**
      * 分类
      */
-    private Integer typeId;
+    private TypeVo type;
+
+    /**
+     * 标签列表
+     */
+    private List<TagVo> tagList;
 
     /**
      * 文章封面图片
@@ -52,11 +57,6 @@ public class ArticleVo {
      * 文章内容
      */
     private String content;
-
-    /**
-     * 标签列表
-     */
-    private List<Integer> tagIdList;
 
     /**
      * 浏览次数

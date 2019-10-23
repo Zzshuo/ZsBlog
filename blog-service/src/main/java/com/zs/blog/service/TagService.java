@@ -2,6 +2,7 @@ package com.zs.blog.service;
 
 import com.zs.blog.object.Page;
 import com.zs.blog.vo.request.TagReqVo;
+import com.zs.blog.vo.response.TagDetailVo;
 import com.zs.blog.vo.response.TagVo;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface TagService {
      * @param reqVo
      * @return
      */
-    TagVo get(TagReqVo reqVo);
+    TagDetailVo get(TagReqVo reqVo);
 
     /**
      * 标签列表
@@ -40,12 +41,19 @@ public interface TagService {
      * @param reqVo
      * @return
      */
-    Page<TagVo> list(TagReqVo reqVo);
+    Page<TagDetailVo> list(TagReqVo reqVo);
 
     /**
      * 获取所有标签
      *
      * @return
      */
-    List<TagVo> getAll();
+    List<TagDetailVo> getAll();
+
+    /**
+     * 获取文章标签
+     *
+     * @return
+     */
+    List<TagVo> getTagsByArticleId(Integer articleId);
 }

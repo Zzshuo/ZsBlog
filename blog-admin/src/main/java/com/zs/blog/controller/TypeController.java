@@ -6,7 +6,7 @@ import com.zs.blog.object.ResponseVo;
 import com.zs.blog.service.TypeService;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.vo.request.TypeReqVo;
-import com.zs.blog.vo.response.TypeVo;
+import com.zs.blog.vo.response.TypeDetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +43,7 @@ public class TypeController {
     @BusinessLog("获取所有分类")
     @PostMapping("/getAllType")
     public ResponseVo getAllType() {
-        List<TypeVo> list = typeService.getAll();
+        List<TypeDetailVo> list = typeService.getAll();
         return ResponseUtil.success(list);
     }
 }

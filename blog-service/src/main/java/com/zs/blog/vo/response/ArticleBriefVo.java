@@ -26,12 +26,12 @@ public class ArticleBriefVo {
     /**
      * 分类
      */
-    private Integer typeId;
+    private TypeVo type;
 
     /**
      * 标签id
      */
-    private List<Integer> tagIdList;
+    private List<TagVo> tagList;
 
     /**
      * 文章封面图片

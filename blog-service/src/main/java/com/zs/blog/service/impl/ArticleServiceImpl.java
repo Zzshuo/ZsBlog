@@ -12,12 +12,15 @@ import com.zs.blog.model.ArticleTag;
 import com.zs.blog.model.ArticleTagExample;
 import com.zs.blog.object.Page;
 import com.zs.blog.service.ArticleService;
+import com.zs.blog.service.TagService;
+import com.zs.blog.service.TypeService;
 import com.zs.blog.util.BeanUtil;
 import com.zs.blog.util.PageUtils;
 import com.zs.blog.vo.request.ArticleByTagReqVo;
 import com.zs.blog.vo.request.ArticleReqVo;
 import com.zs.blog.vo.response.ArticleBriefVo;
 import com.zs.blog.vo.response.ArticleVo;
+import com.zs.blog.vo.response.TagVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +43,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleTagMapper articleTagMapper;
+
+    @Autowired
+    private TagService tagService;
+    @Autowired
+    private TypeService typeService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -93,8 +101,9 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleVo articleVo = new ArticleVo();
         BeanUtil.copy(article, articleVo);
 
-        List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(id);
-        articleVo.setTagIdList(tagIdList);
+        List<TagVo> tags = tagService.getTagsByArticleId(article.getId());
+        articleVo.setTagList(tags);
+        articleVo.setType(typeService.get(article.getTypeId()));
         articleVo.setViews(0);
         articleVo.setComments(0);
         return articleVo;
@@ -130,9 +139,9 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleBriefVo getArticleBriefVo(Article article) {
         ArticleBriefVo articleBriefVo = BeanUtil.copy(article, ArticleBriefVo.class);
 
-        // tagIdList
-        List<Integer> tagIdList = selfMapper.getTagIdListByArticleId(article.getId());
-        articleBriefVo.setTagIdList(tagIdList);
+        List<TagVo> tags = tagService.getTagsByArticleId(article.getId());
+        articleBriefVo.setTagList(tags);
+        articleBriefVo.setType(typeService.get(article.getTypeId()));
         // 浏览次数 评论次数
         articleBriefVo.setViews(0);
         articleBriefVo.setComments(0);

@@ -13,6 +13,7 @@ import com.zs.blog.service.TypeService;
 import com.zs.blog.util.BeanUtil;
 import com.zs.blog.util.PageUtils;
 import com.zs.blog.vo.request.TypeReqVo;
+import com.zs.blog.vo.response.TypeDetailVo;
 import com.zs.blog.vo.response.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,27 +79,22 @@ public class TypeServiceImpl implements TypeService {
         if (type == null) {
             throw new BusinessException(ResponseEnum.TYPE_NOT_EXIST);
         }
-        TypeVo typeVo = new TypeVo();
-        BeanUtil.copy(type, typeVo);
-        return typeVo;
+
+        return BeanUtil.copy(type, TypeVo.class);
     }
 
     @Override
-    public Page<TypeVo> list(TypeReqVo reqVo) {
+    public Page<TypeDetailVo> list(TypeReqVo reqVo) {
         TypeExample example = genExample(reqVo);
 
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Type> types = typeMapper.selectByExample(example);
 
-        List<TypeVo> typeVos = types.stream()
-                .map(this::genTypeVo)
-                .collect(Collectors.toList());
-
         return PageUtils.toPage(types, this::genTypeVo);
     }
 
     @Override
-    public List<TypeVo> getAll() {
+    public List<TypeDetailVo> getAll() {
         List<Type> types = typeMapper.selectAll();
         return types.stream()
                 .map(this::genTypeVo)
@@ -117,16 +113,16 @@ public class TypeServiceImpl implements TypeService {
         return example;
     }
 
-    private TypeVo genTypeVo(Type type) {
-        TypeVo typeVo = new TypeVo();
-        BeanUtil.copy(type, typeVo);
+    private TypeDetailVo genTypeVo(Type type) {
+        TypeDetailVo typeDetailVo = new TypeDetailVo();
+        BeanUtil.copy(type, typeDetailVo);
 
         // TODO 后面换成从redis获取
         ArticleExample example = new ArticleExample();
-        example.createCriteria().andTypeIdEqualTo(typeVo.getId());
+        example.createCriteria().andTypeIdEqualTo(typeDetailVo.getId());
         int count = articleMapper.selectCountByExample(example);
 
-        typeVo.setCount(count);
-        return typeVo;
+        typeDetailVo.setCount(count);
+        return typeDetailVo;
     }
 }

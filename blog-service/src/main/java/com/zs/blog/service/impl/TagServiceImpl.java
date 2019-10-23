@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
 import com.zs.blog.mapper.ArticleTagMapper;
+import com.zs.blog.mapper.SelfMapper;
 import com.zs.blog.mapper.TagMapper;
 import com.zs.blog.model.ArticleTagExample;
 import com.zs.blog.model.Tag;
@@ -13,6 +14,7 @@ import com.zs.blog.service.TagService;
 import com.zs.blog.util.BeanUtil;
 import com.zs.blog.util.PageUtils;
 import com.zs.blog.vo.request.TagReqVo;
+import com.zs.blog.vo.response.TagDetailVo;
 import com.zs.blog.vo.response.TagVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
     @Autowired
     private ArticleTagMapper articleTagMapper;
+    @Autowired
+    private SelfMapper selfMapper;
 
     @Override
     public void save(TagReqVo reqVo) {
@@ -72,31 +76,31 @@ public class TagServiceImpl implements TagService {
 
 
     @Override
-    public TagVo get(TagReqVo reqVo) {
+    public TagDetailVo get(TagReqVo reqVo) {
         Tag tag = tagMapper.selectByPrimaryKey(reqVo.getId());
         if (tag == null) {
             throw new BusinessException(ResponseEnum.TAG_NOT_EXIST);
         }
-        TagVo tagVo = new TagVo();
-        BeanUtil.copy(tag, tagVo);
-        return tagVo;
+        TagDetailVo tagDetailVo = new TagDetailVo();
+        BeanUtil.copy(tag, tagDetailVo);
+        return tagDetailVo;
     }
 
     @Override
-    public Page<TagVo> list(TagReqVo reqVo) {
+    public Page<TagDetailVo> list(TagReqVo reqVo) {
         TagExample example = genExample(reqVo);
 
         PageHelper.startPage(reqVo.getPageNum(), reqVo.getPageSize());
         List<Tag> tags = tagMapper.selectByExample(example);
 
-        return PageUtils.toPage(tags, this::genTagVo);
+        return PageUtils.toPage(tags, this::genTagDetailVo);
     }
 
     @Override
-    public List<TagVo> getAll() {
+    public List<TagDetailVo> getAll() {
         List<Tag> tags = tagMapper.selectAll();
         return tags.stream()
-                .map(this::genTagVo)
+                .map(this::genTagDetailVo)
                 .collect(Collectors.toList());
     }
 
@@ -112,16 +116,27 @@ public class TagServiceImpl implements TagService {
         return example;
     }
 
-    private TagVo genTagVo(Tag tag) {
-        TagVo tagVo = BeanUtil.copy(tag, TagVo.class);
+    private TagDetailVo genTagDetailVo(Tag tag) {
+        TagDetailVo tagDetailVo = BeanUtil.copy(tag, TagDetailVo.class);
 
         // TODO 后面换成从redis获取
         ArticleTagExample example = new ArticleTagExample();
         ArticleTagExample.Criteria criteria = example.createCriteria();
-        criteria.andTagIdEqualTo(tagVo.getId());
+        criteria.andTagIdEqualTo(tagDetailVo.getId());
         int count = articleTagMapper.selectCountByExample(example);
 
-        tagVo.setCount(count);
-        return tagVo;
+        tagDetailVo.setCount(count);
+        return tagDetailVo;
+    }
+
+
+    @Override
+    public List<TagVo> getTagsByArticleId(Integer articleId) {
+        List<Tag> taglist = selfMapper.getTagListByArticleId(articleId);
+        return taglist.stream().map(this::genTagVo).collect(Collectors.toList());
+    }
+
+    private TagVo genTagVo(Tag tag) {
+        return BeanUtil.copy(tag, TagVo.class);
     }
 }

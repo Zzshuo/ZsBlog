@@ -2,6 +2,7 @@ package com.zs.blog.service;
 
 import com.zs.blog.object.Page;
 import com.zs.blog.vo.request.TypeReqVo;
+import com.zs.blog.vo.response.TypeDetailVo;
 import com.zs.blog.vo.response.TypeVo;
 
 import java.util.List;
@@ -40,12 +41,12 @@ public interface TypeService {
      * @param reqVo
      * @return
      */
-    Page<TypeVo> list(TypeReqVo reqVo);
+    Page<TypeDetailVo> list(TypeReqVo reqVo);
 
     /**
      * 获取所有分类
      *
      * @return
      */
-    List<TypeVo> getAll();
+    List<TypeDetailVo> getAll();
 }

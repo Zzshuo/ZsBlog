@@ -15,8 +15,4 @@ public class TagVo {
      */
     private String name;
 
-    /**
-     * 数量
-     */
-    private Integer count;
 }
