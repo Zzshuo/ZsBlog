@@ -14,7 +14,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
@@ -48,7 +47,7 @@ public class ShiroRealm extends AuthorizingRealm {
         }
         // 用户名当做盐值
         ByteSource credentialsSalt = ByteSource.Util.bytes(username);
-        return new SimpleAuthenticationInfo(username, user.getPassword(), credentialsSalt, user.getNickname());
+        return new SimpleAuthenticationInfo(user, user.getPassword(), credentialsSalt, user.getNickname());
     }
 
     /**

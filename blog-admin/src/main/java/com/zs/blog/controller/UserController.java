@@ -5,6 +5,7 @@ import com.zs.blog.annotation.BusinessLog;
 import com.zs.blog.config.ShiroProperties;
 import com.zs.blog.enums.ResponseEnum;
 import com.zs.blog.exception.BusinessException;
+import com.zs.blog.model.User;
 import com.zs.blog.object.ResponseVo;
 import com.zs.blog.util.ResponseUtil;
 import com.zs.blog.vo.request.UserReqVo;
@@ -56,8 +57,9 @@ public class UserController {
             subject.login(usernamePasswordToken);
 
             String token = (String) subject.getSession().getId();
+            User user = (User) subject.getPrincipal();
 
-            return ResponseUtil.success(ImmutableMap.of("token", token));
+            return ResponseUtil.success(ImmutableMap.of("user", user, "token", token));
 
         } catch (IncorrectCredentialsException e) {
             throw new BusinessException("密码错误");
@@ -96,7 +98,7 @@ public class UserController {
         String hashAlgorithmName = shiroProperties.getHashAlgorithmName();
         int hashIterations = shiroProperties.getHashIterations();
 
-        String credentials = "admin";
+        String credentials = "8914de686ab28dc22f30d3d8e107ff6c";
         // 用户名当做盐值
         ByteSource credentialsSalt = ByteSource.Util.bytes("admin");
         Object obj = new SimpleHash(hashAlgorithmName, credentials, credentialsSalt, hashIterations);

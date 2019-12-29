@@ -45,9 +45,8 @@ const vueConfig = {
     externals: isProd() ? prodExternals : {}
   },
 
-  chainWebpack: (config) => {
-    config.resolve.alias
-      .set('@$', resolve('src'))
+  chainWebpack: config => {
+    config.resolve.alias.set('@$', resolve('src'))
 
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
@@ -80,7 +79,6 @@ const vueConfig = {
       less: {
         modifyVars: {
           // less vars，customize ant design theme
-
           // 'primary-color': '#F5222D',
           // 'link-color': '#F5222D',
           // 'border-radius-base': '4px'
@@ -93,15 +91,24 @@ const vueConfig = {
 
   devServer: {
     // development server port 8000
-    port: 8000
+    host: 'localhost',
+    port: 8000, // 端口号
+    https: false, // https:{type:Boolean}
+    open: false, // 配置自动启动浏览器
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro',
-    //     ws: false,
-    //     changeOrigin: true
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        // 这里是公共部分，在调用接口时后面接不相同的部分
+        target: 'http://localhost:8081', // 这里写的是访问接口的域名和端口号
+        // target: 'http://admin.zshuo.top',
+        ws: false,
+        changeOrigin: true, // 必须加上这个才能跨域请求
+        pathRewrite: {
+          // 重命名
+          '^/api': ''
+        }
+      }
+    }
   },
 
   // disable source map in production

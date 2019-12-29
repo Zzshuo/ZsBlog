@@ -11,6 +11,3 @@ server:
 # MyBatis
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
-
-logging:
-  path: /data/blog-admin/log

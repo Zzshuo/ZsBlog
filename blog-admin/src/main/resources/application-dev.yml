@@ -28,3 +28,6 @@ spring:
     timeout: 5000
     # 默认的数据过期时间 30 天，主要用于shiro权限管理 单位秒
     expire: 2592000
+
+logging:
+  path: /Users/data/blog-admin/log
