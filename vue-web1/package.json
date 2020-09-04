@@ -13,7 +13,7 @@
     "bulma": "^0.7.2",
     "fastclick": "^1.0.6",
     "iview": "^3.2.2",
-    "marked": "^0.6.0",
+    "marked": "^0.7.0",
     "mavon-editor": "^2.6.17",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.21",
