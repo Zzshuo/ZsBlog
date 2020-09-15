@@ -1,6 +1,0 @@
-export * from './tagApi'
-export * from './typeApi'
-export * from './configApi'
-export * from './uploadApi'
-export * from './articleApi'
-export * from './otherApi'
