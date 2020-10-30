@@ -106,3 +106,10 @@ deploy:
   type: git
   repo: git@github.com:Zzshuo/Zzshuo.github.io.git
   branch: master
+
+# hexo-admin authentification
+admin:
+  username: 694814357
+  password_hash: $2a$10$wUOzFwY6H5GIwJqrN6.w1urM9/oGXFJMaVL7AuGPYTzASkLN6MQRq
+  secret: Come on. You're the best. You'll make it alibaba
+  deployCommand: './deploy.sh'
