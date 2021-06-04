@@ -27,8 +27,8 @@ code: # 代码块相关的配置
     enable: true
     lib: "highlightjs" # 实现高亮的库，可选：highlightjs | prismjs，对应下面的配置项
     highlightjs:
-      style: "Github Gist" # 高亮样式见：https://highlightjs.org/static/demo/  在页面挑选 style 填入
-      bg_color: true # 是否根据 style 改变代码背景色，**如果 style 是深色背景别忘了开启此项**
+      style: "Github" # 高亮样式见：https://highlightjs.org/static/demo/  在页面挑选 style 填入
+      bg_color: false # 是否根据 style 改变代码背景色，**如果 style 是深色背景别忘了开启此项**
     prismjs:
       style: "default" # 高亮样式见：https://prismjs.com/  在页面右侧的圆形按钮挑选 style 填入，也可以直接填入 css 链接
       preprocess: true # 设为 true 高亮将本地静态生成（并只支持部分 prismjs 插件），设为 false 高亮将在浏览器通过 js 生成
@@ -42,11 +42,11 @@ fun_features: # 一些好玩的功能
   anchorjs: # 为文章内容中的标题添加锚图标
     enable: true
     element: h1,h2,h3,h4,h5,h6
-    placement: right # icon放置的位置： left | right
+    placement: left # icon放置的位置： left | right
     visible: hover # 默认悬浮显示，可选：hover（鼠标在元素上悬浮时显示） | always（一直显示） | touch（移动端触摸显示）
     icon: "" # 可选：§ | # | ❡ 等，留空则为默认效果
   mouse_click: # 鼠标点击动效
-    enable: false
+    enable: true
     style: values # 目前设置两个值：values（价值观词汇） | love（爱心）
 
 dark_mode: # 主题暗色模式，开启后菜单中会出现切换按钮，用户浏览器会存储切换选项，并且会遵循 prefers-color-scheme 自动切换
@@ -258,7 +258,7 @@ post: # 部分配置同时控制自定义页面，注意备注
     options: { theme: "default" } # 接口选项，具体可见：http://mermaid-js.github.io/mermaid/#/mermaidAPI
   comments: # 评论
     enable: true # 开启评论
-    type: gitalk # 指定使用的评论模块  available: disqus | valine | gitalk | utterances | changyan | livere | remark42
+    type: valine # 指定使用的评论模块  available: disqus | valine | gitalk | utterances | changyan | livere | remark42
 
 #---------------------------
 # 评论
@@ -307,17 +307,17 @@ gitalk:
 # 完整文档 https://valine.js.org/configuration.html
 # 注意：下列配置项中的 true/false 不要用引号括起来
 valine:
-  appid: # 从 LeanCloud 的应用中得到的 appId
-  appkey: # 从 LeanCloud 的应用中得到的 APP Key
+  appid: dMX6eq2GtqbP3OlaWbbHnIHr-gzGzoHsz # 从 LeanCloud 的应用中得到的 appId
+  appkey: 2z6whXtLiDqK3on6zGN615vv # 从 LeanCloud 的应用中得到的 APP Key
   placeholder: 说点什么 # 评论框占位提示符
   path: window.location.pathname # 当前文章页路径，用于区分不同的文章页，以保证正确读取该文章页下的评论列表
-  avatar: retro # Gravatar 头像展示方式
+  avatar: robohash # Gravatar 头像展示方式
   meta: ["nick", "mail", "link"] # 评论者相关属性
   pageSize: 10 # 评论列表分页，每页条数
   lang: zh-CN # zh-CN | zh-TW | en | ja
-  highlight: false # 代码高亮
-  recordIP: false # 是否记录评论者IP
-  serverURLs: # REST API 服务器地址，国际版不填
+  highlight: true # 代码高亮
+  recordIP: true # 是否记录评论者IP
+  serverURLs: https://zzshuo.github.io # REST API 服务器地址，国际版不填
 
 # 畅言
 # http://changyan.kuaizhan.com/
@@ -415,3 +415,4 @@ links:
   subtitle: # 打字机内容
   items: # intro 与 image 可省略
     - { title: "Stephen's Blog", intro: "Stephen's Blog", link: "https://blog.nisiyong.com/", image: "/img/favicon.png" }
+    - { title: "Fluid", intro: "Hexo Theme Fluid", link: "https://hexo.fluid-dev.com/", image: "/img/favicon.png" }
