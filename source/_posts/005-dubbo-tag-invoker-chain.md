@@ -1,15 +1,14 @@
 ---
 title: dubbo自定义标签路由
-date: 2021-05-21
 typora-root-url: ../../source
-coauthor: zshuo
-tags: 
-- dubbo 
-- router
+date: 2021-05-21
+tags:
+  - dubbo
+  - router
 categories:
-- dubbo 
-banner_img: /images/general/1.jpg
-index_img: /images/general/1.jpg
+  - dubbo
+banner_img: /images/general/5.jpg
+index_img: /images/general/5.jpg
 ---
 
 # **简介**
@@ -18,11 +17,11 @@ index_img: /images/general/1.jpg
 
 官网地址：[路由规则](https://dubbo.apache.org/zh/docs/v2.7/user/examples/routing-rule/#标签路由规则)
 
-由于dubbo官方路由规则无法满足业务需要，因此自定义标签路由实现
+由于 dubbo 官方路由规则无法满足业务需要，因此自定义标签路由实现
 
 # 自定义路由
 
-## 实现Router接口，重写route方法
+## 实现 Router 接口，重写 route 方法
 
 ```java
 public class xxxTagRouter extends AbstractRouter {
@@ -66,18 +65,18 @@ private <T> List<Invoker<T>> filterTag(List<Invoker<T>> invokers, URL url, Invoc
     }
 ```
 
-## 实现RouterFactory getRouter方法
+## 实现 RouterFactory getRouter 方法
 
 XxxRouterFactory.java：
 
 ```java
 package com.xxx;
- 
+
 import org.apache.dubbo.rpc.cluster.RouterFactory;
 import org.apache.dubbo.rpc.Invoker;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.RpcException;
- 
+
 public class XxxRouterFactory implements RouterFactory {
     public Router getRouter(URL url) {
         // ...
@@ -86,7 +85,7 @@ public class XxxRouterFactory implements RouterFactory {
 }
 ```
 
-## 基于 SPI 机制,加载RouterFactory
+## 基于 SPI 机制,加载 RouterFactory
 
 在 `META-INF/dubbo/org.apache.dubbo.rpc.cluster.RouterFactory`添加
 
@@ -96,11 +95,11 @@ xxx=com.xxx.XxxRouterFactory
 
 # 其他
 
-## Dubbo Provider 注册url添加参数
+## Dubbo Provider 注册 url 添加参数
 
-由于业务需要，provider静态规则打标需要给把标签添加到url上，实现方法如下
+由于业务需要，provider 静态规则打标需要给把标签添加到 url 上，实现方法如下
 
-实现`RegistryFactory` 使用包装类`RegistryWrapper` 中的 `appendProviderTag` 方法中给url添加parameter
+实现`RegistryFactory` 使用包装类`RegistryWrapper` 中的 `appendProviderTag` 方法中给 url 添加 parameter
 
 ```java
 public class xxxRegistryWrapper implements RegistryFactory {
@@ -174,7 +173,7 @@ public class xxxRegistryWrapper implements RegistryFactory {
 }
 ```
 
-## Dirctory，Router，LoadBalance和Filter调用顺序
+## Dirctory，Router，LoadBalance 和 Filter 调用顺序
 
 `Dirctory`→Router→LoadBalance→Filter
 
@@ -184,10 +183,10 @@ public class xxxRegistryWrapper implements RegistryFactory {
 组件中的方法             list                 route                select         invoke
 ```
 
-## 解决Consumer标签当前线程多次调用dubbo失效问题
+## 解决 Consumer 标签当前线程多次调用 dubbo 失效问题
 
-由于Dubbo的ContextFilter特性会在调用结束时移除Consumer的上下文，tag也因此移除，下次调用时没有标签因此需要在移除之前通过把tag保存下来。官方建议 也是通过filter设置
-https://github.com/apache/dubbo/issues/5638 
+由于 Dubbo 的 ContextFilter 特性会在调用结束时移除 Consumer 的上下文，tag 也因此移除，下次调用时没有标签因此需要在移除之前通过把 tag 保存下来。官方建议 也是通过 filter 设置
+https://github.com/apache/dubbo/issues/5638
 
 `We do that on purpose, you need to do some extra work to make the tag passed along the invoke chain. For example, you add a filter working before ContextFilter and save tag before it get removed.`
 
@@ -199,7 +198,7 @@ https://github.com/apache/dubbo/issues/5638
  * @see RpcContext
  */
 @Activate(group = PROVIDER, order = -10000)
-public class ContextFilter extends ListenableFilter { 
+public class ContextFilter extends ListenableFilter {
 	...
 	try {
 	    return invoker.invoke(invocation);
@@ -213,4 +212,3 @@ public class ContextFilter extends ListenableFilter {
 ```
 
 ![dubbo-tag](/images/dubbo-tag-invoker-chain/dubbo-tag-1662529.jpg)
-

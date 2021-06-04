@@ -1,20 +1,20 @@
 ---
 title: shardingsphere之mysql数据迁移优化
 typora-root-url: ../../source
-date: 2020-12-04 21:37:05
-coauthor: zshuo
-tags: 
-- shardingsphere 
-- mysql
+date: 2021-01-07
+tags:
+  - shardingsphere
+  - mysql
+  - 水平分库
 categories:
-- shardingsphere 
-banner_img: /images/general/1.jpg
-index_img: /images/general/1.jpg
+  - shardingsphere
+banner_img: /images/general/4.jpg
+index_img: /images/general/4.jpg
 ---
 
-水平分库项目，用了ShardingSphere-scaling做数据迁移，由于存量数据迁移过程中过于缓慢，对数据迁移模块进行优化。
+水平分库项目，用了 ShardingSphere-scaling 做数据迁移，由于存量数据迁移过程中过于缓慢，对数据迁移模块进行优化。
 
-迁移效率提升600%，校验效率提升6000%。
+迁移效率提升 600%，校验效率提升 6000%。
 
 | 表名           | 数据   | 迁移耗时      | 校验耗时     |
 | -------------- | ------ | ------------- | ------------ |
@@ -29,7 +29,7 @@ index_img: /images/general/1.jpg
 
 改写存量数据为批量插入，代码如下：
 
-``` java
+```java
 try (Connection connection = dataSource.getConnection()) {
     connection.setAutoCommit(false);
     try (PreparedStatement ps = connection.prepareStatement(insertSql)) {
@@ -43,7 +43,7 @@ try (Connection connection = dataSource.getConnection()) {
         ps.executeBatch();
     }
     connection.commit();
-} 
+}
 ```
 
 当时以为这样写就可以了，但是迁移速度还是很慢只比原来单条插入快了一倍左右，经过研究发现，这并不是真正的批量插入，只是多条插入一次事务，降低了事务开销。
@@ -60,11 +60,11 @@ INSERT IGNORE INTO `user`(`id`,`cust_no`,`age`,`name`,`delete_at`) VALUES(50200,
 ```
 
 分析源码可以发现：
-当mysql版本>4.1.1，并且rewriteBatchedStatements=true，批操作语句总数大于 4 条时（nbrCommands > 4），才会合并成一条语句提交。
+当 mysql 版本>4.1.1，并且 rewriteBatchedStatements=true，批操作语句总数大于 4 条时（nbrCommands > 4），才会合并成一条语句提交。
 
 ```java
 com.mysql.jdbc.StatementImpl#executeBatchInternal
-  
+
 protected long[] executeBatchInternal() throws SQLException {
 	...
 	nbrCommands = (long[])this.batchedArgs.size();	// 获取批操作语句数量
@@ -81,45 +81,45 @@ protected long[] executeBatchInternal() throws SQLException {
 
 ## 预编译设置
 
- jdbc客户端参数：
+jdbc 客户端参数：
 
-  cachePrepStmts：默认false.是否缓存prepareStatement对象。每个连接都有一个缓存，是以sql为唯一标识的LRU cache. 同一连接下，不同stmt可以不用重新创建prepareStatement对象。
+cachePrepStmts：默认 false.是否缓存 prepareStatement 对象。每个连接都有一个缓存，是以 sql 为唯一标识的 LRU cache. 同一连接下，不同 stmt 可以不用重新创建 prepareStatement 对象。
 
-  prepStmtCacheSize：LRU cache中prepareStatement对象的个数。一般设置为最常用sql的个数。
+prepStmtCacheSize：LRU cache 中 prepareStatement 对象的个数。一般设置为最常用 sql 的个数。
 
-  prepStmtCacheSqlLimit：prepareStatement对象的大小。超出大小不缓存。
+prepStmtCacheSqlLimit：prepareStatement 对象的大小。超出大小不缓存。
 
 ## 服务端编译
 
-useServerPrepStmts=false 关闭服务器端编译，sql语句在客户端编译好再发送给服务器端。
+useServerPrepStmts=false 关闭服务器端编译，sql 语句在客户端编译好再发送给服务器端。
 
-如果为true,sql会采用占位符方式发送到服务器端，在服务器端再组装sql语句。
+如果为 true,sql 会采用占位符方式发送到服务器端，在服务器端再组装 sql 语句。
 
 占位符方式：`INSERT INTO t (c1,c2) VALUES (？,？),(？,？),(？,？);`
 
-此方式就会产生一个问题，当列数*提交记录数>65535
+此方式就会产生一个问题，当列数\*提交记录数>65535
 
 时就会报错：Prepared statement contains too many placeholders,
 
-这是由于我把“提交记录数量”设为10000，而要插入记录的表字段有30个，所以要进行批量插入时需要30*10000=300000  > 65535 ，故而报错。
+这是由于我把“提交记录数量”设为 10000，而要插入记录的表字段有 30 个，所以要进行批量插入时需要 30\*10000=300000 > 65535 ，故而报错。
 
 **解决方案**
 
-**方案1：**把DB连接中的 rewriteBatchedStatements 给设置为false（或者去掉），不过这个操作会影响数据的插入速度。
+**方案 1：**把 DB 连接中的 rewriteBatchedStatements 给设置为 false（或者去掉），不过这个操作会影响数据的插入速度。
 
-**方案2：**更改表输出的设计。确保30个输出字段的和提交记录数量的乘积不超过65535。比如把提交记录数量由10000更改为450（30*2000=60000< 65535）
+**方案 2：**更改表输出的设计。确保 30 个输出字段的和提交记录数量的乘积不超过 65535。比如把提交记录数量由 10000 更改为 450（30\*2000=60000< 65535）
 
-当然我们的目的是为了提高数据库写速度，并且不考虑sql注入问题，所以当`rewriteBatchedStatements =true`时`useServerPrepStmts=false`配合使用较为合适。
+当然我们的目的是为了提高数据库写速度，并且不考虑 sql 注入问题，所以当`rewriteBatchedStatements =true`时`useServerPrepStmts=false`配合使用较为合适。
 
 ## 压缩数据传输
 
-`useCompression=true`压缩数据传输，优化客户端和MySQL服务器之间的通信性能。
+`useCompression=true`压缩数据传输，优化客户端和 MySQL 服务器之间的通信性能。
 
 ```java
 com.mysql.jdbc.MysqlIO#doHandshake
 
 void doHandshake(String user, String password, String database) throws SQLException {
- ···      
+ ···
     //
     // Can't enable compression until after handshake 在握手后
     才能启用压缩
@@ -138,27 +138,25 @@ https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_have
 
 ![image-20201124001333217](/images/shardingsphere-sacling-mysql-speed-increase/image-20201124001333217.png)
 
-压缩协议提升网络传输性能，对于一些网络环境较差的用户会有很大的帮助，但是会相应地增加CPU开销，适用于传输数据量很大带宽不高的情况，这是一个CPU和网络资源的平衡问题。
+压缩协议提升网络传输性能，对于一些网络环境较差的用户会有很大的帮助，但是会相应地增加 CPU 开销，适用于传输数据量很大带宽不高的情况，这是一个 CPU 和网络资源的平衡问题。
 
-经过测试 直连数据库会速度提高 5% 左右，效果不明显。通过shardingsphere-proxy连接数据库速度也并无明显提升
+经过测试 直连数据库会速度提高 5% 左右，效果不明显。通过 shardingsphere-proxy 连接数据库速度也并无明显提升
 
 因此目前带宽无瓶颈的情况下，未使用压缩协议
 
-直连数据库批量插入5分钟：
+直连数据库批量插入 5 分钟：
 
-| useCompression | 100条avg | 1000条avg | 10000条avg |
-| -------------- | -------- | --------- | ---------- |
-| true           | 11ms     | 42ms      | 307ms      |
-| false          | 12ms     | 43ms      | 321ms      |
+| useCompression | 100 条 avg | 1000 条 avg | 10000 条 avg |
+| -------------- | ---------- | ----------- | ------------ |
+| true           | 11ms       | 42ms        | 307ms        |
+| false          | 12ms       | 43ms        | 321ms        |
 
-通过shardingsphere-proxy连接数据库批量插入5分钟：
+通过 shardingsphere-proxy 连接数据库批量插入 5 分钟：
 
-| useCompression | 100条avg | 1000条avg | 10000条avg |
-| -------------- | -------- | --------- | ---------- |
-| true           | 31ms     | 101ms     | 725ms      |
-| false          | 32ms     | 100ms     | 732ms      |
-
-
+| useCompression | 100 条 avg | 1000 条 avg | 10000 条 avg |
+| -------------- | ---------- | ----------- | ------------ |
+| true           | 31ms       | 101ms       | 725ms        |
+| false          | 32ms       | 100ms       | 732ms        |
 
 **适用场景**
 
@@ -186,8 +184,6 @@ b、复制的时候 binlog 量太大，启用 slave_compressed_protocol 参数�
 
 当第三个字段的值大于 0x00 的时候，表示当前包已采用 zlib 压缩，因此使用的时候需要对 n`*`byte 进行解压，解压后内容为 1`*`byte,n`*`byte，即请求类型和请求内容。
 
-
-
 ## 结论
 
 **原库读取数据设置**
@@ -198,9 +194,8 @@ b、复制的时候 binlog 量太大，启用 slave_compressed_protocol 参数�
 **新库插入数据设置**
 
 `rewriteBatchedStatements=true `
-`useServerPrepStmts=false ` 
+`useServerPrepStmts=false `
 `useCompression=false`
-
 
 ## 参考文章
 

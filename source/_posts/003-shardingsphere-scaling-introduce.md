@@ -1,12 +1,15 @@
 ---
 title: shardingsphere之scaling
-tags: shardingsphere
 typora-root-url: ../../source
-coauthor: 郑硕
-categories: shardingsphere
-date: 2021-01-05 17:06:20
+date: 2021-01-06
+tags:
+  - shardingsphere
+  - 水平分库
+categories:
+  - shardingsphere
+banner_img: /images/general/3.jpg
+index_img: /images/general/3.jpg
 ---
-
 
 ## 简介
 
@@ -52,13 +55,11 @@ ShardingSphere-Scaling 是一个提供给用户的通用的 ShardingSphere 数�
 
 ### 规则切换阶段
 
-在此阶段，可能存在一定时间的业务只读窗口期，通过业务停止写入或设置数据库只读或ShardingSphere的熔断机制，让旧数据节点中的数据短暂静态，确保增量同步已完全完成。
+在此阶段，可能存在一定时间的业务只读窗口期，通过业务停止写入或设置数据库只读或 ShardingSphere 的熔断机制，让旧数据节点中的数据短暂静态，确保增量同步已完全完成。
 
 这个窗口期时间短则数秒，长则数分钟，取决于数据量和用户是否需要对数据进行强校验。 确认完成后，Apache ShardingSphere 可通过配置中心修改配置，将业务导向新规则的集群，弹性伸缩完成。
 
 我们由于有写业务无法无法完全停止写入，目前只能尽可能减少写入，然后开启双写，并且停止迁移，进行数据校验，对有问题数据进行补处理。
-
-
 
 ## 架构设计
 
@@ -75,8 +76,8 @@ ShardingSphere-Scaling 是一个提供给用户的通用的 ShardingSphere 数�
 
 从原库获取数据，核心操作主要有：
 
-- setChannel(Channel channel); 设置Channel
-- dump(); 从原库获取数据，并保存数据到channel中
+- setChannel(Channel channel); 设置 Channel
+- dump(); 从原库获取数据，并保存数据到 channel 中
 
 主要实现类：
 
@@ -87,7 +88,7 @@ ShardingSphere-Scaling 是一个提供给用户的通用的 ShardingSphere 数�
 
 把数据写入数据到新库,核心操作主要有：
 
-- setChannel(Channel channel); 设置Channel
+- setChannel(Channel channel); 设置 Channel
 - write(); 写入数据到数据库
 
 ### Channel
@@ -111,28 +112,28 @@ public interface Channel {
 
 ![image-20201216175534892](/images/shardingsphere-scaling-introduce/image-20201216175534892.png)
 
-1. 获取minId、maxId，并根据id和concurrency 把迁移id区间平均分配到各个Task（InventoryDataScalingTask）。
+1. 获取 minId、maxId，并根据 id 和 concurrency 把迁移 id 区间平均分配到各个 Task（InventoryDataScalingTask）。
 
    minId=1，maxId=100，concurrency=10，则
 
-   task1 id区间为 1-10，task2 id区间为 11-20 ......
+   task1 id 区间为 1-10，task2 id 区间为 11-20 ......
 
-2. 每个Task都有一个dumper 从原库批量获取DataRecord，并push到MemoryChannel，BlockingQueue长度为10000，超过则阻塞等待
+2. 每个 Task 都有一个 dumper 从原库批量获取 DataRecord，并 push 到 MemoryChannel，BlockingQueue 长度为 10000，超过则阻塞等待
 
-3. Importer从MemoryChannel批量获取DataRecord并依次插入到新库中，然后ack()。
+3. Importer 从 MemoryChannel 批量获取 DataRecord 并依次插入到新库中，然后 ack()。
 
-4. 当dumper获取不到数据时，则push一个FinishedRecord到MemoryChannel，dumper结束。
+4. 当 dumper 获取不到数据时，则 push 一个 FinishedRecord 到 MemoryChannel，dumper 结束。
 
-5. Importer获取到FinishedRecord时，Importer结束，Task执行完毕。
+5. Importer 获取到 FinishedRecord 时，Importer 结束，Task 执行完毕。
 
 ### 增量迁移
 
 ![image-20201216175621918](/images/shardingsphere-scaling-introduce/image-20201216175621918.png)
 
-1. 每次Task（InventoryDataScalingTask）执行完成，callBack 检测是否所有Task（InventoryDataScalingTask）执行完成。都执行完成开启增量迁移Task（IncrementalDataScalingTask）。
+1. 每次 Task（InventoryDataScalingTask）执行完成，callBack 检测是否所有 Task（InventoryDataScalingTask）执行完成。都执行完成开启增量迁移 Task（IncrementalDataScalingTask）。
 
-2. 增量只有一个dumper 从迁移开始时记录的binlog位置subscribe数据，并根据hashcode和channelNumber取模push到Memorychannel。
+2. 增量只有一个 dumper 从迁移开始时记录的 binlog 位置 subscribe 数据，并根据 hashcode 和 channelNumber 取模 push 到 Memorychannel。
 
    String index = Integer.toString(Math.abs(dataRecord.hashCode()) % channelNumber);
 
-3. Importer从MemoryChannel批量获取DataRecord并依次插入/更新到新库中，然后ack()。
+3. Importer 从 MemoryChannel 批量获取 DataRecord 并依次插入/更新到新库中，然后 ack()。

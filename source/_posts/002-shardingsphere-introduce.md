@@ -1,12 +1,15 @@
 ---
 title: shardingsphere介绍
-tags: shardingsphere
 typora-root-url: ../../source
-coauthor: 郑硕
-categories: shardingsphere
-date: 2021-01-05 17:06:20
+date: 2021-01-05
+tags:
+  - shardingsphere
+  - 水平分库
+categories:
+  - shardingsphere
+banner_img: /images/general/2.jpg
+index_img: /images/general/2.jpg
 ---
-
 
 ## 简介
 
@@ -18,7 +21,7 @@ Apache ShardingSphere 定位为关系型数据库中间件，旨在充分合理�
 
 Apache ShardingSphere 5.x 版本开始致力于可插拔架构，项目的功能组件能够灵活的以可插拔的方式进行扩展。 目前，数据分片、读写分离、数据加密、影子库压测等功能，以及对 MySQL、PostgreSQL、SQLServer、Oracle 等 SQL 与协议的支持，均通过插件的方式织入项目。 开发者能够像使用积木一样定制属于自己的独特系统。Apache ShardingSphere 目前已提供数十个 SPI 作为系统的扩展点，而且仍在不断增加中。
 
-ShardingSphere 已于2020年4月16日成为 [Apache 软件基金会](https://apache.org/index.html#projects-list)的顶级项目。
+ShardingSphere 已于 2020 年 4 月 16 日成为 [Apache 软件基金会](https://apache.org/index.html#projects-list)的顶级项目。
 
 ### ShardingSphere-JDBC
 
@@ -45,7 +48,7 @@ ShardingSphere-Scaling 是一个提供给用户的通用的 ShardingSphere 数�
 
 ### ShardingSphere-UI
 
-ShardingSphere-UI 是 ShardingSphere 的一个简单而有用的web管理控制台。它用于帮助用户更简单的使用 ShardingSphere 的相关功能，目前提供注册中心管理、动态配置管理、数据库编排等功能。
+ShardingSphere-UI 是 ShardingSphere 的一个简单而有用的 web 管理控制台。它用于帮助用户更简单的使用 ShardingSphere 的相关功能，目前提供注册中心管理、动态配置管理、数据库编排等功能。
 
 项目结构上采取了前后端分离的方式，前端使用 Vue 框架，后端采用 Spring Boot 框架。使用标准的 Maven 方式进行打包，部署，同时也可以采用前后端分离的方式本地运行，方便开发调试。
 
@@ -57,7 +60,7 @@ Database Mesh 的关注重点在于如何将分布式的数据访问应用与数
 
 ![ShardingSphere-Sidecar Architecture](/images/shardingsphere-introduce/shardingsphere-sidecar-brief.png)
 
-|            | *ShardingSphere-JDBC* | *ShardingSphere-Proxy* | *ShardingSphere-Sidecar* |
+|            | _ShardingSphere-JDBC_ | _ShardingSphere-Proxy_ | _ShardingSphere-Sidecar_ |
 | :--------- | :-------------------- | :--------------------- | :----------------------- |
 | 数据库     | 任意                  | MySQL/PostgreSQL       | MySQL/PostgreSQL         |
 | 连接消耗数 | 高                    | 低                     | 高                       |
@@ -68,12 +71,10 @@ Database Mesh 的关注重点在于如何将分布式的数据访问应用与数
 
 ### 应用
 
-ShardingSphere-JDBC采用无中心化架构，用于 Java 开发的高性能的轻量级应用。
+ShardingSphere-JDBC 采用无中心化架构，用于 Java 开发的高性能的轻量级应用。
 
 ShardingSphere-Proxy 提供静态入口以及异构语言的支持，用于数据迁移及运维查询。
 
 ShardingSphere-Scaling 用于数据迁移。
-
-
 
 ![image-20201216154030084](/images/shardingsphere-introduce/image-20201216154030084.png)
